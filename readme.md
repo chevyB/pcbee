@@ -30,6 +30,12 @@ sudo mv composer.phar /usr/local/bin/composer
 
 Link: [Click here](https://docs.docker.com/engine/install/)
 
+Run
+
+```
+docker-compose up --build -d
+```
+
 ### 3. Backend Setup:
 
 Update `api/.env` file:
