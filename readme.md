@@ -29,7 +29,12 @@ docker-compose up --build -d
 Update `api/.env` file:
 
 ```
+DB_CONNECTION=mysql
 DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=pcbee-db
+DB_USERNAME=root
+DB_PASSWORD=admin
 ```
 
 ```
