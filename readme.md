@@ -10,7 +10,41 @@ git clone git@github.com:chevyB/pcbee.git
 
 ## Installation
 
-### 1. Install Composer
+##
+
+## Option 1. Using Docker
+
+### 1.A Install Docker
+
+Intallation Link: [Click here](https://docs.docker.com/engine/install/)
+
+After installation, Run:
+
+```
+docker-compose up --build -d
+```
+
+### 1.B. Backend Setup:
+
+Update `api/.env` file:
+
+```
+DB_HOST=db
+```
+
+```
+docker-compose exec app composer install
+docker-compose exec app php artisan key:generate
+docker-compose exec app php artisan migrate
+```
+
+You should be able to access: [http://localhost:8000/](http://localhost:8000/)
+
+##
+
+## Option 2. Manual Setup
+
+### 2.A Install Composer
 
 Link:
 [Click here](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-composer-on-ubuntu-20-04)
@@ -26,36 +60,24 @@ sudo curl -s https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 ```
 
-### 2. Install Docker
+### 2.B Install MySQL
 
-Link: [Click here](https://docs.docker.com/engine/install/)
+LAMP Stack (Ubuntu/MAC) [Recommended]
 
-Run
+- [Click here](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04)
 
-```
-docker-compose up --build -d
-```
+XAMPP (Windows/MAC/Ubuntu)
 
-### 3. Backend Setup:
+- [Click here](https://www.apachefriends.org/)
 
-Update `api/.env` file:
-
-```python
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=pcbee-db
-DB_USERNAME=root
-DB_PASSWORD=admin
-```
-
-Open terminal
+### 3.B Run the server
 
 ```
 cd api
 composer install
 php artisan key:generate
 php artisan serve
+php artisan migrate
 ```
 
 You should be able to access: [http://localhost:8000/](http://localhost:8000/)
@@ -88,3 +110,14 @@ yarn dev
 ```
 
 You should be able to access: [http://localhost:3000/](http://localhost:3000/)
+
+## BE Possible errors
+
+1. Laravel & Docker: The stream or file "/var/www/html/storage/logs/laravel.log"
+   could not be opened: failed to open stream: Permission denied
+
+Solution:
+
+```
+sudo chown www-data:www-data -R ./storage
+```

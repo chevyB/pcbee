@@ -1,51 +1,53 @@
 version: '3.7'
 services:
   # MySql Service
-  database:
-    image: mysql:8.0.20
+  db:
+    container_name: db
+    image: mysql:latest
     restart: unless-stopped
-    tty: true
     ports:
       - '3306:3306'
     environment:
-      MYSQL_DATABASE: pcbee-db
-      MYSQL_USER: root
-      MYSQL_PASSWORD: admin
-      MYSQL_ROOT_PASSWORD: admin
-      SERVICE_TAGS: local
-      SERVICE_NAME: mysql
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     volumes:
       - dbdata:/var/lib/mysql
     networks:
       - app-network
 
-  # # PHP Service
-  # backend:
-  #   build: .
-  #   restart: unless-stopped
-  #   tty: true
-  #   working_dir: /var/www/
-  #   ports:
-  #     - '9001:9000'
-  #   volumes:
-  #     - '.:/var/www'
-  #     - ./docker/php/uploads.ini:/usr/local/etc/php/conf.d/upload.ini
-  #   networks:
-  #     - app-network
+  # PHP Service
+  app:
+    container_name: app
+    build: 
+      context: ./php
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www/html
+    ports:
+      - '9000:9000'
+    volumes:
+      - './api:/var/www/html'
+      # - ./docker/php/uploads.ini:/usr/local/etc/php/conf.d/upload.ini
+    networks:
+      - app-network
 
-  # # Webserver Service
-  # webserver:
-  #   image: nginx:alpine
-  #   restart: unless-stopped
-  #   tty: true
-  #   ports:
-  #     - '81:80'
-  #     - '443:443'
-  #   volumes:
-  #     - ./:/var/www
-  #     - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
-  #   networks:
-  #     - app-network
+  # Webserver Service
+  server:
+    image: nginx:stable-alpine
+    container_name: server
+    restart: unless-stopped
+    tty: true
+    ports:
+      - '8000:80'
+      - '8443:443'
+    volumes:
+      - ./api:/var/www/html
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
 
 #Docker Networks
 networks:
