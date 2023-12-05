@@ -124,5 +124,5 @@ You should be able to access: [http://localhost:3000/](http://localhost:3000/)
 Solution:
 
 ```
-sudo chown www-data:www-data -R ./storage
+sudo chmod -R 777 api/storage
 ```

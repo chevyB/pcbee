@@ -1,5 +1,8 @@
+import { Provider } from 'react-redux'
+
 import '@/app/globals.css'
 import Theme from '@/app/theme'
+import { store } from '@/hooks/store'
 
 export const metadata = {
   title: 'PCBee ',
@@ -8,9 +11,11 @@ export const metadata = {
 
 const App = ({ Component, pageProps }) => {
   return (
-    <Theme>
-      <Component {...pageProps} />
-    </Theme>
+    <Provider store={store}>
+      <Theme>
+        <Component {...pageProps} />
+      </Theme>
+    </Provider>
   )
 }
 
