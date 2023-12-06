@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { errors } from '@/constant/formErrors'
-import { useAuthLogin } from '@/hooks/redux/auth'
 import { authApi } from '@/hooks/api/authApi'
 import { useHandleError } from '@/hooks/useHandleError'
 
