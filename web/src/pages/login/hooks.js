@@ -25,7 +25,7 @@ export function useHooks() {
   const onSubmit = async (data) => {
     try {
       const result = await loginMutation(data).unwrap()
-      // TODO:Toast Add success toast here 
+      // TODO:Toast Add success toast here
     } catch (error) {
       useHandleError(error)
     }
