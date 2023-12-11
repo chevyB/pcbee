@@ -1,10 +1,10 @@
 import { baseApi } from './baseApi'
 
 export const authApi = baseApi.injectEndpoints({
-  tagTypes: ['Auth'],
   endpoints: (build) => ({
-    user: build.query({
-      query: (id) => ({ url: 'auth' }),
+    tagTypes: ['Auth'],
+    getUser: build.query({
+      query: () => ({ url: 'auth' }),
       providesTags: ['Auth'],
     }),
     login: build.mutation({
@@ -17,8 +17,17 @@ export const authApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ['Auth'],
     }),
+    logout: build.mutation({
+      query() {
+        return {
+          url: 'logout',
+          method: 'POST',
+        }
+      },
+      invalidatesTags: ['Auth'],
+    }),
   }),
   overrideExisting: false,
 })
 
-export const { useLoginMutation } = authApi
+export const { useGetUserQuery, useLoginMutation, useLogoutMutation } = authApi
