@@ -1,4 +1,5 @@
 export const useHandleError = (error) => {
+  console.error({ error })
   const errorMessage = error.data.message
 
   if (!!errorMessage) {
