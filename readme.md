@@ -10,7 +10,10 @@ git clone git@github.com:chevyB/pcbee.git
 
 ## Installation
 
-##
+### NOTE:
+
+You will follow only 1 Option, either `Option 1. Using Docker` or
+`Option 2. Manual Setup` Then proceed to `#3. Frontend Setup`
 
 ## Option 1. Using Docker
 
@@ -45,6 +48,12 @@ docker-compose exec app php artisan migrate
 
 You should be able to access: [http://localhost:8000/](http://localhost:8000/)
 
+Seed for Admin Login
+
+```
+docker-compose exec app php artisan db:seed
+```
+
 ##
 
 ## Option 2. Manual Setup
@@ -75,7 +84,7 @@ XAMPP (Windows/MAC/Ubuntu)
 
 - [Click here](https://www.apachefriends.org/)
 
-### 3.B Run the server
+### 2.C Run the server
 
 ```
 cd api
@@ -87,7 +96,13 @@ php artisan migrate
 
 You should be able to access: [http://localhost:8000/](http://localhost:8000/)
 
-### 4. Frontend Setup:
+Seed for Admin Login
+
+```
+docker-compose exec app php artisan db:seed
+```
+
+### 3. Frontend Setup:
 
 Install NodeJS: Link: [Click here](https://nodejs.org/en/download/current)
 
@@ -115,6 +130,13 @@ yarn dev
 ```
 
 You should be able to access: [http://localhost:3000/](http://localhost:3000/)
+
+Default Admin Credential
+
+```
+Username: admin
+Password: !p@ssword123
+```
 
 ## BE Possible errors
 
