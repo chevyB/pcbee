@@ -8,27 +8,27 @@ const RouteGuard = ({ children }) => {
   const [authorized, setAuthorized] = useState(false)
   const { user, isLoading, isError, logout } = useUser()
 
-  const authCheck = useCallback((url) => {
-    const publicPaths = ['/login']
-    const path = url.split('?')[0]
+  const authCheck = useCallback(
+    (url) => {
+      const publicPaths = ['/login']
+      const path = url.split('?')[0]
 
-    if (!user && !publicPaths.includes(path)) {
-      setAuthorized(false)
-      router.push({
-        pathname: '/login',
-        query: { returnUrl: router.asPath },
-      })
-    } else {
-      setAuthorized(true)
-    }
-  }, [user])
+      if (!user && !publicPaths.includes(path)) {
+        setAuthorized(false)
+        logout()
+        router.push({
+          pathname: '/login',
+          query: { returnUrl: router.asPath },
+        })
+      } else {
+        setAuthorized(true)
+      }
+    },
+    [user],
+  )
 
   useEffect(() => {
     if (isLoading) return
-
-    if (isError) {
-      logout()
-    }
 
     // on initial load - run auth check
     authCheck(router.asPath)
