@@ -18,6 +18,7 @@ const schema = yup
 export function useHooks() {
   const router = useRouter()
   const { login } = useUser()
+  const { handleError } = useHandleError()
   const [loginMutation] = authApi.useLoginMutation()
   const {
     register,
@@ -30,9 +31,8 @@ export function useHooks() {
       const { token } = await loginMutation(data).unwrap()
       login(token)
       router.push('/dashboard')
-      // TODO:Toast Add success toast here
     } catch (error) {
-      useHandleError(error)
+      handleError(error)
     }
   }
 
