@@ -4,6 +4,7 @@ import '@/app/globals.css'
 import { store } from '@/hooks/store'
 import Theme from '@/app/theme'
 import RouteGuard from '@/components/templates/RouteGuard'
+import ToastProvider from '@/components/templates/ToastProvider'
 
 export const metadata = {
   title: 'PCBee ',
@@ -15,7 +16,9 @@ const App = ({ Component, pageProps }) => {
     <Provider store={store}>
       <RouteGuard>
         <Theme>
-          <Component {...pageProps} />
+          <ToastProvider>
+            <Component {...pageProps} />
+          </ToastProvider>
         </Theme>
       </RouteGuard>
     </Provider>
