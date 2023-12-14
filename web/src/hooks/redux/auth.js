@@ -11,13 +11,13 @@ export const useUser = () => {
 
   const logout = useCallback(() => {
     removeToken()
-    dispatch(baseApi.util.resetApiState())
+    baseApi.util.resetApiState()
   }, [user])
 
   const login = useCallback(
     (token) => {
       setToken(token)
-      dispatch(baseApi.util.resetApiState())
+      baseApi.util.resetApiState()
     },
     [user],
   )
