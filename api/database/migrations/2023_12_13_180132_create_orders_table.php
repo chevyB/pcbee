@@ -28,7 +28,7 @@ return new class extends Migration
             $table->integer('job_order')->nullable();
             $table->integer('order_number');
             $table->string('brand');
-            $table->string('model');
+            $table->string('model')->nullable();
             $table->decimal('downpayment')->default(0);
             $table->integer('quantity');
             $table->enum('status', ['delivered', 'open', 'in-transit', 'cancelled', 'onhold'])->default('open');
@@ -36,7 +36,6 @@ return new class extends Migration
             $table->text('notes')->nullable();
             $table->jsonb('image_paths')->nullable();
             $table->dateTime('order_at')->default(now());
-            $table->dateTime('order_at')->useCurrent();
             $table->timestamps();
             $table->softDeletes();
         });

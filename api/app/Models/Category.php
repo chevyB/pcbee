@@ -12,8 +12,9 @@ class Category extends Model
     protected $fillable = [
         'label',
     ];
-    public function stores()
+    
+    public function orders()
     {
-        return $this->hasMany(Store::class);
+        return $this->hasMany(Order::class);
     }
 }
