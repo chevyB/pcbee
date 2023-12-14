@@ -1,9 +1,20 @@
-export const useHandleError = (error) => {
-  console.error({ error })
-  const errorMessage = error.data.message
+import { useToast } from "./useToast";
 
-  if (!!errorMessage) {
-    // TODO:Toast Add error toast here
-    alert(errorMessage)
-  }
+export const useHandleError = () => {
+  const { addToast } = useToast()
+
+  const handleError = (error) => {
+    const errorMessage = error.data.message
+
+    if (!!errorMessage){
+      addToast({
+        type: 'error',
+        message: errorMessage,
+      })
+    }
+  };
+
+  return {
+    handleError,
+  };
 }
