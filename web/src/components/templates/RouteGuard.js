@@ -7,11 +7,16 @@ const RouteGuard = ({ children }) => {
   const router = useRouter()
   const [authorized, setAuthorized] = useState(false)
   const { user, isLoading, isError, logout } = useUser()
+  const isAuthOff =  process.env.NEXT_PUBLIC_AUTHENTICATION_OFF || false
 
   const authCheck = useCallback(
     (url) => {
       const publicPaths = ['/login']
       const path = url.split('?')[0]
+
+      if (isAuthOff) {
+        return setAuthorized(true)
+      }
 
       if (!user && !publicPaths.includes(path)) {
         setAuthorized(false)
