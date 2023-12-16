@@ -41,7 +41,7 @@ module.exports = {
     '@typescript-eslint/consistent-type-definitions': 'off',
     '@typescript-eslint/consistent-indexed-object-style': 'off',
     '@typescript-eslint/prefer-for-of': 'off',
-    'react/react-in-jsx-scope': 'off', // NextJS provides React without importing
+    'react/react-in-jsx-scope': 'off',
     'react/display-name': 'off',
     'react/prop-types': 'off',
     'react/no-typos': 'error',
@@ -52,7 +52,6 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'error',
   },
-  // ignorePatterns: ['.eslintrc.js'],
   root: true,
   env: {
     browser: true,
