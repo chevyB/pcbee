@@ -3,7 +3,7 @@ const Dashboard = () => {
 
     return (
         <section>
-            Test
+            Hello Test
         </section>
     )
 }
