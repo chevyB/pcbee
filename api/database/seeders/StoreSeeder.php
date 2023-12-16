@@ -17,6 +17,6 @@ class StoreSeeder extends Seeder
             ['label' => 'Cebu'],
             ['label' => 'Davao'],
             ['label' => 'Tagum'],
-        ],  ['label']);
+        ],  ['label'], ['created_at', 'updated_at']);
     }
 }
