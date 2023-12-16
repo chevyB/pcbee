@@ -1,8 +1,8 @@
-import { useMemo, useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 
-import { baseApi } from '@/hooks/api/baseApi'
 import { authApi } from '@/hooks/api/authApi'
-import { setToken, removeToken } from '@/hooks/lib/tokenStorage'
+import { baseApi } from '@/hooks/api/baseApi'
+import { removeToken, setToken } from '@/hooks/lib/tokenStorage'
 
 export const useUser = () => {
   const { data, isError, isLoading } = authApi.useGetUserQuery()
@@ -12,15 +12,12 @@ export const useUser = () => {
   const logout = useCallback(() => {
     removeToken()
     baseApi.util.resetApiState()
-  }, [user])
+  }, [])
 
-  const login = useCallback(
-    (token) => {
-      setToken(token)
-      baseApi.util.resetApiState()
-    },
-    [user],
-  )
+  const login = useCallback((token) => {
+    setToken(token)
+    baseApi.util.resetApiState()
+  }, [])
 
   return {
     user,
