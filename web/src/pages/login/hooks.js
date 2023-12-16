@@ -1,12 +1,12 @@
-import * as yup from 'yup'
-import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useRouter } from 'next/router'
+import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
 
 import { errors } from '@/constants/formErrors'
 import { authApi } from '@/hooks/api/authApi'
-import { useHandleError } from '@/hooks/useHandleError'
-import { useRouter } from 'next/router'
 import { useUser } from '@/hooks/redux/auth'
+import { useHandleError } from '@/hooks/useHandleError'
 
 const schema = yup
   .object({

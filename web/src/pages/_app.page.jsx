@@ -1,10 +1,11 @@
+import '@/app/globals.css'
+
 import { Provider } from 'react-redux'
 
-import '@/app/globals.css'
-import { store } from '@/hooks/store'
 import Theme from '@/app/theme'
 import RouteGuard from '@/components/templates/RouteGuard'
 import ToastProvider from '@/components/templates/ToastProvider'
+import { store } from '@/hooks/store'
 
 export const metadata = {
   title: 'PCBee ',
