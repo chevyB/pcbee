@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB; 
+use Illuminate\Support\Facades\DB;
 
 class CategorySeeder extends Seeder
 {
@@ -23,6 +23,6 @@ class CategorySeeder extends Seeder
             ['label' => 'Case'],
             ['label' => 'Speaker'],
             ['label' => 'Fan'],
-        ],  ['label']);
+        ],  ['label'], ['created_at', 'updated_at']);
     }
 }

@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { useCallback, useEffect, useState } from 'react'
 
 import { useUser } from '@/hooks/redux/auth'
 
@@ -7,7 +7,7 @@ const RouteGuard = ({ children }) => {
   const router = useRouter()
   const [authorized, setAuthorized] = useState(false)
   const { user, isLoading, isError, logout } = useUser()
-  const isAuthOff =  process.env.NEXT_PUBLIC_AUTHENTICATION_OFF || false
+  const isAuthOff = process.env.NEXT_PUBLIC_AUTHENTICATION_OFF || false
 
   const authCheck = useCallback(
     (url) => {
@@ -29,7 +29,7 @@ const RouteGuard = ({ children }) => {
         setAuthorized(true)
       }
     },
-    [user],
+    [user, isAuthOff, router, logout],
   )
 
   useEffect(() => {

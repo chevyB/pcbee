@@ -1,11 +1,5 @@
-
 const Dashboard = () => {
-
-    return (
-        <section>
-            Hello Test
-        </section>
-    )
+  return <section>Test</section>
 }
 
 export default Dashboard

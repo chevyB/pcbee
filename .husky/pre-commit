@@ -1,1 +1,4 @@
-yarn format && yarn test
+#!/bin/sh
+
+cd web
+yarn lint-staged

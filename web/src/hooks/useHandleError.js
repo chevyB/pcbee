@@ -1,4 +1,4 @@
-import { useToast } from "./useToast";
+import { useToast } from './useToast'
 
 export const useHandleError = () => {
   const { addToast } = useToast()
@@ -6,15 +6,15 @@ export const useHandleError = () => {
   const handleError = (error) => {
     const errorMessage = error.data.message
 
-    if (!!errorMessage){
+    if (!!errorMessage) {
       addToast({
         type: 'error',
         message: errorMessage,
       })
     }
-  };
+  }
 
   return {
     handleError,
-  };
+  }
 }
