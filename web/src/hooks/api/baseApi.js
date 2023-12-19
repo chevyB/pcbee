@@ -9,7 +9,6 @@ export const baseApi = createApi({
   tagTypes: ['Auth'],
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API || 'http://localhost:8000/api',
-    mode: 'cors',
     prepareHeaders: (headers) => {
       const token = getToken()
 
@@ -17,8 +16,6 @@ export const baseApi = createApi({
       if (token) {
         headers.set('authorization', `Bearer ${token}`)
       }
-
-      headers.set('Access-Control-Allow-Origin', '*')
       return headers
     },
     validateStatus(response) {

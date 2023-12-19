@@ -16,25 +16,18 @@ const ToastProvider = ({ children }) => {
       setToasts((toasts) => [...toasts, { id, ...content }])
 
       const timer = setTimeout(() => {
-        removeToast(id)
+        (id)
       }, 3000) // delay
 
       return () => {
         clearTimeout(timer)
       }
     },
-    [setToasts, removeToast],
-  )
-
-  const removeToast = useCallback(
-    (id) => {
-      setToasts((toasts) => toasts.filter((t) => t.id !== id))
-    },
     [setToasts],
   )
 
   return (
-    <ToastContext.Provider value={{ addToast, removeToast }}>
+    <ToastContext.Provider value={{ addToast }}>
       <Toasts toasts={toasts} />
       {children}
     </ToastContext.Provider>
