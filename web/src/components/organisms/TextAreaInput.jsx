@@ -1,10 +1,10 @@
-import { Label, Textarea } from 'flowbite-react';
+import { Textarea } from 'flowbite-react';
 import React from 'react';
 
-const TextAreaInput = () => {
+const TextAreaInput = ({ placeHolder }) => {
     return (
         <div className="col-start-1 col-end-auto">
-            <Textarea placeholder="Comment" rows={4} />
+            <Textarea placeholder={placeHolder} rows={4} />
         </div>
     )
 }

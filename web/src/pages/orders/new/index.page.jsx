@@ -1,17 +1,18 @@
-import React from 'react';
-import TextInput from "@/components/organisms/TextInput";
 import { Button } from "flowbite-react";
-import TextAreaInput from '@/components/organisms/TextAreaInput';
-import FilePickerInput from '@/components/organisms/FilePickerInput ';
+import React from 'react';
+
 import DatePicker from '@/components/organisms/DatePicker';
+import FilePickerInput from '@/components/organisms/FilePickerInput ';
 import SelectInput from '@/components/organisms/SelectInput';
+import TextAreaInput from '@/components/organisms/TextAreaInput';
+import TextInput from "@/components/organisms/TextInput";
 
 const Order = () => {
 
     const staffOptions = [
         {
             value: 0,
-            label: 'Staff Name',
+            label: 'Select Staff Name',
             disabled: true,
             selected: true,
             hidden: true,
@@ -36,7 +37,7 @@ const Order = () => {
     const statusOptions = [
         {
             value: 0,
-            label: 'Status',
+            label: 'Select Status',
             disabled: true,
             selected: true,
             hidden: true,
@@ -71,20 +72,19 @@ const Order = () => {
                 </h1>
                 <form className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {/* First Column */}
-                    <div>
+                    <div className="col-span-1">
                         <div className="p-4 mb-4 bg-white rounded-lg shadow-sm dark:bg-gray-800">
-                            <div className="grid grid-cols-1 gap-4">
+                            <div className="grid grid-cols-1 gap-6">
                                 <DatePicker label='Date' name='created_at' />
                                 <TextInput label='Job Order No.' name='job_order' />
-                                <SelectInput label="" name='user_id' options={staffOptions} />
                                 <TextInput label='Branch Name' name='Store__id' />
                                 <TextInput label='Downpayment' name='downpayment' />
-
+                                <TextInput label='Link Ref' name='link' />
                             </div>
                         </div>
                     </div>
                     {/* Second Column */}
-                    <div>
+                    <div className="col-span-1">
                         <div className="p-4 mb-4 bg-white rounded-lg shadow-sm dark:bg-gray-800">
                             <div className="grid grid-cols-1 gap-4">
                                 <TextInput label='Category' name='category_id' />
@@ -92,24 +92,24 @@ const Order = () => {
                                 <TextInput label='Unit Model' name='model' />
                                 <TextInput label='Parts Model' name='part_model' />
                                 <TextInput label='Quantity' name='quantity' />
-                                
                             </div>
                         </div>
                     </div>
                     {/* Third Column */}
-                    <div>
+                    <div className="col-span-1">
                         <div className="p-4 mb-4 bg-white rounded-lg shadow-sm dark:bg-gray-800">
                             <div className="grid grid-cols-1 gap-4">
-                            <SelectInput label='' name='status' options={statusOptions} />
-                                <TextInput label='Link Ref' name='link' />
-                                <TextAreaInput label='Comments' name='notes' />
-                                <FilePickerInput label='Upload File' name='images_paths' />
-                                <FilePickerInput label='Upload File' name='images_paths' />
+                                <SelectInput label='Staff Name' name='user_id' options={staffOptions} />
+                                <SelectInput label='Status' name='status' options={statusOptions} />
+                               
+                                <TextAreaInput label='Comments' name='notes' placeHolder='Comments' />
+                                <FilePickerInput label='Upload File 1' name='images_paths' />
+                                <FilePickerInput label='Upload File 2' name='images_paths' />
                             </div>
                         </div>
                     </div>
-
-                    <div className="col-span-full flex pl-64">
+                    {/* Submit Button */}
+                    <div className="col-span-1 md:col-span-full flex  flex pl-64">
                         <Button gradientMonochrome="success" className='w-1/2' type='submit'>
                             Submit
                         </Button>
@@ -119,5 +119,4 @@ const Order = () => {
         </section>
     );
 };
-
 export default Order;

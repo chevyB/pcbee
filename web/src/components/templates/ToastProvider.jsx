@@ -15,7 +15,6 @@ const ToastProvider = ({ children }) => {
     },
     [setToasts],
   )
-
   const addToast = useCallback(
     (content) => {
       const id = count++
@@ -24,7 +23,7 @@ const ToastProvider = ({ children }) => {
 
       const removeToastTimer = setTimeout(() => {
         removeToast(id)
-      }, 3000) // delay
+      }, 3000)
 
       return () => {
         clearTimeout(removeToastTimer)
@@ -34,7 +33,7 @@ const ToastProvider = ({ children }) => {
   )
 
   return (
-    <ToastContext.Provider value={{ addToast }}>
+    <ToastContext.Provider value={{ addToast, removeToast }}>
       <Toasts toasts={toasts} />
       {children}
     </ToastContext.Provider>
