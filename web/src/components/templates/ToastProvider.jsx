@@ -9,21 +9,28 @@ let count = 1
 const ToastProvider = ({ children }) => {
   const [toasts, setToasts] = useState([])
 
+  const removeToast = useCallback(
+    (id) => {
+      setToasts((toasts) => toasts.filter((t) => t.id !== id))
+    },
+    [setToasts],
+  )
+
   const addToast = useCallback(
     (content) => {
       const id = count++
 
       setToasts((toasts) => [...toasts, { id, ...content }])
 
-      const timer = setTimeout(() => {
-        (id)
+      const removeToastTimer = setTimeout(() => {
+        removeToast(id)
       }, 3000) // delay
 
       return () => {
-        clearTimeout(timer)
+        clearTimeout(removeToastTimer)
       }
     },
-    [setToasts],
+    [setToasts, removeToast],
   )
 
   return (
