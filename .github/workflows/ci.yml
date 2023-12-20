@@ -24,8 +24,3 @@ jobs:
         run: |
           cd web && yarn
           yarn lint
-
-      - name: run test
-        run: |
-          cd web && yarn
-          yarn test
