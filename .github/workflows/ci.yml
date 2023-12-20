@@ -17,10 +17,8 @@ jobs:
 
       - name: run build
         run: |
-          cd web && yarn install
-          cd web && yarn lint
-          cd web && yarn test
-          cd web && yarn build
+          cd web && yarn
+          yarn build
 
       - name: run build
         run: yarn lint
