@@ -20,8 +20,12 @@ jobs:
           cd web && yarn
           yarn build
 
-      - name: run build
-        run: yarn lint
+      - name: run lint
+        run: |
+          cd web && yarn
+          yarn lint
 
       - name: run test
-        run: yarn test
+        run: |
+          cd web && yarn
+          yarn test
