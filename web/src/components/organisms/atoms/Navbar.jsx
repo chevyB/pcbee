@@ -3,13 +3,13 @@ import { HiLogout } from "react-icons/hi";
 
 const Navbar = () => {
     return (
-<nav className="bg-gray-50 dark:bg-gray-800 p-2 text-center">
-      <div className="container mx-auto flex justify-between items-center">
-        <Link href="/" className="text-black font-bold justify-center">
+<nav className="bg-gray-50 dark:bg-gray-800 p-2">
+      <div className="px-4 flex justify-between items-center">
+        <Link href="/" className="font-bold">
         PC Bee Parts Ordering System
         </Link>
         
-        <HiLogout className="text-gray-900 hover:underline cursor-pointer">
+        <HiLogout className="cursor-pointer">
           Logout
         </HiLogout>
 

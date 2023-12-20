@@ -1,7 +1,7 @@
 import Template from "@/components/templates/Template";
 import Link from 'next/link';
 
-const Layout = ({ children }) => {
+const Dashboard = () => {
   return (
       <Template>
           Dashboard
@@ -9,4 +9,4 @@ const Layout = ({ children }) => {
   );
 }
 
-export default Layout;
+export default Dashboard;
