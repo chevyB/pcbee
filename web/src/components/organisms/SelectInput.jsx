@@ -7,9 +7,6 @@ const SelectInput = ({ errors, name, register, label, options, ...rest }) => {
 
     return (
         <div className="w-full h-full">
-            <label htmlFor={name} className="block mb-1 font-medium text-gray-700 text-xs">
-                {label}
-            </label>
             <Select
                 id={name}
                 variant='outlined'
