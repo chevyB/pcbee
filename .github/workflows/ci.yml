@@ -4,22 +4,26 @@ on: [push]
 
 jobs:
   build:
-    name: Build
-    runs-on: ubuntu-18.04
     strategy:
+      fail-fast: false
       matrix:
+        os: ['ubuntu-latest']
         node_version: [18.17]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v1
-        with:
-          node_version: ${{ matrix.node_version }}
 
-      - name: run CI
+      - name: run build
         run: |
           cd web && yarn install
           cd web && yarn lint
           cd web && yarn test
           cd web && yarn build
+
+      - name: run build
+        run: yarn lint
+
+      - name: run test
+        run: yarn test
