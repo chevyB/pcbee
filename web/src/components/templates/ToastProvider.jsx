@@ -9,6 +9,13 @@ let count = 1
 const ToastProvider = ({ children }) => {
   const [toasts, setToasts] = useState([])
 
+  const removeToast = useCallback(
+    (id) => {
+      setToasts((toasts) => toasts.filter((t) => t.id !== id))
+    },
+    [setToasts],
+  )
+
   const addToast = useCallback(
     (content) => {
       const id = count++
@@ -24,13 +31,6 @@ const ToastProvider = ({ children }) => {
       }
     },
     [setToasts, removeToast],
-  )
-
-  const removeToast = useCallback(
-    (id) => {
-      setToasts((toasts) => toasts.filter((t) => t.id !== id))
-    },
-    [setToasts],
   )
 
   return (
