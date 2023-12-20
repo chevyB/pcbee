@@ -101,7 +101,6 @@ const Order = () => {
                             <div className="grid grid-cols-1 gap-4">
                                 <SelectInput label='Staff Name' name='user_id' options={staffOptions} />
                                 <SelectInput label='Status' name='status' options={statusOptions} />
-                               
                                 <TextAreaInput label='Comments' name='notes' placeHolder='Comments' />
                                 <FilePickerInput label='Upload File 1' name='images_paths' />
                                 <FilePickerInput label='Upload File 2' name='images_paths' />
