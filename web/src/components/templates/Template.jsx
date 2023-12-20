@@ -1,11 +1,14 @@
-const Template = ({children}) => {
+import  Navbar  from "@/components/organisms/atoms/Navbar";
+import  Sidebar  from "@/components/organisms/atoms/SideBar";
 
-    return (
+const Template = ({ children }) => {
+  return (
     <>
-    <Navbar />
-    <SideBar/>
-    {children}
+      <Navbar />
+      <Sidebar />
+      {children}
     </>
-    
-    )
-    }
+  );
+}
+
+export default Template;
