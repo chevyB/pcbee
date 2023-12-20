@@ -1,5 +1,5 @@
 import { Select } from 'flowbite-react';
-import React from 'react';
+
 
 const SelectInput = ({ errors, name, register, label, options, ...rest }) => {
     const formRegister = (name && register) && { ...register(name) };

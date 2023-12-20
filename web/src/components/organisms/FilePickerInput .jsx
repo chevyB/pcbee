@@ -1,6 +1,4 @@
 import { FileInput } from 'flowbite-react';
-import React from 'react';
-
 
 const FilePickerInput  = ({ multiple = false }) => {
     return (

@@ -70,52 +70,34 @@ const Order = () => {
                 <h1 className="text-xl font-bold text-gray-800 text-center mb-4">
                     PC BEE ORDERING PARTS SYSTEM
                 </h1>
-                <form className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {/* First Column */}
-                    <div className="col-span-1">
-                        <div className="p-4 mb-4 bg-white rounded-lg shadow-sm dark:bg-gray-800">
-                            <div className="grid grid-cols-1 gap-6">
-                                <DatePicker label='Date' name='created_at' />
-                                <TextInput label='Job Order No.' name='job_order' />
-                                <TextInput label='Branch Name' name='Store__id' />
-                                <TextInput label='Downpayment' name='downpayment' />
-                                <TextInput label='Link Ref' name='link' />
-                            </div>
-                        </div>
+                <form className="lg:w-3/4 mx-auto">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <DatePicker label='Date' name='created_at' />
+                        <TextInput label='Job Order No.' name='job_order' />
+                        <TextInput label='Category' name='category_id' />
+                        <TextInput label='Brand' name='brand' />
+                        <TextInput label='Unit Model' name='model' />
+                        <TextInput label='Parts Model' name='part_model' />
+                        <TextInput label='Quantity' name='quantity' />
+                        <TextInput label='Link Ref' name='link' />
+                        <TextInput label='Downpayment' name='downpayment' />
+                        <TextInput label='Branch Name' name='Store__id' />
+                        <SelectInput label='Staff Name' name='user_id' options={staffOptions} />
+                        <SelectInput label='Status' name='status' options={statusOptions} />
+                        <TextAreaInput label='Comments' name='notes' placeHolder='Comments' />
+                        <FilePickerInput label='Upload File' name='images_paths' multiple />
                     </div>
-                    {/* Second Column */}
-                    <div className="col-span-1">
-                        <div className="p-4 mb-4 bg-white rounded-lg shadow-sm dark:bg-gray-800">
-                            <div className="grid grid-cols-1 gap-4">
-                                <TextInput label='Category' name='category_id' />
-                                <TextInput label='Brand' name='brand' />
-                                <TextInput label='Unit Model' name='model' />
-                                <TextInput label='Parts Model' name='part_model' />
-                                <TextInput label='Quantity' name='quantity' />
-                            </div>
-                        </div>
-                    </div>
-                    {/* Third Column */}
-                    <div className="col-span-1">
-                        <div className="p-4 mb-4 bg-white rounded-lg shadow-sm dark:bg-gray-800">
-                            <div className="grid grid-cols-1 gap-4">
-                                <SelectInput label='Staff Name' name='user_id' options={staffOptions} />
-                                <SelectInput label='Status' name='status' options={statusOptions} />
-                                <TextAreaInput label='Comments' name='notes' placeHolder='Comments' />
-                                <FilePickerInput label='Upload File 1' name='images_paths' />
-                                <FilePickerInput label='Upload File 2' name='images_paths' />
-                            </div>
-                        </div>
-                    </div>
-                    {/* Submit Button */}
-                    <div className="col-span-1 md:col-span-full flex  flex pl-64">
-                        <Button gradientMonochrome="success" className='w-1/2' type='submit'>
+                    
+                    <div className="flex justify-center mt-8 ">
+                        <Button gradientMonochrome="success" className='w-full lg:w-1/2' type='submit'>
                             Submit
                         </Button>
                     </div>
+
                 </form>
             </div>
         </section>
     );
 };
+
 export default Order;
