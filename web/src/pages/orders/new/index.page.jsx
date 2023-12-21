@@ -84,8 +84,8 @@ const Order = () => {
                         <TextAreaInput label='Comments' name='notes' placeHolder='Comments' />
                         <FilePickerInput label='Upload File' name='images_paths' multiple />
                     </div>
-                    <div className="flex justify-center mt-8 ">
-                        <Button gradientMonochrome="success" className='w-full lg:w-1/2' type='submit'>
+                    <div className="mt-8 ">
+                        <Button color='warning' type='submit'>
                             Submit
                         </Button>
                     </div>
