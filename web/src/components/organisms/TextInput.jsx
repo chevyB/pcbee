@@ -5,7 +5,8 @@ const TextInput = (props) => {
 
   const formRegister = name && register && { ...register(name) }
 
-  const error = errors[name]?.message
+  const error = errors?.[name]?.message || null
+
 
   return (
     <div>

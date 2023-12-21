@@ -26,7 +26,7 @@ const Login = () => {
         </a>
 
         <h1 className='text-xl font-bold text-gray-800'>
-          PC BEE ORDERING PARTS SYSTEM
+          PC BEE 
         </h1>
 
         <form onSubmit={handleSubmit}>
@@ -39,7 +39,7 @@ const Login = () => {
               {...formState}
             />
 
-            <Button color='warning' className='w-full' type='submit' >
+            <Button color='warning' className='w-full' type='submit'>
               Submit
             </Button>
           </div>

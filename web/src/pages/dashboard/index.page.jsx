@@ -1,5 +1,8 @@
-const Dashboard = () => {
+import React from "react"
+
+
+const backgroundColor = () => {
   return <section>Test</section>
 }
 
-export default Dashboard
+export default backgroundColor

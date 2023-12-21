@@ -30,7 +30,7 @@ const ToastProvider = ({ children }) => {
         clearTimeout(timer)
       }
     },
-    [setToasts, removeToast],
+   
   )
 
   return (
