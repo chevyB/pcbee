@@ -9,9 +9,11 @@ const Navbar = () => {
         PC Bee Parts Ordering System
         </Link>
         
-        <HiLogout className="cursor-pointer">
-          Logout
-        </HiLogout>
+        <Link href="/logout">
+          <HiLogout className="cursor-pointer">
+           Logout
+          </HiLogout>
+        </Link>
 
     </div>
 </nav>
