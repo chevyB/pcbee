@@ -32,7 +32,7 @@ const backgroundColor = () => {
 
                                                        
             <Button color='warning' className='w-full' type='submit' 
-            style={{width: '160px', height: '60px', float:'left', marginLeft:'18px', marginTop:'11px'}}>
+            style={{width: '160px', height: '60px', float:'left', marginLeft:'19px', marginTop:'11px'}}>
               Submit
             </Button>
 
