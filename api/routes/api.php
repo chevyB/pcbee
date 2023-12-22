@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrderController;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -31,13 +32,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::get('/', 'user');
         });
 
-    // Route::prefix('admin')->group(['middleware' => ['restrictRole:admin']], function () {
-    //    // Routes here
-    // });
-
-Route::group(['middleware' => ['restrictRole:staff']], function () {
-    Route::post('/orders/new', function (Request $request) {
-        return Order::create($request->all());
+    Route::prefix('admin')->group(['middleware' => ['restrictRole:admin']], function () {
+        Route::resource('admin-orders', OrderController::class);
     });
-});
+
+    Route::group(['middleware' => ['restrictRole:staff']], function () {
+        Route::resource('staff-orders', OrderController::class);
+    });
 });
