@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOrderRequest;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -19,25 +20,9 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreOrderRequest $request)
     {
-        $validatedData = $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'store_id' => 'required|exists:stores,id',
-            'category_id' => 'required|exists:categories,id',
-            'job_order' => 'nullable|integer',
-            'order_number' => 'required|integer',
-            'brand' => 'required|string',
-            'model' => 'nullable|string',
-            'downpayment' => 'numeric',
-            'quantity' => 'required|integer',
-            'status' => 'nullable|in:delivered,open,in-transit,cancelled,onhold',
-            'link' => 'nullable|string',
-            'notes' => 'nullable|string',
-            'image_paths' => 'nullable|array',
-            'image_paths.*' => 'nullable|string',
-            'order_at' => 'nullable|date',
-        ]);
+        $validatedData = $request->validated();
 
         $order = Order::create($validatedData);
         return response()->json(['order' => $order], 201);

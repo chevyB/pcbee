@@ -3,8 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrderController;
-use App\Models\Order;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,5 +35,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // });
 
     Route::group(['middleware' => ['restrictRole:staff', 'restrictRole:admin']], function () {
+        Route::resource('staff-orders', OrderController::class);
     });
 });
