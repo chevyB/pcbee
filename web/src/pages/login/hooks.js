@@ -1,12 +1,12 @@
-import * as yup from 'yup'
-import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useRouter } from 'next/router'
+import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
 
 import { errors } from '@/constants/formErrors'
 import { authApi } from '@/hooks/api/authApi'
-import { useHandleError } from '@/hooks/useHandleError'
-import { useRouter } from 'next/router'
 import { useUser } from '@/hooks/redux/auth'
+import { useHandleError } from '@/hooks/useHandleError'
 
 const schema = yup
   .object({
@@ -18,6 +18,7 @@ const schema = yup
 export function useHooks() {
   const router = useRouter()
   const { login } = useUser()
+  const { handleError } = useHandleError()
   const [loginMutation] = authApi.useLoginMutation()
   const {
     register,
@@ -30,9 +31,8 @@ export function useHooks() {
       const { token } = await loginMutation(data).unwrap()
       login(token)
       router.push('/dashboard')
-      // TODO:Toast Add success toast here
     } catch (error) {
-      useHandleError(error)
+      handleError(error)
     }
   }
 

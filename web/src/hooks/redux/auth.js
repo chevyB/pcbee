@@ -1,27 +1,23 @@
-import { useMemo, useCallback } from 'react'
-import { useDispatch } from 'react-redux'
+import { useCallback, useMemo } from 'react'
 
-import { baseApi } from '@/hooks/api/baseApi'
 import { authApi } from '@/hooks/api/authApi'
-import { setToken, removeToken } from '@/hooks/lib/tokenStorage'
+import { baseApi } from '@/hooks/api/baseApi'
+import { removeToken, setToken } from '@/hooks/lib/tokenStorage'
 
 export const useUser = () => {
-  const dispatch = useDispatch()
   const { data, isError, isLoading } = authApi.useGetUserQuery()
 
-  const user = useMemo(
-    () => data || null, [data])
+  const user = useMemo(() => data || null, [data])
 
   const logout = useCallback(() => {
     removeToken()
-    dispatch(baseApi.util.resetApiState())
-  }, [user, dispatch])
+    baseApi.util.resetApiState()
+  }, [])
 
   const login = useCallback((token) => {
     setToken(token)
-    dispatch(baseApi.util.resetApiState())
-  }, [user, dispatch])
-  
+    baseApi.util.resetApiState()
+  }, [])
 
   return {
     user,

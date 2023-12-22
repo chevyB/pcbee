@@ -1,9 +1,12 @@
 import { Button } from 'flowbite-react'
-import { useHooks } from './hooks'
+import Image from 'next/image'
+
 import TextInput from '@/components/organisms/TextInput'
 
+import { useHooks } from './hooks'
+
 const Login = () => {
-  const {formState, handleSubmit } = useHooks()
+  const { formState, handleSubmit } = useHooks()
 
   return (
     <section className='bg-white dark:bg-gray-900'>
@@ -12,10 +15,12 @@ const Login = () => {
           href='#'
           className='flex items-center mb-6 text-2xl font-semibold text-gray-800 dark:text-white'
         >
-          <img
+          <Image
             className='w-8 h-8 mr-2'
             src='https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg'
             alt='logo'
+            width={10}
+            height={10}
           />
           Logo Here
         </a>
@@ -26,9 +31,13 @@ const Login = () => {
 
         <form onSubmit={handleSubmit}>
           <div className='space-y-8 mt-8 w-80'>
-
-            <TextInput label='Username' name='username' {...formState}/>
-            <TextInput label='Password' name='password' type="password" {...formState}/>
+            <TextInput label='Username' name='username' {...formState} />
+            <TextInput
+              label='Password'
+              name='password'
+              type='password'
+              {...formState}
+            />
 
             <Button color='warning' className='w-full' type='submit'>
               Submit
