@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Models\Order;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +35,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //    // Routes here
     // });
 
-    // Route::group(['middleware' => ['restrictRole:staff']], function () {
-    //     // Routes here
-    // });
+Route::group(['middleware' => ['restrictRole:staff']], function () {
+    Route::post('/orders/new', function (Request $request) {
+        return Order::create($request->all());
+    });
+});
 });
