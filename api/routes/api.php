@@ -32,11 +32,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::get('/', 'user');
         });
 
-    Route::prefix('admin')->group(['middleware' => ['restrictRole:admin']], function () {
-        Route::resource('admin-orders', OrderController::class);
-    });
+    // Route::prefix('admin')->group(['middleware' => ['restrictRole:admin']], function () {
+    //    // Routes here
+    // });
 
-    Route::group(['middleware' => ['restrictRole:staff']], function () {
-        Route::resource('staff-orders', OrderController::class);
+    Route::group(['middleware' => ['restrictRole:staff', 'restrictRole:admin']], function () {
     });
 });
