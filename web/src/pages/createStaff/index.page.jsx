@@ -11,28 +11,18 @@ const backgroundColor = () => {
       
 
       <form className="mt-10 ml-4 w-1/2 lg:w-1/4  ">
-        
-         <div className>
-         <TextInput label='Name' name='createStaff' />
-             </div>
+       
+         <TextInput label='Name' name='createStaff'/>
+        <TextInput label='Position' name='createStaff' />
+        <TextInput label='Contact Number' name='createStaff' />
+        <TextInput label='Account Type' name='createStaff' />
+                                                 
 
-                  <div className = 'mt-5'>
-               <TextInput label='Position' name='createStaff' />
-                  </div>
-
-                        <div className ='mt-5'>
-                           <TextInput label='Contact Number' name='createStaff' />
-                              </div>
-
-                                 <div className ='mt-5'>
-                                       <TextInput label='Account Type' name='createStaff' />
-                                                </div> 
-
-                                                       </form>
+       </form>
 
                                                        
             <Button color='warning' className='w-full' type='submit' 
-            style={{width: '160px', height: '60px', float:'left', marginLeft:'19px', marginTop:'11px'}}>
+            style={{width: '160px', height: '60px', float:'left', marginLeft:'19px', marginTop:'5px'}}>
               Submit
             </Button>
 
