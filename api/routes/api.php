@@ -34,7 +34,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //    // Routes here
     // });
 
-    Route::group(['middleware' => ['restrictRole:staff', 'restrictRole:admin']], function () {
-        Route::resource('staff-orders', OrderController::class);
+    Route::group(['middleware' => ['restrictRole:admin,staff']], function () {
+        Route::resource('orders', OrderController::class);
     });
 });
