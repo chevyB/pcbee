@@ -1,8 +1,7 @@
-import React from "react"
+import Template from '@/components/templates/Template'
 
-
-const backgroundColor = () => {
-  return <section>Test</section>
+const Dashboard = () => {
+  return <Template>Dashboard</Template>
 }
 
-export default backgroundColor
+export default Dashboard
