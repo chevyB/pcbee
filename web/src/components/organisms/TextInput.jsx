@@ -7,7 +7,6 @@ const TextInput = (props) => {
 
   const error = errors?.[name]?.message || null
 
-
   return (
     <div>
       <FloatingLabel

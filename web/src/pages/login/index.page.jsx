@@ -39,7 +39,7 @@ const Login = () => {
               {...formState}
             />
 
-            <Button color='warning' className='w-full' type='submit' >
+            <Button color='warning' className='w-full' type='submit'>
               Submit
             </Button>
           </div>

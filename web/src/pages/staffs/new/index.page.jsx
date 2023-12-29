@@ -1,31 +1,28 @@
-import { Button } from 'flowbite-react';
-import React from 'react';
+import { Button } from 'flowbite-react'
+import React from 'react'
 
-import TextInput from '@/components/organisms/TextInput';
+import TextInput from '@/components/organisms/TextInput'
+import Template from '@/components/templates/Template'
 
-
-const CreateStaffPage = () => {
+const AddStaff = () => {
   return (
+    <Template>
+      <form className='flex w-80 flex-col gap-2'>
+        <TextInput label='Name' name='createStaff' />
+        <TextInput label='Position' name='createStaff' />
+        <TextInput label='Contact Number' name='createStaff' />
+        <TextInput label='Account Type' name='createStaff' />
 
-   
-   <div className="bg-white min-h-screen p-5">
-
-      <form className="flex flex-col gap-4">  
-      <TextInput label='Name' name='createStaff'/>
-      <TextInput label='Position' name='createStaff' />
-      <TextInput label='Contact Number' name='createStaff' />
-      <TextInput label='Account Type' name='createStaff' />
+        <Button
+          color='warning'
+          type='submit'
+          style={{ width: 140, height: 55 }}
+        >
+          Submit
+        </Button>
       </form>
+    </Template>
+  )
+}
 
-                                                       
-      <Button color='warning' className='w-32 h-14' type='submit'>
-      Submit
-      </Button>
-
-    </div>
-
-  );
-};
-
-export default CreateStaffPage;
-
+export default AddStaff
