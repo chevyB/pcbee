@@ -16,7 +16,7 @@ const AddStaff = () => {
         <Button
           color='warning'
           type='submit'
-          style={{ width: 140, height: 55 }}
+          style={{ width: 140}}
         >
           Submit
         </Button>
