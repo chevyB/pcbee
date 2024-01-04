@@ -6,6 +6,7 @@ import FilePickerInput from '@/components/organisms/FilePickerInput ';
 import SelectInput from '@/components/organisms/SelectInput';
 import TextAreaInput from '@/components/organisms/TextAreaInput';
 import TextInput from "@/components/organisms/TextInput";
+import Template from '@/components/templates/Template'
 
 const Order = () => {
 
@@ -65,10 +66,11 @@ const Order = () => {
     ];
 
     return (
+        <Template>
         <section className="bg-white dark:bg-gray-900">
-            <div className="container mx-auto px-4 py-8">
-                <form className="lg:w-3/4 mx-auto">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="container mx-auto px-8 py-8">
+                <form className="mx-auto">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 w-full">
                         <DatePicker label='Date' name='created_at' />
                         <TextInput label='Job Order No.' name='job_order' />
                         <TextInput label='Category' name='category_id' />
@@ -92,6 +94,7 @@ const Order = () => {
                 </form>
             </div>
         </section>
+        </Template>
     );
 };
 
