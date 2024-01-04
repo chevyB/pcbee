@@ -6,7 +6,7 @@ const SelectInput = ({ errors, name, register, label, options, ...rest }) => {
     const error = errors?.[name]?.message || null;
 
     return (
-        <div className="w-full h-full">
+        <>
             <Select
                 id={name}
                 variant='outlined'
@@ -20,7 +20,7 @@ const SelectInput = ({ errors, name, register, label, options, ...rest }) => {
                 ))}
             </Select>
             {error && <span className="text-xs text-red-700">{error}</span>}
-        </div>
+        </>
     );
 };
 
