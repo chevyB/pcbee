@@ -61,58 +61,54 @@ const Order = () => {
     ]
     return (
         <Template>
-        <section className='bg-white dark:bg-gray-900'>
-            <div className='container mx-auto px-8 py-8'>
-                <form className='grid lg:grid-cols-2 gap-4'>
-                    <div className='grid grid-cols-1 gap-4'>
-                        {/* Inputs in the first column */}
-                        <DatePicker label='Date' name='created_at' />
-                        <TextInput label='Job Order No.' name='job_order' />
-                        <SelectInput
-                            label='Status'
-                            name='status'
-                            options={statusOptions}
-                        />
-                        <TextInput label='Category' name='category_id' />
-                        <TextInput label='Brand' name='brand' />
-                        <TextInput label='Parts Model' name='part_model' />
-                        <TextInput label='Quantity' name='quantity' />
-                        <TextInput label='Link Ref' name='link' />
-                        <TextInput label='Down Payment' name='downpayment' />
-                        <FilePickerInput
-                            label='Upload File'
-                            name='images_paths'
-                            multiple
-                        />
-                    </div>
-                    <div className='grid grid-cols-1 gap-4'>
-                        {/* Inputs in the second column */}
-                        <SelectInput
-                            label='Branch'
-                            name='store__id'
-                            options={branchOptions}
-                        />
-                        <TextInput label='Unit Model' name='unit_model' />
-                    </div>
-                    <div className='col-span-full'>
-                        {/* Textarea for comments */}
-                        <TextAreaInput
-                            label='Comments'
-                            name='notes'
-                            placeHolder='Comments'
-                        />
-                    </div>
-                    <div className='col-span-full'>
-                        {/* Submit button */}
-                        <Button color='warning' type='submit'>
-                            Submit
-                        </Button>
-                    </div>
-                </form>
-            </div>
-        </section>
-    </Template>
-)
+            <section className='bg-white dark:bg-gray-900'>
+                <div className='container mx-auto px-8 py-8'>
+                    <form className='grid lg:grid-cols-2 gap-4'>
+                        <div className='grid grid-cols-1 gap-4'>
+                            <DatePicker label='Date' name='created_at' />
+                            <TextInput label='Job Order No.' name='job_order' />
+                            <SelectInput
+                                label='Status'
+                                name='status'
+                                options={statusOptions}
+                            />
+                            <TextInput label='Category' name='category_id' />
+                            <TextInput label='Brand' name='brand' />
+                            <TextInput label='Parts Model' name='part_model' />
+                            <TextInput label='Quantity' name='quantity' />
+                            <TextInput label='Link Ref' name='link' />
+                            <TextInput label='Down Payment' name='downpayment' />
+                            <FilePickerInput
+                                label='Upload File'
+                                name='images_paths'
+                                multiple
+                            />
+                        </div>
+                        <div className="grid grid-cols-1 gap-2">
+                            <SelectInput
+                                label='Branch'
+                                name='store_id'
+                                options={branchOptions}
+                            />
+                            <TextInput label='Unit Model' name='unit_model' className="mb-36" />
+                        </div>
+                        <div className='col-span-full'>
+                            <TextAreaInput
+                                label='Comments'
+                                name='notes'
+                                placeHolder='Comments'
+                            />
+                        </div>
+                        <div className='col-span-full'>
+                            <Button color='warning' type='submit'>
+                                Submit
+                            </Button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </Template>
+    )
 }
 
 export default Order
