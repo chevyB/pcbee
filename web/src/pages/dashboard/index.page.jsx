@@ -1,7 +1,11 @@
-import Template from '@/components/templates/Template'
+import Template from "@/components/templates/Template";
 
 const Dashboard = () => {
-  return <Template>Dashboard</Template>
+  return (
+      <Template>
+          Dashboard
+      </Template>
+  );
 }
 
-export default Dashboard
+export default Dashboard;
