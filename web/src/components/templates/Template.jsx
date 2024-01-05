@@ -7,7 +7,7 @@ const Template = ({ children }) => {
       <Navbar />
       <div className='flex-1 flex'>
         <Sidebar />
-        <div className='bg-white dark:bg-gray-900 p-4'>{children}</div>
+        <div className='bg-white dark:bg-gray-900 p-4 w-full'>{children}</div>
       </div>
     </div>
   )

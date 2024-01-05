@@ -15,19 +15,18 @@ const ToastProvider = ({ children }) => {
     },
     [setToasts],
   )
-
   const addToast = useCallback(
     (content) => {
       const id = count++
 
       setToasts((toasts) => [...toasts, { id, ...content }])
 
-      const timer = setTimeout(() => {
+      const removeToastTimer = setTimeout(() => {
         removeToast(id)
-      }, 3000) // delay
+      }, 3000)
 
       return () => {
-        clearTimeout(timer)
+        clearTimeout(removeToastTimer)
       }
     },
     [setToasts, removeToast],
