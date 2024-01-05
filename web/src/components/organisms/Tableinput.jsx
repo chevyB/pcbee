@@ -1,6 +1,4 @@
 import { Table } from 'flowbite-react';
-import { McLaren } from 'next/font/google';
-import { Input } from 'postcss';
 
 const Tableinput = () => {
     return (
