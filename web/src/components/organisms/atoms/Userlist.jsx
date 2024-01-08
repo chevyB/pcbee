@@ -9,7 +9,7 @@ const users = [
 const UserList = () => {
   return (
     <div className="p-2">
-      <h2 className="font-semibold mb-2">User List</h2>
+
       <Table>
         <TableHead>
           <TableHeadCell>ID</TableHeadCell>
