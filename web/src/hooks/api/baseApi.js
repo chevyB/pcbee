@@ -16,7 +16,6 @@ export const baseApi = createApi({
       if (token) {
         headers.set('authorization', `Bearer ${token}`)
       }
-
       return headers
     },
     validateStatus(response) {

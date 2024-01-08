@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserListController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,9 +35,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //    // Routes here
     // });
 
-    // Route::group(['middleware' => ['restrictRole:staff']], function () {
-    //     // Routes here
-    // });
+    Route::group(['middleware' => ['restrictRole:admin,staff']], function () {
+        Route::resource('orders', OrderController::class);
+    });
 });
 
 Route::get('/userlist', [UserListController::class, 'getUserList']);
