@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserListController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 
 /*
@@ -40,4 +40,4 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
 });
 
-Route::get('/userlist', [UserListController::class, 'getUserList']);
+Route::get('/user', [UserController::class, 'getUserList']);

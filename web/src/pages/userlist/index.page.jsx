@@ -1,11 +1,15 @@
-import UserlistTemplate from "@/components/templates/UserlistTemplate";
+import Userlist from '@/components/organisms/atoms/Userlist'
+import Template from "@/components/templates/Template";
 
-const Userlist = () => {
+const Dashboard = () => {
   return (
-      <UserlistTemplate>
-          Userlist
-      </UserlistTemplate>
+      <Template>
+         <div>
+        <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
+        <Userlist />
+      </div>
+      </Template>
   );
 }
  
-export default Userlist;
+export default Dashboard;
