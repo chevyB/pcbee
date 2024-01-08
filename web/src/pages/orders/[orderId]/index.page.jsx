@@ -1,5 +1,7 @@
-import Detail from '@/components/organisms/Detail'
+import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
+
 import Gallery from '@/components/organisms/Gallery'
+import RowItem from '@/components/organisms/RowItem';
 import Template from '@/components/templates/Template'
 
 const Order = () => {
@@ -29,22 +31,24 @@ const Order = () => {
                 <div className='container mx-auto px-8 py-8'>
                     <div className='grid lg:grid-cols-2 gap-4'>
                         <div className='grid grid-cols-1 gap-4'>
-                            <Detail label='Date' value={orderDetails.date} />
-                            <Detail label='Job Order No.' value={orderDetails.jobOrder} />
-                            <Detail label='Status' value={orderDetails.status} />
-                            <Detail label='Category' value={orderDetails.category} />
-                            <Detail label='Brand' value={orderDetails.brand} />
-                            <Detail label='Parts Model' value={orderDetails.partModel} />
-                            <Detail label='Link Ref' value={orderDetails.linkRef} />
-                            <Detail label='Down Payment' value={orderDetails.downPayment} />
+                            <RowItem label='Date' value={orderDetails.date} icon={<FaCalendarAlt />} />
+                            <RowItem label='Job Order No.' value={orderDetails.jobOrder} />
+                            <RowItem label='Status' value={orderDetails.status} />
+                            <RowItem label='Category' value={orderDetails.category} />
+                            <RowItem label='Brand' value={orderDetails.brand} />
+                            <RowItem label='Parts Model' value={orderDetails.partModel} />
+                            <RowItem label='Link Ref' value={orderDetails.linkRef} />
+                            <RowItem label='Down Payment' value={orderDetails.downPayment} />
                         </div>
                         <div className='grid grid-cols-1 gap-5'>
-                            <Detail label='Branch' value={orderDetails.branch} />
-                            <Detail label='Unit Model' value={orderDetails.unitModel} />
-                            <Gallery images={imageUrls} />
+                            <RowItem label='Branch' value={orderDetails.branch} icon={<FaMapMarkerAlt />} />
+                            <RowItem label='Unit Model' value={orderDetails.unitModel} />
+                            <div className="grid grid-cols-2 gap-2">
+                                <Gallery images={imageUrls} />
+                            </div>
                         </div>
                         <div className='col-span-full'>
-                            <Detail label='Comment' value={orderDetails.comment} />
+                            <RowItem label='Comment' value={orderDetails.comment} />
                         </div>
                     </div>
                 </div>
