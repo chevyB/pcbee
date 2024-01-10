@@ -25,7 +25,7 @@ const links = [
 
 const Sidebar = () => {
   return (
-    <aside className='pt-2 w-64 overflow-y-auto bg-gray-50 dark:bg-gray-800 '>
+    <aside className='pt-2 w-64 overflow-y-auto bg-gray-50'>
       <ul className='space-y-2'>
         {links.map((item) => (
           <li key={item.label}>

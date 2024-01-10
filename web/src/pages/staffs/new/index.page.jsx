@@ -13,11 +13,7 @@ const AddStaff = () => {
         <TextInput label='Contact Number' name='createStaff' />
         <TextInput label='Account Type' name='createStaff' />
 
-        <Button
-          color='warning'
-          type='submit'
-          style={{ width: 140}}
-        >
+        <Button color='warning' type='submit' style={{ width: 140 }}>
           Submit
         </Button>
       </form>
