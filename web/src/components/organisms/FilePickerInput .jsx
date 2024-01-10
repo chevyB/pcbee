@@ -1,11 +1,11 @@
-import { FileInput } from 'flowbite-react';
+import { FileInput } from 'flowbite-react'
 
-const FilePickerInput  = ({ multiple = false }) => {
-    return (
-        <>
-            <FileInput multiple={multiple} />
-        </>
-    )
+const FilePickerInput = ({ multiple = false }) => {
+  return (
+    <>
+      <FileInput multiple={multiple} />
+    </>
+  )
 }
 
-export default FilePickerInput ;
+export default FilePickerInput

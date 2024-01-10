@@ -2,6 +2,7 @@ import '@/app/globals.css'
 
 import { Provider } from 'react-redux'
 
+import RootLayout from '@/app/layout'
 import Theme from '@/app/theme'
 import RouteGuard from '@/components/templates/RouteGuard'
 import ToastProvider from '@/components/templates/ToastProvider'
@@ -16,11 +17,13 @@ const App = ({ Component, pageProps }) => {
   return (
     <Provider store={store}>
       <RouteGuard>
-        <Theme>
-          <ToastProvider>
-            <Component {...pageProps} />
-          </ToastProvider>
-        </Theme>
+        <RootLayout>
+          <Theme>
+            <ToastProvider>
+              <Component {...pageProps} />
+            </ToastProvider>
+          </Theme>
+        </RootLayout>
       </RouteGuard>
     </Provider>
   )
