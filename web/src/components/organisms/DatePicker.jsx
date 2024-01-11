@@ -1,11 +1,11 @@
-import { Datepicker } from "flowbite-react";
+import { Datepicker } from 'flowbite-react'
 
 const DatePicker = () => {
-    return (
-        <>
-            <Datepicker autoHide={false}/>
-        </>
-    );
-};
+  return (
+    <>
+      <Datepicker autoHide={false} />
+    </>
+  )
+}
 
-export default DatePicker;
+export default DatePicker
