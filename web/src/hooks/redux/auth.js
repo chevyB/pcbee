@@ -6,15 +6,15 @@ import { removeToken, setToken } from '@/hooks/lib/tokenStorage'
 
 export const useUser = () => {
   const { data, isError, isLoading } = authApi.useGetUserQuery()
-  const [logoutMutation] = authApi.useLogoutMutation()
+  // const [logoutMutation] = authApi.useLogoutMutation()
 
   const user = useMemo(() => data || null, [data])
 
   const logout = useCallback(async () => {
-    await logoutMutation().unwrap()
+    // await logoutMutation().unwrap()
     removeToken()
     baseApi.util.resetApiState()
-  }, [logoutMutation])
+  }, [])
 
   const login = useCallback((token) => {
     setToken(token)
