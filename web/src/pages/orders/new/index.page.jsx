@@ -8,7 +8,11 @@ import TextAreaInput from '@/components/organisms/TextAreaInput'
 import TextInput from '@/components/organisms/TextInput'
 import Template from '@/components/templates/Template'
 
+import { useHooks } from './hooks'
+
 const Order = () => {
+    const { formState, handleSubmit } = useHooks()
+
     const branchOptions = [
         {
             value: 0,
@@ -63,40 +67,57 @@ const Order = () => {
         <Template>
             <section className='bg-white dark:bg-gray-900'>
                 <div className='container mx-auto px-8 py-8'>
-                    <form className='grid lg:grid-cols-2 gap-4'>
+                    <form onSubmit={handleSubmit} className='grid lg:grid-cols-2 gap-4'>
                         <div className='grid grid-cols-1 gap-4'>
-                            <DatePicker label='Date' name='created_at' />
-                            <TextInput label='Job Order No.' name='job_order' />
+                            <DatePicker label='Date' name='order_at' {...formState} />
+                            <TextInput
+                                label='Job Order No.'
+                                name='job_order'
+                                {...formState}
+                            />
                             <SelectInput
                                 label='Status'
                                 name='status'
                                 options={statusOptions}
+                                {...formState}
                             />
-                            <TextInput label='Category' name='category_id' />
-                            <TextInput label='Brand' name='brand' />
-                            <TextInput label='Parts Model' name='part_model' />
-                            <TextInput label='Quantity' name='quantity' />
-                            <TextInput label='Link Ref' name='link' />
-                            <TextInput label='Down Payment' name='downpayment' />
+                            <TextInput label='Category' name='category_id' {...formState} />
+                            <TextInput label='Brand' name='brand' {...formState} />
+                            <TextInput label='Parts Model' name='part_model' {...formState} />
+                            <TextInput label='Quantity' name='quantity' {...formState} />
+                            <TextInput label='Link Ref' name='link' {...formState} />
+                            <TextInput
+                                label='Down Payment'
+                                name='downpayment'
+                                {...formState}
+                            />
                             <FilePickerInput
                                 label='Upload File'
                                 name='images_paths'
                                 multiple
+                                {...formState}
                             />
                         </div>
-                        <div className="grid grid-cols-1 gap-2">
+                        <div className='grid grid-cols-1 gap-2'>
                             <SelectInput
                                 label='Branch'
                                 name='store_id'
                                 options={branchOptions}
+                                {...formState}
                             />
-                            <TextInput label='Unit Model' name='unit_model' className="mb-36" />
+                            <TextInput
+                                label='Unit Model'
+                                name='model'
+                                className='mb-36'
+                                {...formState}
+                            />
                         </div>
                         <div className='col-span-full'>
                             <TextAreaInput
                                 label='Comments'
                                 name='notes'
                                 placeHolder='Comments'
+                                {...formState}
                             />
                         </div>
                         <div className='col-span-full'>

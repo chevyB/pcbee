@@ -4,7 +4,7 @@ export const useHandleError = () => {
   const { addToast } = useToast()
 
   const handleError = (error) => {
-    const errorMessage = error.data.message
+    const errorMessage = error?.data?.message || 'Unknown error';
 
     if (!!errorMessage) {
       addToast({

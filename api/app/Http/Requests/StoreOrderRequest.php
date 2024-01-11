@@ -37,6 +37,7 @@ class StoreOrderRequest extends FormRequest
             'image_paths' => 'nullable|array',
             'image_paths.*' => 'nullable|string',
             'order_at' => 'nullable|date',
+            'part_model' => 'required|string',
         ];
     }
 }

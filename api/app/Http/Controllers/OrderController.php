@@ -25,7 +25,7 @@ class OrderController extends Controller
         $validatedData = $request->validated();
 
         $order = Order::create($validatedData);
-        return response()->json(['order' => $order], 201);
+        return response()->json(['orders' => $order], 201);
     }
 
     /**
