@@ -7,9 +7,9 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function getUserList()
+    public function index()
     {
-        $users = User::all();
+        $users = User::select(['name', 'username', 'phone', 'position', 'role'])->get();
         return response()->json(['users' => $users]);
     }
 }

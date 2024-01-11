@@ -40,4 +40,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
 });
 
-Route::get('/user', [UserController::class, 'getUserList']);
+Route::group(['middleware' => ['restrictRole:admin']], function () {
+    Route::get('/users', [UserController::class, 'index']);
+});
