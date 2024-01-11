@@ -39,7 +39,7 @@ class AuthController extends Controller
         $user = User::where('username', $fields['username'])->first();
 
         if (!$user || !Hash::check($fields['password'], $user->password)) {
-            return response([
+            return response()->json([
                 'message' => 'Wrong credentials',
             ], 401);
         }
@@ -61,7 +61,7 @@ class AuthController extends Controller
             'message' => 'User Logged Out'
         ];
 
-        return response($response, 201);
+        return response()->json($response, 201);
     }
 
     public function user(Request $request)

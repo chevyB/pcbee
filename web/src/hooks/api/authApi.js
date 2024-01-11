@@ -4,15 +4,15 @@ export const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     tagTypes: ['Auth'],
     getUser: build.query({
-      query: () => ({ url: 'auth' }),
+      query: () => ({ url: '/auth' }),
       providesTags: ['Auth'],
     }),
     login: build.mutation({
-      query(body) {
+      query(user) {
         return {
-          url: 'login',
+          url: '/login',
           method: 'POST',
-          body,
+          body: user,
         }
       },
       invalidatesTags: ['Auth'],
@@ -20,7 +20,7 @@ export const authApi = baseApi.injectEndpoints({
     logout: build.mutation({
       query() {
         return {
-          url: 'logout',
+          url: '/auth/logout',
           method: 'POST',
         }
       },
