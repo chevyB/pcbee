@@ -29,15 +29,16 @@ class StoreOrderRequest extends FormRequest
             'order_number' => 'required|integer',
             'brand' => 'required|string',
             'model' => 'nullable|string',
-            'downpayment' => 'numeric',
+            'part_model' => 'required|string',
+            'downpayment' => 'required|numeric',
             'quantity' => 'required|integer',
             'status' => 'nullable|in:delivered,open,in-transit,cancelled,onhold',
             'link' => 'nullable|string',
             'notes' => 'nullable|string',
             'image_paths' => 'nullable|array',
             'image_paths.*' => 'nullable|string',
-            'order_at' => 'nullable|date',
-            'part_model' => 'required|string',
+            'order_at' => 'nullable',
+            
         ];
     }
 }

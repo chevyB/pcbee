@@ -14,7 +14,7 @@ const links = [
   {
     label: 'Orders',
     icon: <HiOutlineShoppingBag />,
-    link: '/orders/new',
+    link: '/orders',
   },
   {
     label: 'Staffs',

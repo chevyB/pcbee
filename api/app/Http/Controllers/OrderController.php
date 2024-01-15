@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrderRequest;
 use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -14,7 +15,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::all();
-        return response()->json(['orders' => $orders]);
+        return response()->json(['order' => $orders]);
     }
 
     /**
@@ -24,7 +25,11 @@ class OrderController extends Controller
     {
         $validatedData = $request->validated();
 
+        $order_at = Carbon::now('Asia/Manila')->format('Y-m-d H:i:s');
+        $validatedData['order_at'] = $order_at;
+
         $order = Order::create($validatedData);
+        
         return response()->json(['orders' => $order], 201);
     }
 
