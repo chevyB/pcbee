@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <nav className='p-3 px-8 flex justify-between items-center bg-gray-50'>
       <Link href='/' className='font-bold flex items-center'>
-        <Image src='/logo.png' width={30} height={30} alt="logo"/>
+        <Image src='/logo.png' width={30} height={30} alt='logo' />
         <span className='px-2'>PC Bee Parts Ordering System</span>
       </Link>
 

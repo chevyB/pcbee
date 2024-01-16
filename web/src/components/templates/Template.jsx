@@ -1,5 +1,5 @@
-import Navbar from '@/components/organisms/atoms/Navbar'
-import Sidebar from '@/components/organisms/atoms/SideBar'
+import Navbar from '@/components/organisms/Navbar'
+import Sidebar from '@/components/organisms/SideBar'
 
 const Template = ({ children }) => {
   return (
@@ -7,7 +7,7 @@ const Template = ({ children }) => {
       <Navbar />
       <div className='flex-1 flex'>
         <Sidebar />
-        <div className='p-4 w-full'>{children}</div>
+        <div className='px-8 py-4 w-full'>{children}</div>
       </div>
     </div>
   )
