@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrderRequest;
+use App\Models\Category;
 use App\Models\Order;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -15,7 +16,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::all();
-        return response()->json(['order' => $orders]);
+        return response()->json(['orders' => $orders]);
     }
 
     /**
@@ -23,11 +24,18 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
+
+        $userId = Auth::id();
+
         $validatedData = $request->validated();
+        $category = Category::firstOrCreate(
+            ['label' => $validatedData['category_label']],
+        );
+        $validatedData['category_id'] = $category->id;
 
-        $order_at = Carbon::now('Asia/Manila')->format('Y-m-d H:i:s');
-        $validatedData['order_at'] = $order_at;
-
+        $validatedData['user_id'] = $userId;
+        unset($validatedData['category_label']);
+        
         $order = Order::create($validatedData);
         
         return response()->json(['orders' => $order], 201);

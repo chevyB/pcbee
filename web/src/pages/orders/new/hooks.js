@@ -4,14 +4,13 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import { orderApi } from '@/hooks/api/orderApi'
+import { useCategories } from '@/hooks/redux/useCategories'
 import { useHandleError } from '@/hooks/useHandleError'
 
 const schema = yup.object({
-    user_id: yup.number().required(),
     store_id: yup.number().oneOf([1, 2, 3]).required(),
-    category_id: yup.number().required(),
+    category_label: yup.string().required(),
     job_order: yup.number(),
-    order_number: yup.number().required(),
     brand: yup.string().required(),
     part_models: yup.string(),
     model: yup.string(),
@@ -31,14 +30,14 @@ export function useHooks() {
     const router = useRouter()
     const { handleError } = useHandleError()
     const [createOrderMutation] = orderApi.useCreateOrderMutation()
+    const { categories } = useCategories()
     const {
         register,
         formState: { errors },
         handleSubmit,
     } = useForm({ resolver: yupResolver(schema) })
-
     const onSubmit = async (data) => {
-        console.log('Form data:', data)
+        data.order_at = new Date(data.order_at).toISOString().slice(0, 19).replace("T", " ");
         try {
             const { order } = await createOrderMutation(data).unwrap()
             console.log('Order created successfully:', order)
@@ -48,8 +47,8 @@ export function useHooks() {
             handleError(error)
         }
     }
-
     return {
+        categories,
         handleSubmit: handleSubmit(onSubmit),
         formState: {
             errors,
