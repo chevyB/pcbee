@@ -25,15 +25,12 @@ class OrderController extends Controller
     public function store(StoreOrderRequest $request)
     {
 
-        $userId = Auth::id();
-
         $validatedData = $request->validated();
         $category = Category::firstOrCreate(
             ['label' => $validatedData['category_label']],
         );
         $validatedData['category_id'] = $category->id;
-
-        $validatedData['user_id'] = $userId;
+        $validatedData['user_id'] = Auth::id();
         unset($validatedData['category_label']);
         
         $order = Order::create($validatedData);

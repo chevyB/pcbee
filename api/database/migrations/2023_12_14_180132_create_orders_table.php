@@ -27,7 +27,6 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->integer('job_order')->nullable();
             $table->string('brand');
-            $table->string('part_model')->nullable();
             $table->string('model')->nullable();
             $table->decimal('downpayment')->default(0);
             $table->integer('quantity');
