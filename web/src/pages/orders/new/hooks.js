@@ -1,8 +1,8 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { format } from "date-fns";
-import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
+import { yupResolver } from '@hookform/resolvers/yup'
+import { format } from 'date-fns';
+import { useRouter } from 'next/router'
+import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
 
 import { orderApi } from "@/hooks/api/orderApi";
 import { statuses } from "@/hooks/lib/statuses";

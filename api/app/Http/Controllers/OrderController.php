@@ -30,9 +30,8 @@ class OrderController extends Controller
             ['label' => $validatedData['category_label']],
         );
         $validatedData['category_id'] = $category->id;
-
-        $validatedData['user_id'] = Auth::id();
         
+        $validatedData['user_id'] = Auth::id();
         unset($validatedData['category_label']);
         
         $order = Order::create($validatedData);
