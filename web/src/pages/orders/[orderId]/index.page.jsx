@@ -1,10 +1,23 @@
-import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa'
+import { FaCalendarAlt, FaMapMarkerAlt, FaTasks } from 'react-icons/fa'
 
 import Gallery from '@/components/organisms/Gallery'
+import PageHeader from '@/components/organisms/PageHeader'
 import RowItem from '@/components/organisms/RowItem'
 import Template from '@/components/templates/Template'
 
 const Order = () => {
+  const breadcrumbs = [
+    {
+      href: '/orders',
+      title: 'Orders',
+      icon: FaTasks,
+    },
+    {
+      href: '#',
+      title: 'Order Detail',
+    },
+  ]
+
   const orderDetails = {
     date: 'January 6, 2024',
     jobOrder: '819089',
@@ -27,6 +40,7 @@ const Order = () => {
 
   return (
     <Template>
+      <PageHeader breadcrumbs={breadcrumbs} />
       <section className='bg-white dark:bg-gray-900'>
         <div className='container mx-auto px-8 py-8'>
           <div className='grid lg:grid-cols-2 gap-4'>

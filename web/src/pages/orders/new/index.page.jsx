@@ -1,13 +1,12 @@
 import { Button } from "flowbite-react";
+import { FaTasks } from 'react-icons/fa'
 
-import DatePicker from "@/components/organisms/DatePicker";
-import FilePickerInput from "@/components/organisms/FilePickerInput ";
-import SelectInput from "@/components/organisms/SelectInput";
-import TextAreaInput from "@/components/organisms/TextAreaInput";
-import TextInput from "@/components/organisms/TextInput";
-import Template from "@/components/templates/Template";
-
-import { useHooks } from "./hooks";
+import DatePicker from '@/components/organisms/DatePicker'
+import FilePickerInput from '@/components/organisms/FilePickerInput '
+import SelectInput from '@/components/organisms/SelectInput'
+import TextAreaInput from '@/components/organisms/TextAreaInput'
+import TextInput from '@/components/organisms/TextInput'
+import Template from '@/components/templates/Template'
 
 const Order = () => {
     const { formState, handleSubmit, categories } = useHooks();

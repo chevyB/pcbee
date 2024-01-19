@@ -12,8 +12,8 @@ export default function RootLayout({ children }) {
     <html lang='en'>
       <Head>
         <title>PC Bee Parts</title>
-        <link rel="icon" href="/logo.jpg" />
-        <meta name='description' content='PC Bee Parts Ordering System'/>
+        <link rel='icon' href='/logo.jpg' />
+        <meta name='description' content='PC Bee Parts Ordering System' />
       </Head>
       <body>{children}</body>
     </html>
