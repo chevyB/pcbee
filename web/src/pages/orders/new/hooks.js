@@ -1,5 +1,4 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { format } from 'date-fns';
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -22,7 +21,7 @@ const schema = yup.object({
   link: yup.string(),
   notes: yup.string(),
   image_paths: yup.array().of(yup.string()),
-  order_at: yup.date().default(() => new Date()),
+  created_at: yup.date().default(() => new Date()),
 });
 
 export function useHooks() {
@@ -37,7 +36,6 @@ export function useHooks() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
-    data.order_at = format(data.order_at, "yyyy-MM-dd");
     try {
       const { order } = await createOrderMutation(data).unwrap();
       router.push(`/orders`, order);

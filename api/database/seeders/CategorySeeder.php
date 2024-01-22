@@ -23,6 +23,6 @@ class CategorySeeder extends Seeder
             ['id' => 7, 'label' => 'Case'],
             ['id' => 8, 'label' => 'Speaker'],
             ['id' => 9, 'label' => 'Fan'],
-        ], ['label'], ['label', 'created_at', 'updated_at']);
+        ], ['label'], ['created_at', 'updated_at']);
     }
 }

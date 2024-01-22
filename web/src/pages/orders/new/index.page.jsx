@@ -85,7 +85,7 @@ const Order = () => {
             <div className='grid grid-cols-1 gap-4'>
               <DatePicker
                 label='Date'
-                name='order_at'
+                name='created_at'
                 {...formState}
               />
               <TextInput
