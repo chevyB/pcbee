@@ -21,7 +21,6 @@ const schema = yup.object({
   link: yup.string(),
   notes: yup.string(),
   image_paths: yup.array().of(yup.string()),
-  created_at: yup.date().default(() => new Date()),
 });
 
 export function useHooks() {

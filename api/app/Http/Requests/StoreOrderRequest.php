@@ -35,7 +35,6 @@ class StoreOrderRequest extends FormRequest
             'notes' => 'nullable|string',
             'image_paths' => 'nullable|array',
             'image_paths.*' => 'nullable|string',
-            'order_at' => 'nullable|date',
         ];
     }
 }
