@@ -1,47 +1,46 @@
 import { Table, TableBody, TableCell,TableHead, TableHeadCell, TableRow } from 'flowbite-react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import Template from "@/components/templates/Template";
 
+import { useGetUsersQuery } from './userApi';
+
 
 const Dashboard = () => {
-  const [users, setUsers] = useState([]);
+  const { data: users, isError } = useGetUsersQuery();
 
   useEffect(() => {
-      fetch('http://your-laravel-app/api/users')
-          .then(response => response.json())
-          .then(data => setUsers(data.users))
-          .catch(error => console.error('Error fetching users:', error));
-  }, []);
+    // No need to dispatch here, RTK Query manages the state for you
+  }, [users, isError]);
 
   return (
-      <Template>
-          <div className="p-2">
-            <Table>
-              <TableHead>
-                <TableHeadCell>ID</TableHeadCell>
-                <TableHeadCell>Name</TableHeadCell>
-                <TableHeadCell>Username</TableHeadCell>
-                <TableHeadCell>Phone</TableHeadCell>
-                <TableHeadCell>Position</TableHeadCell>
-                <TableHeadCell>Role</TableHeadCell>
-              </TableHead>
-              <TableBody>
-                {users.map(user => (
-                  <TableRow key={user.id}>
-                    <TableCell>{user.id}</TableCell>
-                    <TableCell>{user.name}</TableCell>
-                    <TableCell>{user.username}</TableCell> 
-                    <TableCell>{user.phone}</TableCell> 
-                    <TableCell>{user.position}</TableCell> 
-                    <TableCell>{user.role}</TableCell>   
-                  </TableRow>
+    <Template>
+      <div className="p-2">
+        <Table>
+          <TableHead>
+            <TableHeadCell>ID</TableHeadCell>
+            <TableHeadCell>Name</TableHeadCell>
+            <TableHeadCell>Username</TableHeadCell>
+            <TableHeadCell>Phone</TableHeadCell>
+            <TableHeadCell>Position</TableHeadCell>
+            <TableHeadCell>Role</TableHeadCell>
+          </TableHead>
+          <TableBody>
+            {users.map(user => (
+              <TableRow key={user.id}>
+                <TableCell>{user.id}</TableCell>
+                <TableCell>{user.name}</TableCell>
+                <TableCell>{user.username}</TableCell>
+                <TableCell>{user.phone}</TableCell>
+                <TableCell>{user.position}</TableCell>
+                <TableCell>{user.role}</TableCell>
+              </TableRow>
             ))}
-              </TableBody>
-            </Table>
-          </div>
-      </Template>
+          </TableBody>
+        </Table>
+      </div>
+    </Template>
   );
-}
- 
+};
+
 export default Dashboard;
