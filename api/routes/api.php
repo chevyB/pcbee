@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,23 +32,16 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::get('/', 'user');
         });
 
-     Route::prefix('admin')->group(['middleware' => ['restrictRole:admin']], function () {
-        //Route::post('/users', [UserController::class, 'store']);//
-        Route::resource('users', UserController::class)->only([
-            'store', 'destroy'
-        ]);
+        Route::group(['middleware' => ['restrictRole:admin'], 'prefix' => 'admin'], function () {
+            Route::resource('users', UserController::class)->only(['store', 'destroy']);
+            
+        });
         
-     });
+                                 
 
     Route::group(['middleware' => ['restrictRole:admin,staff']], function () {
         Route::resource('orders', OrderController::class);
     });
-
     
-
-
-
-
-
-
-});
+});     
+    
