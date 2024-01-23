@@ -4,7 +4,7 @@ const Toasts = ({ toasts }) => {
   if (!toasts || !toasts.length) return null
 
   return (
-    <div className='absolute w-1/2 top-2 start-1/2 -translate-x-1/2 flex flex-col justify-center items-center gap-4'>
+    <div className='absolute z-50 w-1/2 top-2 start-1/2 -translate-x-1/2 flex flex-col justify-center items-center gap-4'>
       {toasts?.map((toast) => {
         return (
           <Toast key={toast.id} className='max-w-none min-w-[200px] w-auto'>

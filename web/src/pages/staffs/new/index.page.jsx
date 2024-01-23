@@ -1,23 +1,35 @@
 import { Button } from 'flowbite-react'
 import React from 'react'
+import { FaUserFriends } from 'react-icons/fa'
 
+import PageHeader from '@/components/organisms/PageHeader'
 import TextInput from '@/components/organisms/TextInput'
 import Template from '@/components/templates/Template'
 
 const AddStaff = () => {
+  const breadcrumbs = [
+    {
+      href: '/users',
+      title: 'Users',
+      icon: FaUserFriends,
+    },
+    {
+      href: '#',
+      title: 'User Create',
+    },
+  ]
+
   return (
     <Template>
-      <form className='flex w-80 flex-col gap-2'>
+      <PageHeader breadcrumbs={breadcrumbs} />
+
+      <form className='flex center w-80 flex-col gap-2'>
         <TextInput label='Name' name='createStaff' />
         <TextInput label='Position' name='createStaff' />
         <TextInput label='Contact Number' name='createStaff' />
         <TextInput label='Account Type' name='createStaff' />
 
-        <Button
-          color='warning'
-          type='submit'
-          style={{ width: 140}}
-        >
+        <Button color='warning' type='submit' style={{ width: 140 }}>
           Submit
         </Button>
       </form>

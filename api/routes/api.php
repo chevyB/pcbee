@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 
 /*
@@ -42,5 +43,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::group(['middleware' => ['restrictRole:admin']], function () {
         Route::get('/users', [UserController::class, 'index']);
     });
+    Route::get('/categories', [CategoryController::class, 'index']);
 });
 
