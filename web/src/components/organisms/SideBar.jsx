@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import {
+  HiOutlineChatAlt2,
   HiOutlineShoppingBag,
   HiOutlineUsers,
   HiTemplate,
@@ -20,6 +21,11 @@ const links = [
     label: 'Staffs',
     icon: <HiOutlineUsers />,
     link: '/staffs',
+  },
+  {
+    label: 'Messages',
+    icon: <HiOutlineChatAlt2 />,
+    link: '/messages',
   },
 ]
 
