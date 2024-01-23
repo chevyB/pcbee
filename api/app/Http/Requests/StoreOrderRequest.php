@@ -22,21 +22,19 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|exists:users,id',
             'store_id' => 'required|exists:stores,id',
-            'category_id' => 'required|exists:categories,id',
+            'category_label' => 'required|string',
             'job_order' => 'nullable|integer',
-            'order_number' => 'required|integer',
             'brand' => 'required|string',
             'model' => 'nullable|string',
-            'downpayment' => 'numeric',
+            'part_model' => 'required|string',
+            'downpayment' => 'required|numeric',
             'quantity' => 'required|integer',
             'status' => 'nullable|in:delivered,open,in-transit,cancelled,onhold',
             'link' => 'nullable|string',
             'notes' => 'nullable|string',
             'image_paths' => 'nullable|array',
             'image_paths.*' => 'nullable|string',
-            'order_at' => 'nullable|date',
         ];
     }
 }
