@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\OrderController;
 
 /*
@@ -29,6 +30,16 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         ->group(function () {
             Route::post('/logout', 'logout');
             Route::get('/', 'user');
+        });
+
+
+
+    Route::prefix('messages')
+        ->controller(MessageController::class)
+        ->group(function () {
+            Route::get('/', 'index');
+            Route::get('/{id}', 'show');
+            Route::post('/{id}', 'store');
         });
 
     // Route::prefix('admin')->group(['middleware' => ['restrictRole:admin']], function () {
