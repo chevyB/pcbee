@@ -3,10 +3,10 @@ import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { orderApi } from "@/hooks/api/orderApi";
-import { statuses } from "@/hooks/lib/statuses";
-import { useCategories } from "@/hooks/redux/useCategories";
-import { useHandleError } from "@/hooks/useHandleError";
+import { orderApi } from '@/hooks/api/orderApi'
+import { statuses } from '@/hooks/lib/statuses'
+import { useCategories } from '@/hooks/redux/useCategories'
+import { useHandleError } from '@/hooks/useHandleError'
 
 const schema = yup.object({
   store_id: yup.number().oneOf([1, 2, 3]).required(),
@@ -21,27 +21,27 @@ const schema = yup.object({
   link: yup.string(),
   notes: yup.string(),
   image_paths: yup.array().of(yup.string()),
-});
+})
 
 export function useHooks() {
-  const router = useRouter();
-  const { handleError } = useHandleError();
-  const [createOrderMutation] = orderApi.useCreateOrderMutation();
-  const { categories } = useCategories();
+  const router = useRouter()
+  const { handleError } = useHandleError()
+  const [createOrderMutation] = orderApi.useCreateOrderMutation()
+  const { categories } = useCategories()
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({ resolver: yupResolver(schema) })
 
   const onSubmit = async (data) => {
     try {
-      const { order } = await createOrderMutation(data).unwrap();
-      router.push(`/orders`, order);
+      const { order } = await createOrderMutation(data).unwrap()
+      router.push(`/orders`, order)
     } catch (error) {
-      handleError(error);
+      handleError(error)
     }
-  };
+  }
   return {
     categories,
     handleSubmit: handleSubmit(onSubmit),
@@ -49,5 +49,5 @@ export function useHooks() {
       errors,
       register,
     },
-  };
+  }
 }
