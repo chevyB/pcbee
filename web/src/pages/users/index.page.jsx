@@ -1,10 +1,9 @@
-import { Table, TableBody, TableCell,TableHead, TableHeadCell, TableRow } from 'flowbite-react';
+// Dashboard.js
+import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from 'flowbite-react';
 import { useEffect } from 'react';
 
 import Template from "@/components/templates/Template";
-
-import { useGetUsersQuery } from './userApi';
-
+import { useGetUsersQuery } from '@/hooks/api/userApi';
 
 const Dashboard = () => {
   const { data: users, isError } = useGetUsersQuery();
@@ -26,7 +25,7 @@ const Dashboard = () => {
             <TableHeadCell>Role</TableHeadCell>
           </TableHead>
           <TableBody>
-            {users.map(user => (
+            {users && users.map(user => (
               <TableRow key={user.id}>
                 <TableCell>{user.id}</TableCell>
                 <TableCell>{user.name}</TableCell>
