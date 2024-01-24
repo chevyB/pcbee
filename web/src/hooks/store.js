@@ -5,18 +5,21 @@ import { authApi } from '@/hooks/api/authApi'
 import authSlice from '@/hooks/redux/authSlice'
 
 import { categoryApi } from './api/categoryApi'
+import { orderApi } from './api/orderApi'
+
 
 export const store = configureStore({
   reducer: {
     authState: authSlice,
     [authApi.reducerPath]: authApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
+    [orderApi.reducerPath]: orderApi.reducer,
 
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([authApi.middleware, categoryApi.middleware]),
+    getDefaultMiddleware().concat([authApi.middleware, categoryApi.middleware, orderApi.middleware]),
 })
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors
