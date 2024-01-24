@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\OrderController;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -33,8 +34,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::get('/', 'user');
         });
 
-
-
+        Route::group(['middleware' => ['restrictRole:admin'], 'prefix' => 'admin'], function () {
+            Route::resource('users', UserController::class)->only(['index','store', 'destroy']);
+            
+        });
+        
+                                 
     Route::prefix('messages')
         ->controller(MessageController::class)
         ->group(function () {
@@ -43,17 +48,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::post('/{id}', 'store');
         });
 
-    // Route::prefix('admin')->group(['middleware' => ['restrictRole:admin']], function () {
-    //    // Routes here
-    // });
+
 
     Route::group(['middleware' => ['restrictRole:admin,staff']], function () {
         Route::resource('orders', OrderController::class);
     });
-
-    Route::group(['middleware' => ['restrictRole:admin']], function () {
-        Route::get('/users', [UserController::class, 'index']);
-    });
+       
+    
     Route::get('/categories', [CategoryController::class, 'index']);
 });
 
