@@ -1,14 +1,30 @@
 import { Button } from 'flowbite-react'
-import React from 'react'
+import { FaTasks } from 'react-icons/fa'
 
 import DatePicker from '@/components/organisms/DatePicker'
 import FilePickerInput from '@/components/organisms/FilePickerInput '
+import PageHeader from '@/components/organisms/PageHeader'
 import SelectInput from '@/components/organisms/SelectInput'
 import TextAreaInput from '@/components/organisms/TextAreaInput'
 import TextInput from '@/components/organisms/TextInput'
 import Template from '@/components/templates/Template'
 
+import { useHooks } from './hooks'
+
 const Order = () => {
+  const { formState, handleSubmit, categories } = useHooks()
+
+  const breadcrumbs = [
+    {
+      href: '/orders',
+      title: 'Orders',
+      icon: FaTasks,
+    },
+    {
+      href: '#',
+      title: 'Order Create',
+    },
+  ]
   const branchOptions = [
     {
       value: 0,
@@ -39,49 +55,72 @@ const Order = () => {
       hidden: true,
     },
     {
-      value: 1,
+      value: 'open',
       label: 'Open',
     },
     {
-      value: 2,
+      value: 'in-transit',
       label: 'In-Transit',
     },
     {
-      value: 3,
+      value: 'delivered',
       label: 'Delivered',
     },
     {
-      value: 4,
+      value: 'cancelled',
       label: 'Cancelled',
     },
     {
-      value: 5,
+      value: 'onhold',
       label: 'Onhold',
     },
   ]
   return (
     <Template>
+      <PageHeader breadcrumbs={breadcrumbs} />
+
       <section className='bg-white dark:bg-gray-900'>
         <div className='container mx-auto px-8 py-8'>
-          <form className='grid lg:grid-cols-2 gap-4'>
+          <form onSubmit={handleSubmit} className='grid lg:grid-cols-2 gap-4'>
             <div className='grid grid-cols-1 gap-4'>
-              <DatePicker label='Date' name='created_at' />
-              <TextInput label='Job Order No.' name='job_order' />
+              <DatePicker label='Date' name='created_at' {...formState} />
+              <TextInput
+                label='Job Order No.'
+                name='job_order'
+                {...formState}
+              />
               <SelectInput
                 label='Status'
                 name='status'
                 options={statusOptions}
+                {...formState}
               />
-              <TextInput label='Category' name='category_id' />
-              <TextInput label='Brand' name='brand' />
-              <TextInput label='Parts Model' name='part_model' />
-              <TextInput label='Quantity' name='quantity' />
-              <TextInput label='Link Ref' name='link' />
-              <TextInput label='Down Payment' name='downpayment' />
+              <SelectInput
+                label='Category'
+                name='category_label'
+                options={[
+                  { value: '', label: 'Category', isDisabled: true },
+                  ...(categories?.map((category) => ({
+                    value: category.label,
+                    label: category.label,
+                  })) || []),
+                ]}
+                {...formState}
+              />
+              <TextInput label='Brand' name='brand' {...formState} />
+              <TextInput label='Parts Model' name='part_model' {...formState} />
+              <TextInput label='Quantity' name='quantity' {...formState} />
+              <TextInput label='Link Ref' name='link' {...formState} />
+              <TextInput
+                label='Down Payment'
+                name='downpayment'
+                {...formState}
+              />
               <FilePickerInput
                 label='Upload File'
                 name='images_paths'
                 multiple
+                {...formState}
               />
             </div>
             <div className='grid grid-cols-1 gap-2'>
@@ -89,11 +128,13 @@ const Order = () => {
                 label='Branch'
                 name='store_id'
                 options={branchOptions}
+                {...formState}
               />
               <TextInput
                 label='Unit Model'
-                name='unit_model'
-                className='mb-36'
+                name='model'
+                className='mb-40'
+                {...formState}
               />
             </div>
             <div className='col-span-full'>
@@ -101,6 +142,7 @@ const Order = () => {
                 label='Comments'
                 name='notes'
                 placeHolder='Comments'
+                {...formState}
               />
             </div>
             <div className='col-span-full'>

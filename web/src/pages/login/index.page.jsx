@@ -10,23 +10,11 @@ const Login = () => {
 
   return (
     <section className='bg-white dark:bg-gray-900'>
-      <div className='flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0'>
-        <a
-          href='#'
-          className='flex items-center mb-6 text-2xl font-semibold text-gray-800 dark:text-white'
-        >
-          <Image
-            className='w-8 h-8 mr-2'
-            src='https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg'
-            alt='logo'
-            width={10}
-            height={10}
-          />
-          Logo Here
-        </a>
+      <div className='flex flex-col gap-2 items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0'>
+        <Image src='/logo.png' alt='logo' width={120} height={100} />
 
-        <h1 className='text-xl font-bold text-gray-800'>
-          PC BEE ORDERING PARTS SYSTEM
+        <h1 className='text-xl font-bold text-blue-900'>
+          Ordering Parts System
         </h1>
 
         <form onSubmit={handleSubmit}>

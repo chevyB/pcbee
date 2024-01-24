@@ -9,7 +9,12 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-
+    public function index()
+    {
+        $users = User::select(['name', 'username', 'phone', 'position', 'role'])->get();
+        return response()->json(['users' => $users]);
+    }
+    
     public function store(UserRequest $request)
     { 
         

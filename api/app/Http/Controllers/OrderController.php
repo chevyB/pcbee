@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrderRequest;
+use App\Models\Category;
 use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -22,10 +24,19 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        $validatedData = $request->validated();
 
+        $validatedData = $request->validated();
+        $category = Category::firstOrCreate(
+            ['label' => $validatedData['category_label']],
+        );
+        $validatedData['category_id'] = $category->id;
+        
+        $validatedData['user_id'] = Auth::id();
+        unset($validatedData['category_label']);
+        
         $order = Order::create($validatedData);
-        return response()->json(['order' => $order], 201);
+        
+        return response()->json(['orders' => $order], 201);
     }
 
     /**
