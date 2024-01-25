@@ -5,24 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Message extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    public function user()
+    public function from()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function stores()
+    public function to()
     {
-        return $this->belongsTo(Store::class);
-    }
-
-    public function categories()
-    {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(User::class);
     }
 }

@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\OrderController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +34,21 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::get('/', 'user');
         });
 
-    // Route::prefix('admin')->group(['middleware' => ['restrictRole:admin']], function () {
-    //    // Routes here
-    // });
+        Route::group(['middleware' => ['restrictRole:admin'], 'prefix' => 'admin'], function () {
+            Route::resource('users', UserController::class)->only(['index','store', 'destroy']);
+            
+        });
+        
+                                 
+    Route::prefix('messages')
+        ->controller(MessageController::class)
+        ->group(function () {
+            Route::get('/', 'index');
+            Route::get('/{id}', 'show');
+            Route::post('/{id}', 'store');
+        });
+
+
 
     Route::group(['middleware' => ['restrictRole:admin,staff']], function () {
         Route::resource('orders', OrderController::class);
@@ -43,6 +57,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::group(['middleware' => ['restrictRole:admin']], function () {
         Route::get('/users', [UserController::class, 'index']);
     });
+       
+    
     Route::get('/categories', [CategoryController::class, 'index']);
 });
 

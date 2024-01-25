@@ -1,19 +1,24 @@
-// Dashboard.js
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from 'flowbite-react';
-import { useEffect } from 'react';
+import { FaUserFriends } from 'react-icons/fa';
 
+import PageHeader from '@/components/organisms/PageHeader'
 import Template from "@/components/templates/Template";
 import { useGetUsersQuery } from '@/hooks/api/userApi';
 
 const Dashboard = () => {
-  const { data: users, isError } = useGetUsersQuery();
+  const { data: users } = useGetUsersQuery();
 
-  useEffect(() => {
-    // No need to dispatch here, RTK Query manages the state for you
-  }, [users, isError]);
+  const breadcrumbs = [
+    {
+      href: '#',
+      title: 'Users',
+      icon: FaUserFriends,
+    },
+  ];
 
   return (
     <Template>
+      <PageHeader breadcrumbs={breadcrumbs} />
       <div className="p-2">
         <Table>
           <TableHead>

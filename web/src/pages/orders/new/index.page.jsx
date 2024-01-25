@@ -9,7 +9,7 @@ import TextAreaInput from '@/components/organisms/TextAreaInput'
 import TextInput from '@/components/organisms/TextInput'
 import Template from '@/components/templates/Template'
 
-import { useHooks } from "./hooks";
+import { useHooks } from './hooks'
 
 const Order = () => {
   const { formState, handleSubmit, categories } = useHooks()
@@ -83,11 +83,7 @@ const Order = () => {
         <div className='container mx-auto px-8 py-8'>
           <form onSubmit={handleSubmit} className='grid lg:grid-cols-2 gap-4'>
             <div className='grid grid-cols-1 gap-4'>
-              <DatePicker
-                label='Date'
-                name='created_at'
-                {...formState}
-              />
+              <DatePicker label='Date' name='created_at' {...formState} />
               <TextInput
                 label='Job Order No.'
                 name='job_order'
