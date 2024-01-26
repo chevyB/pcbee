@@ -53,8 +53,18 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::group(['middleware' => ['restrictRole:admin,staff']], function () {
         Route::resource('orders', OrderController::class);
     });
+<<<<<<< Updated upstream
        
     
     Route::get('/categories', [CategoryController::class, 'index']);
+=======
+
+    Route::group(['middleware' => ['restrictRole:admin']], function () {
+        Route::get('/users', [UserController::class, 'index']);
+    });
+    
+    Route::post('/change-password', [AuthController::class, 'changePassword']);
+
+>>>>>>> Stashed changes
 });
 
