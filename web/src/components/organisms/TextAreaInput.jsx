@@ -1,7 +1,9 @@
-import { Textarea } from 'flowbite-react';
+import { Textarea } from 'flowbite-react'
 
 const TextAreaInput = ({ placeHolder, name, register }) => {
-  return <Textarea placeholder={placeHolder} rows={4} {...register(name)} />;
-};
+  const formRegister = name && register && { ...register(name) }
 
-export default TextAreaInput;
+  return <Textarea placeholder={placeHolder} rows={4} {...formRegister} />
+}
+
+export default TextAreaInput
