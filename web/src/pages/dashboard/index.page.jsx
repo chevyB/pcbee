@@ -30,18 +30,19 @@ const Dashboard = () => {
 
       <PageHeader breadcrumbs={breadcrumbs} />
       
-      <div>
-       <div className="flex flex-row items-center justify-center">
-          <DateRange/>
-        </div>
-
-          <div className="grid grid-cols-3 gap-4">
-           {cardData.map((card, index) => (
-             <CardItem key={index} title={card.title} description={card.description} />
-           ))}
-
-        </div>
+      <div className="p-1 m-1">
+      <div className="flex flex-row items-center justify-center mb-5">
+        <DateRange />
       </div>
+
+      <div className="grid grid-cols-3 gap-3 p-5">
+        {cardData.map((card, index) => (
+          <div key={index} className="p-1">
+            <CardItem title={card.title} description={card.description} />
+          </div>
+        ))}
+      </div>
+    </div>
     </Template>
   );
 };

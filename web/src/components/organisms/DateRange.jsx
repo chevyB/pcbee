@@ -1,66 +1,43 @@
-import React, { useState, useRef } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { FaArrowDown } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { enGB } from 'date-fns/locale';
+import { DateRangePicker, START_DATE, END_DATE } from 'react-nice-dates';
+import { FaArrowRight } from 'react-icons/fa';
+import 'react-nice-dates/build/style.css';
 
-const DateRange = () => {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const startDateRef = useRef(null);
-  const endDateRef = useRef(null);
-
-  const handleStartDateChange = (date) => {
-    setStartDate(date);
-  };
-
-  const handleEndDateChange = (date) => {
-    setEndDate(date);
-  };
-
-  const toggleCalendar = (ref) => {
-    ref.current.setOpen(true);
-  };
+function DateRangePickerExample() {
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
 
   return (
-    <div className="flex flex-row items-center justify-center mt-8">
-      <div className="mt-4">
-        <p className="text-sm text-gray-500">
-          Set Date
-        </p>
-      </div>
-      <div className="mr-4 relative">
-        <label className="block text-sm font-medium text-gray-700">From:</label>
-        <div className="relative">
-          <DatePicker
-            selected={startDate}
-            onChange={handleStartDateChange}
-            className="p-1 pl-1 border border-gray-300 rounded-md pr-8 relative"
-            ref={startDateRef}
-          />
-          <FaArrowDown
-            onClick={() => toggleCalendar(startDateRef)}
-            className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer text-gray-500"
-          />
-        </div>
-      </div>
-
-      <div className="relative">
-        <label className="block text-sm font-medium text-gray-700">To:</label>
-        <div className="relative">
-          <DatePicker
-            selected={endDate}
-            onChange={handleEndDateChange}
-            className="p-1 pl-1 border border-gray-300 rounded-md pr-8 relative"
-            ref={endDateRef}
-          />
-          <FaArrowDown
-            onClick={() => toggleCalendar(endDateRef)}
-            className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer text-gray-500"
-          />
-        </div>
-      </div>
+    <div >
+      <DateRangePicker
+        startDate={startDate}
+        endDate={endDate}
+        onStartDateChange={setStartDate}
+        onEndDateChange={setEndDate}
+        minimumDate={new Date()}
+        minimumLength={1}
+        format="dd MMM yyyy"
+        locale={enGB}
+      >
+        {({ startDateInputProps, endDateInputProps, focus }) => (
+          <div className="flex items-center">
+            <input
+              className={`p-2 border border-gray-300 rounded-md ${focus === START_DATE ? 'focus:outline-none focus:ring focus:border-blue-300' : ''}`}
+              {...startDateInputProps}
+              placeholder=""
+            />
+            <FaArrowRight className="mx-2 text-gray-500" />
+            <input
+              className={`p-2 border border-gray-300 rounded-md ${focus === END_DATE ? 'focus:outline-none focus:ring focus:border-blue-300' : ''}`}
+              {...endDateInputProps}
+              placeholder=""
+            />
+          </div>
+        )}
+      </DateRangePicker>
     </div>
   );
-};
+}
 
-export default DateRange;
+export default DateRangePickerExample;
