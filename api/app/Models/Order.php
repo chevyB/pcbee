@@ -21,7 +21,7 @@ class Order extends Model
         return $this->belongsTo(Store::class);
     }
 
-    public function categories()
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }
