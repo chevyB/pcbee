@@ -27,18 +27,15 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
+    Route::get('/categories', [CategoryController::class, 'index']);
+
     Route::prefix('auth')
         ->controller(AuthController::class)
         ->group(function () {
-            Route::post('/logout', 'logout');
             Route::get('/', 'user');
+            Route::post('/logout', 'logout');
+            Route::post('/change-password', 'changePassword');
         });
-
-        Route::group(['middleware' => ['restrictRole:admin'], 'prefix' => 'admin'], function () {
-            Route::resource('users', UserController::class)->only(['index','store', 'destroy']);
-            
-        });
-        
                                  
     Route::prefix('messages')
         ->controller(MessageController::class)
@@ -47,8 +44,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::get('/{id}', 'show');
             Route::post('/{id}', 'store');
         });
-
-
 
     Route::group(['middleware' => ['restrictRole:admin,staff']], function () {
         Route::resource('orders', OrderController::class);
@@ -61,8 +56,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     
     Route::get('/categories', [CategoryController::class, 'index']);
 
-    Route::group(['middleware' => ['restrictRole:admin']], function () {
-        Route::get('/users', [UserController::class, 'index']);
+    Route::group(['middleware' => ['restrictRole:admin'], 'prefix' => 'admin'], function () {
+        Route::resource('users', UserController::class)->only(['index','store', 'destroy']);
     });
     
     Route::post('/change-password', [AuthController::class, 'changePassword']);
