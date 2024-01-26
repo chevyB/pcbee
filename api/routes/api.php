@@ -60,5 +60,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
        
     
     Route::get('/categories', [CategoryController::class, 'index']);
+
+    Route::group(['middleware' => ['restrictRole:admin']], function () {
+        Route::get('/users', [UserController::class, 'index']);
+    });
+    
+    Route::post('/change-password', [AuthController::class, 'changePassword']);
+
 });
 
