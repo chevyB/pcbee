@@ -6,17 +6,19 @@ import {
   TableHead,
   TableHeadCell,
   TableRow,
-} from 'flowbite-react'
-import Link from 'next/link'
+} from 'flowbite-react';
+import Link from 'next/link';
+import React from 'react';
 
-import Loading from '@/components/atoms/Loading'
-import PageHeader from '@/components/organisms/PageHeader'
-import Template from '@/components/templates/Template'
+import Loading from '@/components/atoms/Loading';
+import Paginations from '@/components/atoms/Pagination';
+import PageHeader from '@/components/organisms/PageHeader';
+import Template from '@/components/templates/Template';
 
-import useHooks from './hooks'
+import useHooks from './hooks';
 
 const Dashboard = () => {
-  const { users, isLoading, breadcrumbs } = useHooks()
+  const { users, isLoading, breadcrumbs } = useHooks();
 
   return (
     <Template>
@@ -30,9 +32,10 @@ const Dashboard = () => {
           </Link>
         }
       />
-      {isLoading ?
+      {isLoading ? (
         <Loading />
-      : <Table>
+      ) : (
+        <Table>
           <TableHead>
             <TableHeadCell>ID</TableHeadCell>
             <TableHeadCell>Name</TableHeadCell>
@@ -55,9 +58,14 @@ const Dashboard = () => {
               ))}
           </TableBody>
         </Table>
-      }
-    </Template>
-  )
-}
+      )}
 
-export default Dashboard
+      <div className='m-8'>
+      <Paginations />
+      </div>
+
+    </Template>
+  );
+};
+
+export default Dashboard;

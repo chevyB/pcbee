@@ -2,6 +2,7 @@ import { Button } from 'flowbite-react'
 import Link from 'next/link'
 
 import Loading from '@/components/atoms/Loading'
+import Paginations from '@/components/atoms/Pagination';
 import PageHeader from '@/components/organisms/PageHeader'
 import Table from '@/components/organisms/Table'
 import Template from '@/components/templates/Template'
@@ -27,6 +28,11 @@ const Order = () => {
           <Loading />
         : <Table headers={headers} data={formattedOrders} showActions={true} />}
       </section>
+
+      <div className='m-8'>
+      <Paginations />
+      </div>
+
     </Template>
   )
 }
