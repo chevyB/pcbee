@@ -1,7 +1,7 @@
 import { FaRegChartBar } from 'react-icons/fa'
 
 import PageHeader from '@/components/organisms/PageHeader'
-import Template from "@/components/templates/Template";
+import Template from '@/components/templates/Template'
 
 const Dashboard = () => {
   const breadcrumbs = [
@@ -20,4 +20,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard;
+export default Dashboard

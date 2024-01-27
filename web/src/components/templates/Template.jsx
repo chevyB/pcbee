@@ -13,4 +13,4 @@ const Template = ({ children, contentSx }) => {
   )
 }
 
-export default Template;
+export default Template
