@@ -31,7 +31,7 @@ const Table = ({ headers, data, showActions = true }) => {
                     </a>
                   </div>
                   <div className='text-blue-500 text-xl'>
-                    <a href='#'>
+                    <a href='order/{id}'>
                       <CiViewList />
                     </a>
                   </div>
