@@ -1,4 +1,5 @@
 import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import Template from '@/components/templates/Template';
@@ -6,9 +7,13 @@ import Template from '@/components/templates/Template';
 const ChangePasswordPage = () => {
   return (
     <Template>
-    <div className="flex justify-center items-center h-screen">
-      <div className="bg-white p-6 rounded-md shadow-md">
-        <form className="flex flex-col gap-4">
+      <div className="flex flex-col items-center justify-center">
+        <div className="mb-4">
+          {/* Insert your logo component here */}
+          <Image src='/logo.png' width={30} height={30} alt='logo' />
+        </div>
+        <div className="text-2xl font-bold mb-4">Change Password</div>
+        <form className="flex flex-col items-center justify-center gap-4 ">
           <div>
             <div className="mb-2 block">
               <Label htmlFor="old_password" value="Old Password" />
@@ -39,9 +44,8 @@ const ChangePasswordPage = () => {
           <Button type="submit">Confirm Password</Button>
         </form>
       </div>
-    </div>
     </Template>
   );
-}
+};
 
 export default ChangePasswordPage;
