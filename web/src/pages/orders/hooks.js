@@ -1,14 +1,15 @@
+import { useState } from 'react'
 import { FaTasks } from 'react-icons/fa'
 
-import { capitalizeFirstLetter, formatDate } from '@/hooks/lib/util'
-import { useCategories } from '@/hooks/redux/useCategories'
 import { useOrders } from '@/hooks/redux/useOrders'
 
 const useHooks = () => {
-  const { orders, isLoading: ordersLoading } = useOrders()
-  const { categories, isLoading: categoriesLoading } = useCategories()
+  const { orders, isLoading } = useOrders()
 
-  const isLoading = ordersLoading || categoriesLoading
+  const totalPages = 100
+  const [currentPage, setCurrentPage] = useState(1)
+  const onPageChange = (page) => setCurrentPage(page)
+
   const breadcrumbs = [
     {
       href: '/orders',
@@ -17,27 +18,13 @@ const useHooks = () => {
     },
   ]
 
-  const headers = ['Product name', 'Date', 'Category', 'Status', 'Action']
-  const getCategoryLabel = (order) => {
-    const category = categories.find((cat) => cat.id === order.category_id)
-    return category ? category.label : 'Unknown Category'
-  }
-
-  const formattedOrders = orders.map((order) => [
-    order.brand,
-    formatDate(order.created_at),
-    order.category.label,
-    capitalizeFirstLetter(order.status),
-  ])
   return {
     orders,
-    categories,
     isLoading,
-    getCategoryLabel,
-    capitalizeFirstLetter,
-    formattedOrders,
     breadcrumbs,
-    headers,
+    totalPages,
+    currentPage,
+    onPageChange,
   }
 }
 
