@@ -2,6 +2,7 @@ import { Button } from 'flowbite-react'
 import Link from 'next/link'
 
 import Loading from '@/components/atoms/Loading'
+import Paginations from '@/components/atoms/Pagination'
 import PageHeader from '@/components/organisms/PageHeader'
 import Table from '@/components/organisms/Table'
 import Template from '@/components/templates/Template'
@@ -9,7 +10,15 @@ import Template from '@/components/templates/Template'
 import useHooks from './hooks'
 
 const Order = () => {
-  const { formattedOrders, isLoading, breadcrumbs, headers } = useHooks()
+  const {
+    formattedOrders,
+    isLoading,
+    breadcrumbs,
+    headers,
+    totalPages,
+    currentPage,
+    onPageChange,
+  } = useHooks()
   return (
     <Template>
       <section>
@@ -27,6 +36,12 @@ const Order = () => {
           <Loading />
         : <Table headers={headers} data={formattedOrders} showActions={true} />}
       </section>
+
+      <Paginations
+        currentPage={currentPage}
+        onPageChange={onPageChange}
+        totalPages={totalPages}
+      />
     </Template>
   )
 }

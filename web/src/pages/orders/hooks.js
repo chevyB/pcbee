@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { FaTasks } from 'react-icons/fa'
 
 import { capitalizeFirstLetter, formatDate } from '@/hooks/lib/util'
@@ -29,7 +30,15 @@ const useHooks = () => {
     order.category.label,
     capitalizeFirstLetter(order.status),
   ])
+
+  const totalPages = 100
+  const [currentPage, setCurrentPage] = useState(1)
+  const onPageChange = (page) => setCurrentPage(page)
+
   return {
+    totalPages,
+    currentPage,
+    onPageChange,
     orders,
     categories,
     isLoading,

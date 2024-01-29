@@ -8,15 +8,24 @@ import {
   TableRow,
 } from 'flowbite-react'
 import Link from 'next/link'
+import React from 'react'
 
 import Loading from '@/components/atoms/Loading'
+import Paginations from '@/components/atoms/Pagination'
 import PageHeader from '@/components/organisms/PageHeader'
 import Template from '@/components/templates/Template'
 
 import useHooks from './hooks'
 
 const Dashboard = () => {
-  const { users, isLoading, breadcrumbs } = useHooks()
+  const {
+    users,
+    isLoading,
+    breadcrumbs,
+    totalPages,
+    currentPage,
+    onPageChange,
+  } = useHooks()
 
   return (
     <Template>
@@ -56,6 +65,12 @@ const Dashboard = () => {
           </TableBody>
         </Table>
       }
+
+      <Paginations
+        currentPage={currentPage}
+        onPageChange={onPageChange}
+        totalPages={totalPages}
+      />
     </Template>
   )
 }
