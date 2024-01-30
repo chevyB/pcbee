@@ -16,10 +16,9 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::all();
-        $orders = Order::with('category')->get();
+        $orders = Order::with('store', 'category')->get();
         return response()->json(['orders' => $orders]);
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -45,9 +44,10 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        $order = Order::findOrFail($id);
+        $order = Order::with('store', 'category')->findOrFail($id);
         return response()->json(['order' => $order]);
     }
+
 
     /**
      * Update the specified resource in storage.

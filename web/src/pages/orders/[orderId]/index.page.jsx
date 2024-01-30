@@ -21,8 +21,8 @@ const Order = () => {
 
   const breadcrumbs = [
     {
-      href: '/order',
-      title: 'order',
+      href: '/orders',
+      title: 'Orders',
       icon: FaTasks,
     },
     {
