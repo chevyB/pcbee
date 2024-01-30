@@ -60,7 +60,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::resource('users', UserController::class)->only(['index','store', 'destroy']);
     });
     
-    Route::post('/change-password', [AuthController::class, 'changePassword']);
+    Route::post('/profile/change-password', [AuthController::class, 'changePassword']);
 
 });
 
