@@ -14,7 +14,7 @@ const Order = () => {
   const router = useRouter();
   const { orderId } = router.query;
 
-  const { order, getCategoryLabel, getStoreLabel, isloading } = useHooks(
+  const { order, isloading } = useHooks(
     orderId
   );
 
@@ -53,7 +53,7 @@ const Order = () => {
                       label="Status"
                       value={capitalizeFirstLetter(order.status)}
                     />
-                    <RowItem label="Category" value={getCategoryLabel(order)} />
+                    <RowItem label="Category" value={order.category.label} />
                     <RowItem label="Brand" value={order.brand} />
                     <RowItem label="Parts Model" value={order.part_model} />
                     <RowItem label="Link Ref" value={order.link} />
@@ -66,7 +66,7 @@ const Order = () => {
                   <>
                     <RowItem
                       label="Branch"
-                      value={getStoreLabel(order)}
+                      value={order.store.label}
                       icon={<FaMapMarkerAlt />}
                     />
                     <RowItem label="Unit Model" value={order.model} />
