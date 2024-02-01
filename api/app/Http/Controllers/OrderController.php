@@ -13,10 +13,12 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::all();
-        $orders = Order::with('store', 'category')->get();
+        $perPage = $request->input('perPage', 5);
+        $orders = Order::with('store', 'category')
+            ->orderBy('created_at', 'DESC') // Assuming 'created_at' is the column you want to order by
+            ->paginate($perPage);
         return response()->json(['orders' => $orders]);
     }
     /**

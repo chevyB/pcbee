@@ -1,14 +1,24 @@
-import { useState } from 'react'
-import { FaTasks } from 'react-icons/fa'
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { FaTasks } from 'react-icons/fa';
 
-import { useOrders } from '@/hooks/redux/useOrders'
+import { useOrders } from '@/hooks/redux/useOrders';
 
 const useHooks = () => {
-  const { orders, isLoading } = useOrders()
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = 100
-  const [currentPage, setCurrentPage] = useState(1)
-  const onPageChange = (page) => setCurrentPage(page)
+  const { orders, isLoading } = useOrders(currentPage);
+
+  const totalPages = 100;
+
+  const onPageChange = (page) => setCurrentPage(page);
+  const router = useRouter();
+
+  const handlePageChange = (page) => {
+    router.push(`/orders?page=${page}`);
+
+    onPageChange(page);
+  };
 
   const breadcrumbs = [
     {
@@ -16,7 +26,7 @@ const useHooks = () => {
       title: 'Orders',
       icon: FaTasks,
     },
-  ]
+  ];
 
   return {
     orders,
@@ -25,7 +35,8 @@ const useHooks = () => {
     totalPages,
     currentPage,
     onPageChange,
-  }
-}
+    handlePageChange,
+  };
+};
 
-export default useHooks
+export default useHooks;

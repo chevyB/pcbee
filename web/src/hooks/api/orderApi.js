@@ -5,7 +5,7 @@ export const orderApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getOrders: build.query({
       providesTags: ['orders'],
-      query: () => ({ url: '/orders' }),
+      query: (page = 1) => ({ url: `/orders?page=${page}` }),
     }),
 
     createOrder: build.mutation({
