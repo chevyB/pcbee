@@ -1,10 +1,9 @@
 import Image from 'next/image'
 import React from 'react'
 
-
 const Gallery = ({ images }) => {
   if (!images) {
-    return null;
+    return null
   }
 
   return (
@@ -24,7 +23,7 @@ const Gallery = ({ images }) => {
         </div>
       ))}
     </>
-  );
-};
+  )
+}
 
 export default Gallery

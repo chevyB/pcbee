@@ -11,4 +11,4 @@ export const storeApi = baseApi.injectEndpoints({
   overrideExisting: false,
 })
 
-export const { useGetStoresQuery } = storeApi;
+export const { useGetStoresQuery } = storeApi

@@ -4,8 +4,8 @@ import { CiViewList } from 'react-icons/ci'
 import { FaEdit } from 'react-icons/fa'
 
 import Loading from '@/components/atoms/Loading'
-import Paginations from '@/components/atoms/Pagination'
 import PageHeader from '@/components/organisms/PageHeader'
+import Pagination from '@/components/organisms/Pagination'
 import Table from '@/components/organisms/Table'
 import Template from '@/components/templates/Template'
 import { capitalizeFirstLetter, formatDate } from '@/hooks/lib/util'
@@ -82,10 +82,10 @@ const Order = () => {
         />
         {isLoading ?
           <Loading />
-        : <Table rows={rows} data={orders} />}
+        : <Table rows={rows} data={orders.data} />}
       </section>
 
-      <Paginations
+      <Pagination
         currentPage={currentPage}
         onPageChange={onPageChange}
         totalPages={totalPages}
