@@ -15,9 +15,9 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $perPage = $request->input('perPage', 5);
+        $perPage = $request->perPage ?? 5;
         $orders = Order::with('store', 'category')
-            ->orderBy('created_at', 'DESC') // Assuming 'created_at' is the column you want to order by
+            ->orderBy('created_at', 'DESC')
             ->paginate($perPage);
         return response()->json(['orders' => $orders]);
     }

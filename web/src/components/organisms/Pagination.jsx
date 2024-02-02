@@ -1,10 +1,9 @@
-// Pagination.jsx
 import { Pagination as FlowbitePagination } from 'flowbite-react'
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const handlePageChange = (page) => {
-    onPageChange(page);
-  };
+    onPageChange(page)
+  }
 
   return (
     <div className='flex overflow-x-auto sm:justify-center'>

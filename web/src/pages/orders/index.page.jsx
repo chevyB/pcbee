@@ -1,16 +1,16 @@
-import { Button } from "flowbite-react";
-import Link from "next/link";
-import { CiViewList } from "react-icons/ci";
-import { FaEdit } from "react-icons/fa";
+import { Button } from 'flowbite-react'
+import Link from 'next/link'
+import { CiViewList } from 'react-icons/ci'
+import { FaEdit } from 'react-icons/fa'
 
-import Loading from "@/components/atoms/Loading";
-import Paginations from "@/components/atoms/Pagination";
-import PageHeader from "@/components/organisms/PageHeader";
-import Table from "@/components/organisms/Table";
-import Template from "@/components/templates/Template";
-import { capitalizeFirstLetter, formatDate } from "@/hooks/lib/util";
+import Loading from '@/components/atoms/Loading'
+import PageHeader from '@/components/organisms/PageHeader'
+import Pagination from '@/components/organisms/Pagination'
+import Table from '@/components/organisms/Table'
+import Template from '@/components/templates/Template'
+import { capitalizeFirstLetter, formatDate } from '@/hooks/lib/util'
 
-import useHooks from "./hooks";
+import useHooks from './hooks'
 
 const Order = () => {
   const {
@@ -20,53 +20,52 @@ const Order = () => {
     totalPages,
     currentPage,
     onPageChange,
-  } = useHooks();
-  console.log("Orders:", orders);
-  
+  } = useHooks()
+
   const getAction = (row) => {
     return (
-      <div className="flex">
-        <div className="mr-2 text-red-500 text-xl">
+      <div className='flex'>
+        <div className='mr-2 text-red-500 text-xl'>
           <Link href={`/orders/${row.id}/edit`}>
             <FaEdit />
           </Link>
         </div>
-        <div className="text-blue-500 text-xl">
+        <div className='text-blue-500 text-xl'>
           <Link href={`/orders/${row.id}`}>
             <CiViewList />
           </Link>
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   const rows = [
     {
-      key: "brand",
-      header: "Product Name",
+      key: 'brand',
+      header: 'Product Name',
       render: (row) => row.brand,
     },
     {
-      key: "date",
-      header: "Date",
+      key: 'date',
+      header: 'Date',
       render: (row) => formatDate(row.created_at),
     },
     {
-      key: "category",
-      header: "Category",
+      key: 'category',
+      header: 'Category',
       render: (row) => row.category.label,
     },
     {
-      key: "status",
-      header: "Status",
+      key: 'status',
+      header: 'Status',
       render: (row) => capitalizeFirstLetter(row.status),
     },
     {
-      key: "actions",
-      header: "Actions",
+      key: 'actions',
+      header: 'Actions',
       render: getAction,
     },
-  ];
+  ]
 
   return (
     <Template>
@@ -74,24 +73,25 @@ const Order = () => {
         <PageHeader
           breadcrumbs={breadcrumbs}
           right={
-            <Link href="/orders/new">
-              <Button size="xs" color="warning" href="/orders/new">
+            <Link href='/orders/new'>
+              <Button size='xs' color='warning' href='/orders/new'>
                 Create Order
               </Button>
             </Link>
           }
         />
-        {isLoading ? <Loading />
+        {isLoading ?
+          <Loading />
         : <Table rows={rows} data={orders.data} />}
       </section>
 
-      <Paginations
+      <Pagination
         currentPage={currentPage}
         onPageChange={onPageChange}
         totalPages={totalPages}
       />
     </Template>
-  );
-};
+  )
+}
 
-export default Order;
+export default Order

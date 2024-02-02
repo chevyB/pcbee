@@ -1,13 +1,12 @@
-import { useOrder } from "@/hooks/redux/useOrders";
+import { useOrder } from '@/hooks/redux/useOrders'
 
 const useHooks = (orderId) => {
+  const { order, isloading } = useOrder(orderId)
 
-    const { order, isloading } = useOrder(orderId);
+  return {
+    order,
+    isloading,
+  }
+}
 
-    return {
-        order,
-        isloading,
-    };
-};
-
-export default useHooks;
+export default useHooks
