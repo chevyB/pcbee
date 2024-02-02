@@ -1,21 +1,16 @@
-import { Button } from "flowbite-react";
+import { Button } from 'flowbite-react'
 
-import PageHeader from "@/components/organisms/PageHeader";
-import Table from "@/components/organisms/Table";
-import Template from "@/components/templates/Template";
+import PageHeader from '@/components/organisms/PageHeader'
+import Table from '@/components/organisms/Table'
+import Template from '@/components/templates/Template'
 
-import useHooks from "./hooks";
+import useHooks from './hooks'
 
 const Order = () => {
-  const {
-    formattedOrders,
-    isLoading,
-    breadcrumbs,
-    headers
-  } = useHooks();
+  const { formattedOrders, isLoading, breadcrumbs, headers } = useHooks()
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p>Loading...</p>
   }
 
   return (
@@ -24,19 +19,15 @@ const Order = () => {
         <PageHeader
           breadcrumbs={breadcrumbs}
           right={
-            <Button color="warning" href="/orders/new">
+            <Button color='warning' href='/orders/new'>
               Create Order
             </Button>
           }
         />
-        <Table
-          headers={headers}
-          data={formattedOrders}
-          showActions={true}
-        />
+        <Table headers={headers} data={formattedOrders} showActions={true} />
       </section>
     </Template>
-  );
-};
+  )
+}
 
-export default Order;
+export default Order
