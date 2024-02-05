@@ -9,7 +9,9 @@ import { useHandleError } from '@/hooks/useHandleError'
 const schema = yup.object({
   old_password: yup.string().min(6).required(),
   password: yup.string().min(6).required(),
-  confirmed_password: yup.string().min(6).required(),
+  confirmed_password: yup.string().min(6).required().test('passwords-match', 'Passwords must match', function(value){
+    return this.parent.password === value
+  }),
 })
 
 export const useHooks = () => {
@@ -24,7 +26,6 @@ export const useHooks = () => {
   const [changePassword] = useChangePasswordMutation()
 
   const onSubmit = async (data) => {
-    console.log('Text')
     try {
       await changePassword(data).unwrap()
       router.push(`/profile`)

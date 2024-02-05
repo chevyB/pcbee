@@ -34,7 +34,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         ->group(function () {
             Route::get('/', 'user');
             Route::post('/logout', 'logout');
-            Route::post('/change-password', 'changePassword');
+            Route::post('/profile/change-password', 'changePassword');
         });
                                  
     Route::prefix('messages')
@@ -47,20 +47,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::group(['middleware' => ['restrictRole:admin,staff']], function () {
         Route::resource('orders', OrderController::class);
-    });
-
-    Route::group(['middleware' => ['restrictRole:admin']], function () {
-        Route::get('/users', [UserController::class, 'index']);
-    });
-       
+    });       
     
     Route::get('/categories', [CategoryController::class, 'index']);
 
     Route::group(['middleware' => ['restrictRole:admin'], 'prefix' => 'admin'], function () {
         Route::resource('users', UserController::class)->only(['index','store', 'destroy']);
     });
-    
-    Route::post('/profile/change-password', [AuthController::class, 'changePassword']);
 
 });
 

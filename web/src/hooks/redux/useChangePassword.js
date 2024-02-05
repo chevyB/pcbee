@@ -1,5 +1,3 @@
-import { useMemo } from 'react'
-
 import { changePasswordApi } from '../api/changePasswordApi'
 
 export const useChangePassword = () => {
