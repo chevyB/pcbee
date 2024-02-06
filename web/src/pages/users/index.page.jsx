@@ -1,5 +1,4 @@
 import {
-  Button,
   Table,
   TableBody,
   TableCell,
@@ -7,41 +6,28 @@ import {
   TableHeadCell,
   TableRow,
 } from 'flowbite-react'
-import Link from 'next/link'
-import React from 'react'
+import { FaUserFriends } from 'react-icons/fa'
 
-import Loading from '@/components/atoms/Loading'
-import Paginations from '@/components/atoms/Pagination'
 import PageHeader from '@/components/organisms/PageHeader'
 import Template from '@/components/templates/Template'
-
-import useHooks from './hooks'
+import { useGetUsersQuery } from '@/hooks/api/userApi'
 
 const Dashboard = () => {
-  const {
-    users,
-    isLoading,
-    breadcrumbs,
-    totalPages,
-    currentPage,
-    onPageChange,
-  } = useHooks()
+  const { data: users } = useGetUsersQuery()
+
+  const breadcrumbs = [
+    {
+      href: '#',
+      title: 'Users',
+      icon: FaUserFriends,
+    },
+  ]
 
   return (
     <Template>
-      <PageHeader
-        breadcrumbs={breadcrumbs}
-        right={
-          <Link href='/staffs/new'>
-            <Button size='xs' color='warning'>
-              Create Staff
-            </Button>
-          </Link>
-        }
-      />
-      {isLoading ?
-        <Loading />
-      : <Table>
+      <PageHeader breadcrumbs={breadcrumbs} />
+      <div className='p-2'>
+        <Table>
           <TableHead>
             <TableHeadCell>ID</TableHeadCell>
             <TableHeadCell>Name</TableHeadCell>
@@ -64,13 +50,7 @@ const Dashboard = () => {
               ))}
           </TableBody>
         </Table>
-      }
-
-      <Paginations
-        currentPage={currentPage}
-        onPageChange={onPageChange}
-        totalPages={totalPages}
-      />
+      </div>
     </Template>
   )
 }

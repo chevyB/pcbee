@@ -1,11 +1,11 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { baseApi } from './baseApi'
 
-export const userApi = createApi({
-  reducerPath: 'userApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://your-laravel-app/api' }),
+export const userApi = baseApi.injectEndpoints({
+  tagTypes: ['users'],
   endpoints: (builder) => ({
     getUsers: builder.query({
-      query: () => 'users',
+      query: () => '/admin/users',
+      providesTags: ['users'],
     }),
   }),
 })

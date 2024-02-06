@@ -6,7 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\OrderController;
-
+use App\Http\Controllers\StoreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +28,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('/categories', [CategoryController::class, 'index']);
+    Route::get('/stores', [StoreController::class, 'index']);
 
     Route::prefix('auth')
         ->controller(AuthController::class)
@@ -36,7 +37,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::post('/logout', 'logout');
             Route::post('/profile/change-password', 'changePassword');
         });
-                                 
+
     Route::prefix('messages')
         ->controller(MessageController::class)
         ->group(function () {
@@ -47,13 +48,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::group(['middleware' => ['restrictRole:admin,staff']], function () {
         Route::resource('orders', OrderController::class);
-    });       
-    
-    Route::get('/categories', [CategoryController::class, 'index']);
-
-    Route::group(['middleware' => ['restrictRole:admin'], 'prefix' => 'admin'], function () {
-        Route::resource('users', UserController::class)->only(['index','store', 'destroy']);
     });
 
-});
 
+    Route::group(['middleware' => ['restrictRole:admin'], 'prefix' => 'admin'], function () {
+        Route::resource('users', UserController::class)->only(['index', 'store', 'destroy']);
+    });
+});

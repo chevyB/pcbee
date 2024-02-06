@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { HiLogout } from 'react-icons/hi'
+import { HiLogout, HiOutlineUserCircle } from 'react-icons/hi'
 
 const Navbar = () => {
   return (
@@ -10,9 +10,16 @@ const Navbar = () => {
         <span className='px-2'>PC Bee Parts Ordering System</span>
       </Link>
 
-      <Link href='/logout'>
-        <HiLogout className='cursor-pointer'>Logout</HiLogout>
-      </Link>
+      <div className='flex gap-5 '>
+        <Link href='/profile'>
+          <HiOutlineUserCircle className='cursor-pointer hover:text-orange-700 text-xl' />
+        </Link>
+        <Link href='/logout'>
+          <HiLogout className='cursor-pointer hover:text-orange-700 text-xl'>
+            Logout
+          </HiLogout>
+        </Link>
+      </div>
     </nav>
   )
 }
