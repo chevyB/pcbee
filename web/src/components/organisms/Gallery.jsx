@@ -2,6 +2,10 @@ import Image from 'next/image'
 import React from 'react'
 
 const Gallery = ({ images }) => {
+  if (!images) {
+    return null
+  }
+
   return (
     <>
       {images.map((imageUrl, index) => (

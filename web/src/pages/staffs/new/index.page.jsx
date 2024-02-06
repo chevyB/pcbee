@@ -9,13 +9,13 @@ import Template from '@/components/templates/Template'
 const AddStaff = () => {
   const breadcrumbs = [
     {
-      href: '/users',
-      title: 'Users',
+      href: '/staffs',
+      title: 'Staffs',
       icon: FaUserFriends,
     },
     {
       href: '#',
-      title: 'User Create',
+      title: 'Staff Create',
     },
   ]
 
