@@ -18,8 +18,8 @@ function Component() {
         <BreadCrumbs />
       </PageHeader>
 
-      <div className='flex justify-center items-right h-5/6'>
-        <Card className='w-80 h-5/6 mb-20'>
+      <div className='flex justify-center items-right'>
+        <Card className='w-80 mb-20'>
           <div className='flex flex-col items-center'>
             <Avatar
               placeholderInitials={initials}
