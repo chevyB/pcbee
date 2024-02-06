@@ -1,21 +1,28 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
+import { HiOutlineUserCircle } from 'react-icons/hi'
 import * as yup from 'yup'
 
 import { useChangePasswordMutation } from '@/hooks/api/authApi'
 import { useHandleError } from '@/hooks/useHandleError'
+import { useToast } from '@/hooks/useToast'
 
 const schema = yup.object({
   old_password: yup.string().min(6).required(),
   password: yup.string().min(6).required(),
-  confirmed_password: yup.string().min(6).required().test('passwords-match', 'Passwords must match', function(value){
-    return this.parent.password === value
-  }),
+  password_confirmation: yup
+    .string()
+    .min(6)
+    .required()
+    .test('passwords-match', 'Passwords must match', function (value) {
+      return this.parent.password === value
+    }),
 })
 
 export const useHooks = () => {
   const router = useRouter()
+  const { addToast } = useToast()
   const { handleError } = useHandleError()
   const {
     register,
@@ -27,14 +34,31 @@ export const useHooks = () => {
 
   const onSubmit = async (data) => {
     try {
-      await changePassword(data).unwrap()
+      const { message } = await changePassword(data).unwrap()
+
+      addToast({
+        message: message,
+      })
       router.push(`/profile`)
     } catch (error) {
       handleError(error)
     }
   }
-  
+
+  const breadcrumbs = [
+    {
+      href: '/profile',
+      title: 'Profile',
+      icon: HiOutlineUserCircle,
+    },
+    {
+      href: '#',
+      title: 'Change password',
+    },
+  ]
+
   return {
+    breadcrumbs,
     handleSubmit: handleSubmit(onSubmit),
     formState: {
       errors,

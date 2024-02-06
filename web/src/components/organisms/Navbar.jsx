@@ -12,10 +12,10 @@ const Navbar = () => {
 
       <div className='flex gap-5 '>
         <Link href='/profile'>
-          <HiOutlineUserCircle className='cursor-pointer hover:text-orange-700 text-xl' />
+          <HiOutlineUserCircle className='cursor-pointer hover:text-orange-600 text-xl' />
         </Link>
         <Link href='/logout'>
-          <HiLogout className='cursor-pointer hover:text-orange-700 text-xl'>
+          <HiLogout className='cursor-pointer hover:text-orange-600 text-xl'>
             Logout
           </HiLogout>
         </Link>

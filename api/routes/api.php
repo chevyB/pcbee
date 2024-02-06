@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         ->group(function () {
             Route::get('/', 'user');
             Route::post('/logout', 'logout');
-            Route::post('/profile/change-password', 'changePassword');
+            Route::post('/change-password', 'changePassword');
         });
 
     Route::prefix('messages')
