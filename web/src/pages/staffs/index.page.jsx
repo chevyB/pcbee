@@ -6,16 +6,16 @@ import {
   TableHead,
   TableHeadCell,
   TableRow,
-} from "flowbite-react";
-import Link from "next/link";
-import React from "react";
+} from 'flowbite-react'
+import Link from 'next/link'
+import React from 'react'
 
-import Loading from "@/components/atoms/Loading";
-import PageHeader from "@/components/organisms/PageHeader";
-import Pagination from "@/components/organisms/Pagination";
-import Template from "@/components/templates/Template";
+import Loading from '@/components/atoms/Loading'
+import PageHeader from '@/components/organisms/PageHeader'
+import Pagination from '@/components/organisms/Pagination'
+import Template from '@/components/templates/Template'
 
-import useHooks from "./hooks";
+import useHooks from './hooks'
 
 const Dashboard = () => {
   const {
@@ -25,26 +25,24 @@ const Dashboard = () => {
     totalPages,
     currentPage,
     onPageChange,
-  } = useHooks();
+  } = useHooks()
 
   return (
     <Template>
       <PageHeader
         breadcrumbs={breadcrumbs}
         right={
-          <Link href="/staffs/new">
-            <Button size="xs" color="warning">
+          <Link href='/staffs/new'>
+            <Button size='xs' color='warning'>
               Create Staff
             </Button>
           </Link>
         }
       />
-      {isLoading ? (
+      {isLoading ?
         <Loading />
-      ) : (
-        <Table>
+      : <Table>
           <TableHead>
-            <TableHeadCell>ID</TableHeadCell>
             <TableHeadCell>Name</TableHeadCell>
             <TableHeadCell>Username</TableHeadCell>
             <TableHeadCell>Phone</TableHeadCell>
@@ -55,7 +53,6 @@ const Dashboard = () => {
             {users &&
               users.map((user) => (
                 <TableRow key={user.id}>
-                  <TableCell>{user.id}</TableCell>
                   <TableCell>{user.name}</TableCell>
                   <TableCell>{user.username}</TableCell>
                   <TableCell>{user.phone}</TableCell>
@@ -65,7 +62,7 @@ const Dashboard = () => {
               ))}
           </TableBody>
         </Table>
-      )}
+      }
 
       <Pagination
         currentPage={currentPage}
@@ -73,7 +70,7 @@ const Dashboard = () => {
         totalPages={totalPages}
       />
     </Template>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard
