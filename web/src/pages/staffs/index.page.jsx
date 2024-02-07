@@ -11,8 +11,8 @@ import Link from 'next/link'
 import React from 'react'
 
 import Loading from '@/components/atoms/Loading'
-import Paginations from '@/components/atoms/Pagination'
 import PageHeader from '@/components/organisms/PageHeader'
+import Pagination from '@/components/organisms/Pagination'
 import Template from '@/components/templates/Template'
 
 import useHooks from './hooks'
@@ -43,7 +43,6 @@ const Dashboard = () => {
         <Loading />
       : <Table>
           <TableHead>
-            <TableHeadCell>ID</TableHeadCell>
             <TableHeadCell>Name</TableHeadCell>
             <TableHeadCell>Username</TableHeadCell>
             <TableHeadCell>Phone</TableHeadCell>
@@ -54,7 +53,6 @@ const Dashboard = () => {
             {users &&
               users.map((user) => (
                 <TableRow key={user.id}>
-                  <TableCell>{user.id}</TableCell>
                   <TableCell>{user.name}</TableCell>
                   <TableCell>{user.username}</TableCell>
                   <TableCell>{user.phone}</TableCell>
@@ -66,7 +64,7 @@ const Dashboard = () => {
         </Table>
       }
 
-      <Paginations
+      <Pagination
         currentPage={currentPage}
         onPageChange={onPageChange}
         totalPages={totalPages}

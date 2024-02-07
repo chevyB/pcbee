@@ -4,8 +4,8 @@ export const userApi = baseApi.injectEndpoints({
   tagTypes: ['users'],
   endpoints: (builder) => ({
     getUsers: builder.query({
-      query: () => '/admin/users',
       providesTags: ['users'],
+      query: (page = 1) => ({ url: `/admin/users?page=${page}` }),
     }),
   }),
 })
