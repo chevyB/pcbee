@@ -6,16 +6,16 @@ import {
   TableHead,
   TableHeadCell,
   TableRow,
-} from 'flowbite-react'
-import Link from 'next/link'
-import React from 'react'
+} from "flowbite-react";
+import Link from "next/link";
+import React from "react";
 
-import Loading from '@/components/atoms/Loading'
-import Paginations from '@/components/atoms/Pagination'
-import PageHeader from '@/components/organisms/PageHeader'
-import Template from '@/components/templates/Template'
+import Loading from "@/components/atoms/Loading";
+import PageHeader from "@/components/organisms/PageHeader";
+import Pagination from "@/components/organisms/Pagination";
+import Template from "@/components/templates/Template";
 
-import useHooks from './hooks'
+import useHooks from "./hooks";
 
 const Dashboard = () => {
   const {
@@ -25,23 +25,24 @@ const Dashboard = () => {
     totalPages,
     currentPage,
     onPageChange,
-  } = useHooks()
+  } = useHooks();
 
   return (
     <Template>
       <PageHeader
         breadcrumbs={breadcrumbs}
         right={
-          <Link href='/staffs/new'>
-            <Button size='xs' color='warning'>
+          <Link href="/staffs/new">
+            <Button size="xs" color="warning">
               Create Staff
             </Button>
           </Link>
         }
       />
-      {isLoading ?
+      {isLoading ? (
         <Loading />
-      : <Table>
+      ) : (
+        <Table>
           <TableHead>
             <TableHeadCell>ID</TableHeadCell>
             <TableHeadCell>Name</TableHeadCell>
@@ -64,15 +65,15 @@ const Dashboard = () => {
               ))}
           </TableBody>
         </Table>
-      }
+      )}
 
-      <Paginations
+      <Pagination
         currentPage={currentPage}
         onPageChange={onPageChange}
         totalPages={totalPages}
       />
     </Template>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

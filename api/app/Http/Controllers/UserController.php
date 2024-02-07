@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::select(['name', 'username', 'phone', 'position', 'role'])->get();
+        $perPage = $request->perPage ?? 5;
+        $users = User::select(['id', 'name', 'username', 'phone', 'position', 'role'])->paginate($perPage);
+    
         return response()->json(['users' => $users]);
     }
     
@@ -32,7 +34,4 @@ class UserController extends Controller
         
         return response()->json(['message' => 'User deleted successfully'], 200);
     }
-
- 
-    
 }
