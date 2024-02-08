@@ -8,6 +8,7 @@ use App\Models\Order;
 use Aws\S3\S3Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
@@ -29,32 +30,25 @@ class OrderController extends Controller
     {
 
         $validatedData = $request->validated();
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $filePath = $file->store('path/to/uploaded', 's3');
-    
-            $s3Client = new S3Client([
-                'credentials' => [
-                    'key'    => config('filesystems.disks.s3.key'),
-                    'secret' => config('filesystems.disks.s3.secret'),
-                ],
-                'region' => config('filesystems.disks.s3.region'),
-                'version' => 'latest',
-            ]);
-    
-            $url = $s3Client->getObjectUrl(config('filesystems.disks.s3.bucket'), $filePath, '+5 minutes');
-            $validatedData['file_url'] = $url;
-        }
+
         $category = Category::firstOrCreate(
             ['label' => $validatedData['category_label']],
         );
         $validatedData['category_id'] = $category->id;
-        
         $validatedData['user_id'] = Auth::id();
+
         unset($validatedData['category_label']);
-        
+
         $order = Order::create($validatedData);
-        
+
+        foreach ($request['files'] as $file) {
+            $filePath[]['order_id'] = $order->id;
+            $filePath[]['path'] = $file->store('orders', 's3');
+        }
+        // if($filePath) {
+        //     OrderImage::createMany($filePath);
+        // }
+
         return response()->json(['orders' => $order], 201);
     }
 
