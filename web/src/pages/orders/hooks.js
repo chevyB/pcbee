@@ -1,15 +1,27 @@
-import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import { FaTasks } from 'react-icons/fa'
 
-import { capitalizeFirstLetter, formatDate } from '@/hooks/lib/util'
-import { useCategories } from '@/hooks/redux/useCategories'
 import { useOrders } from '@/hooks/redux/useOrders'
 
 const useHooks = () => {
-  const { orders, isLoading: ordersLoading } = useOrders()
-  const { categories, isLoading: categoriesLoading } = useCategories()
+  const router = useRouter()
+  const [currentPage, setCurrentPage] = useState(1)
 
-  const isLoading = ordersLoading || categoriesLoading
+  useEffect(() => {
+    const page = parseInt(router.query.page, 10) || 1
+    setCurrentPage(page)
+  }, [router.query.page])
+
+  const { orders, isLoading } = useOrders(currentPage)
+
+  const totalPages = orders.last_page || 1
+
+  const onPageChange = (page) => {
+    setCurrentPage(page)
+    router.push({ pathname: '/orders', query: { page } })
+  }
+
   const breadcrumbs = [
     {
       href: '/orders',
@@ -18,35 +30,13 @@ const useHooks = () => {
     },
   ]
 
-  const headers = ['Product name', 'Date', 'Category', 'Status', 'Action']
-  const getCategoryLabel = (order) => {
-    const category = categories.find((cat) => cat.id === order.category_id)
-    return category ? category.label : 'Unknown Category'
-  }
-
-  const formattedOrders = orders.map((order) => [
-    order.brand,
-    formatDate(order.created_at),
-    order.category.label,
-    capitalizeFirstLetter(order.status),
-  ])
-
-  const totalPages = 100
-  const [currentPage, setCurrentPage] = useState(1)
-  const onPageChange = (page) => setCurrentPage(page)
-
   return {
+    orders,
+    isLoading,
+    breadcrumbs,
     totalPages,
     currentPage,
     onPageChange,
-    orders,
-    categories,
-    isLoading,
-    getCategoryLabel,
-    capitalizeFirstLetter,
-    formattedOrders,
-    breadcrumbs,
-    headers,
   }
 }
 

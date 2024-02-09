@@ -5,7 +5,7 @@ export const orderApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getOrders: build.query({
       providesTags: ['orders'],
-      query: () => ({ url: '/orders' }),
+      query: (page = 1) => ({ url: `/orders?page=${page}` }),
     }),
 
     createOrder: build.mutation({
@@ -16,8 +16,16 @@ export const orderApi = baseApi.injectEndpoints({
         body,
       }),
     }),
+    getOrderById: build.query({
+      providesTags: (orderId) => [{ type: 'orders', id: orderId }],
+      query: (orderId) => ({ url: `/orders/${orderId}` }),
+    }),
   }),
   overrideExisting: false,
 })
 
-export const { useCreateOrderMutation, useGetOrdersQuery } = orderApi
+export const {
+  useCreateOrderMutation,
+  useGetOrdersQuery,
+  useGetOrderByIdQuery,
+} = orderApi
