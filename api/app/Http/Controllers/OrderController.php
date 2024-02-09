@@ -13,13 +13,14 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::all();
-        $orders = Order::with('category')->get();
+        $perPage = $request->perPage ?? 20;
+        $orders = Order::with('store', 'category')
+            ->orderBy('created_at', 'DESC')
+            ->paginate($perPage);
         return response()->json(['orders' => $orders]);
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -45,9 +46,10 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        $order = Order::findOrFail($id);
+        $order = Order::with('store', 'category')->findOrFail($id);
         return response()->json(['order' => $order]);
     }
+
 
     /**
      * Update the specified resource in storage.
