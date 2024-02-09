@@ -33,8 +33,12 @@ class StoreOrderRequest extends FormRequest
             'status' => 'nullable|in:delivered,open,in-transit,cancelled,onhold',
             'link' => 'nullable|string',
             'notes' => 'nullable|string',
-            'image_paths' => 'nullable|array',
-            'image_paths.*' => 'nullable|string',
+            'files' => 'nullable|array',
+            'files.*' => [
+                'nullable',
+                'string',
+                'mimetypes:image/jpeg,image/png,image/jpg',
+            ],
         ];
     }
 }

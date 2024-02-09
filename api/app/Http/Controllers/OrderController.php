@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrderRequest;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\OrderImage;
 use Aws\S3\S3Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -45,9 +46,9 @@ class OrderController extends Controller
             $filePath[]['order_id'] = $order->id;
             $filePath[]['path'] = $file->store('orders', 's3');
         }
-        // if($filePath) {
-        //     OrderImage::createMany($filePath);
-        // }
+        if($filePath) {
+            OrderImage::createMany($filePath);
+        }
 
         return response()->json(['orders' => $order], 201);
     }
@@ -57,7 +58,7 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        $order = Order::with('store', 'category')->findOrFail($id);
+        $order = Order::with('store', 'category', 'orderImages')->findOrFail($id);
         return response()->json(['order' => $order]);
     }
 

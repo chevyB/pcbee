@@ -33,7 +33,7 @@ return new class extends Migration
             $table->enum('status', ['delivered', 'open', 'in-transit', 'cancelled', 'onhold'])->default('open');
             $table->string('link')->nullable();
             $table->text('notes')->nullable();
-            $table->jsonb('image_paths')->nullable();
+            $table->jsonb('files')->nullable();
             $table->dateTime('order_at')->default(now());
             $table->timestamps();
             $table->softDeletes();
