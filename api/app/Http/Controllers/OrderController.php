@@ -42,12 +42,15 @@ class OrderController extends Controller
 
         $order = Order::create($validatedData);
 
-        foreach ($request['files'] as $file) {
-            $filePath[]['order_id'] = $order->id;
-            $filePath[]['path'] = $file->store('orders', 's3');
-        }
-        if($filePath) {
-            OrderImage::createMany($filePath);
+        if ($request->hasFile('files')) {
+            $filePath = [];
+            foreach ($request->file('files') as $file) {
+                $filePath[] = [
+                    'order_id' => $order->id,
+                    'path' => $file->store('orders', 's3')
+                ];
+            }
+            OrderImage::insert($filePath);
         }
 
         return response()->json(['orders' => $order], 201);
