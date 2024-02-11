@@ -6,10 +6,8 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderImage;
-use Aws\S3\S3Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
@@ -50,7 +48,7 @@ class OrderController extends Controller
                     'path' => $file->store('orders', 's3')
                 ];
             }
-            OrderImage::insert($filePath);
+            OrderImage::createMany($filePath);
         }
 
         return response()->json(['orders' => $order], 201);
