@@ -5,8 +5,11 @@ import CardItem from '@/components/organisms/Card'
 import DatePicker from '@/components/organisms/DatePicker'
 import PageHeader from '@/components/organisms/PageHeader'
 import Template from '@/components/templates/Template'
+import { useGetDashboardQuery } from '@/hooks/api/dashboardApi'
 
 const Dashboard = () => {
+  const { data: dashboard } = useGetDashboardQuery()
+
   const breadcrumbs = [
     {
       href: '#',
