@@ -68,7 +68,9 @@ const Order = () => {
                     />
                     <RowItem label='Unit Model' value={order.model} />
                     <div className='grid grid-cols-2 gap-2'>
-                      <Gallery images={order.image_paths || []} />
+                      <Gallery
+                        images={order.order_images.map((image) => image.path)}
+                      />
                     </div>
                   </>
                 )}

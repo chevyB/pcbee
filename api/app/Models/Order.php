@@ -25,4 +25,8 @@ class Order extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function orderImages()
+    {
+        return $this->hasMany(OrderImage::class);
+    }
 }

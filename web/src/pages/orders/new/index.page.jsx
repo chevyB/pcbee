@@ -118,7 +118,7 @@ const Order = () => {
               />
               <FilePickerInput
                 label='Upload File'
-                name='images_paths'
+                name='files'
                 multiple
                 {...formState}
               />

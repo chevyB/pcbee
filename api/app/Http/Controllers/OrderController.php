@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrderRequest;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\OrderImage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -28,16 +29,28 @@ class OrderController extends Controller
     {
 
         $validatedData = $request->validated();
+
         $category = Category::firstOrCreate(
             ['label' => $validatedData['category_label']],
         );
         $validatedData['category_id'] = $category->id;
-        
         $validatedData['user_id'] = Auth::id();
+
         unset($validatedData['category_label']);
-        
+
         $order = Order::create($validatedData);
-        
+
+        if ($request->hasFile('files')) {
+            $filePath = [];
+            foreach ($request->file('files') as $file) {
+                $filePath[] = [
+                    'order_id' => $order->id,
+                    'path' => $file->store('orders', 's3')
+                ];
+            }
+            OrderImage::createMany($filePath);
+        }
+
         return response()->json(['orders' => $order], 201);
     }
 
@@ -46,7 +59,7 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        $order = Order::with('store', 'category')->findOrFail($id);
+        $order = Order::with('store', 'category', 'orderImages')->findOrFail($id);
         return response()->json(['order' => $order]);
     }
 
