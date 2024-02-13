@@ -54,13 +54,21 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreOrderRequest $request, string $id)
     {
         $order = Order::findOrFail($id);
-        $order->update($request->all());
+
+        $validatedData = $request->validated();
+
+        if (isset($validatedData['category_label'])) {
+            $category = Category::firstOrCreate(['label' => $validatedData['category_label']]);
+            $validatedData['category_id'] = $category->id;
+            unset($validatedData['category_label']);
+        }
+        $order->update($validatedData);
+
         return response()->json(['message' => 'Order updated successfully', 'order' => $order]);
     }
-
     /**
      * Remove the specified resource from storage.
      */

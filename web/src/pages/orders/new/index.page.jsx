@@ -8,6 +8,7 @@ import SelectInput from '@/components/organisms/SelectInput'
 import TextAreaInput from '@/components/organisms/TextAreaInput'
 import TextInput from '@/components/organisms/TextInput'
 import Template from '@/components/templates/Template'
+import { branchOptions, statusOptions } from '@/hooks/const'
 
 import { useHooks } from './hooks'
 
@@ -23,56 +24,6 @@ const Order = () => {
     {
       href: '#',
       title: 'Order Create',
-    },
-  ]
-  const branchOptions = [
-    {
-      value: 0,
-      label: 'Branch',
-      disabled: true,
-      selected: true,
-      hidden: true,
-    },
-    {
-      value: 1,
-      label: 'Cebu',
-    },
-    {
-      value: 2,
-      label: 'Davao',
-    },
-    {
-      value: 3,
-      label: 'Tagum',
-    },
-  ]
-  const statusOptions = [
-    {
-      value: 0,
-      label: 'Status',
-      disabled: true,
-      selected: true,
-      hidden: true,
-    },
-    {
-      value: 'open',
-      label: 'Open',
-    },
-    {
-      value: 'in-transit',
-      label: 'In-Transit',
-    },
-    {
-      value: 'delivered',
-      label: 'Delivered',
-    },
-    {
-      value: 'cancelled',
-      label: 'Cancelled',
-    },
-    {
-      value: 'onhold',
-      label: 'Onhold',
     },
   ]
   return (

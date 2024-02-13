@@ -1,5 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
@@ -10,12 +11,22 @@ import { useOrder } from '@/hooks/redux/useOrders'
 import { useHandleError } from '@/hooks/useHandleError'
 
 const schema = yup.object({
+  store_id: yup.number().oneOf([1, 2, 3]).required(),
+  category_label: yup.string().required(),
+  job_order: yup.number(),
+  brand: yup.string().required(),
+  part_model: yup.string(),
+  model: yup.string(),
+  downpayment: yup.number().default(0),
+  quantity: yup.number().required(),
   status: yup.string().oneOf(statuses),
+  link: yup.string(),
   notes: yup.string(),
 })
 
-export function useHooks(orderId) {
+export function useHooks() {
   const router = useRouter()
+  const { orderId } = router.query
   const { order, isLoading } = useOrder(orderId)
   const { categories } = useCategories()
   const { handleError } = useHandleError()
@@ -23,6 +34,7 @@ export function useHooks(orderId) {
     register,
     formState: { errors },
     handleSubmit,
+    setValue,
   } = useForm({ resolver: yupResolver(schema) })
 
   const [updateOrder, { isLoading: isUpdating }] =
@@ -32,7 +44,7 @@ export function useHooks(orderId) {
     try {
       const updatedData = {
         ...formData,
-        orderId: orderId,
+        orderId,
       }
       const { order } = await updateOrder(updatedData).unwrap()
       router.push(`/orders`, order)
@@ -40,6 +52,20 @@ export function useHooks(orderId) {
       handleError(error)
     }
   }
+  useEffect(() => {
+    if (order) {
+      setValue('store_id', order.store_id)
+      setValue('category_label', order.category.label)
+      setValue('job_order', order.job_order)
+      setValue('brand', order.brand)
+      setValue('part_model', order.part_model)
+      setValue('model', order.model)
+      setValue('downpayment', order.downpayment)
+      setValue('quantity', order.quantity)
+      setValue('status', order.status)
+      setValue('notes', order.notes)
+    }
+  }, [order, setValue])
 
   return {
     order,
