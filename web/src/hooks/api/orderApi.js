@@ -18,8 +18,8 @@ export const orderApi = baseApi.injectEndpoints({
     }),
     updateOrder: build.mutation({
       invalidatesTags: ['orders'],
-      query: (orderId, body) => ({
-        url: `orders/${orderId}/`,
+      query: ({ orderId, ...body }) => ({
+        url: `orders/${orderId}`,
         method: 'PUT',
         body,
       }),
@@ -34,7 +34,7 @@ export const orderApi = baseApi.injectEndpoints({
 
 export const {
   useCreateOrderMutation,
-  useUpdateOrderMutation,
   useGetOrdersQuery,
   useGetOrderByIdQuery,
+  useUpdateOrderMutation,
 } = orderApi

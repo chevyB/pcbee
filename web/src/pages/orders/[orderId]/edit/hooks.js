@@ -7,38 +7,34 @@ import { orderApi } from '@/hooks/api/orderApi'
 import { statuses } from '@/hooks/lib/statuses'
 import { useCategories } from '@/hooks/redux/useCategories'
 import { useOrder } from '@/hooks/redux/useOrders'
+import { useHandleError } from '@/hooks/useHandleError'
 
 const schema = yup.object({
-  store_id: yup.number().oneOf([1, 2, 3]).required(),
-  category_label: yup.string().required(),
-  job_order: yup.number(),
-  brand: yup.string().required(),
-  part_model: yup.string(),
-  model: yup.string(),
-  downpayment: yup.number().default(0),
-  quantity: yup.number().required(),
   status: yup.string().oneOf(statuses),
-  link: yup.string(),
   notes: yup.string(),
 })
 
 export function useHooks(orderId) {
   const router = useRouter()
   const { order, isLoading } = useOrder(orderId)
-  const [updateOrderMutation] = orderApi.useUpdateOrderMutation()
   const { categories } = useCategories()
+  const { handleError } = useHandleError()
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm({
-    defaultValues: order,
-    resolver: yupResolver(schema),
-  })
+  } = useForm({ resolver: yupResolver(schema) })
 
-  const onSubmit = async (data) => {
+  const [updateOrder, { isLoading: isUpdating }] =
+    orderApi.useUpdateOrderMutation()
+
+  const onSubmit = async (formData) => {
     try {
-      const { order } = await updateOrderMutation(data).unwrap()
+      const updatedData = {
+        ...formData,
+        orderId: orderId,
+      }
+      const { order } = await updateOrder(updatedData).unwrap()
       router.push(`/orders`, order)
     } catch (error) {
       handleError(error)
@@ -49,12 +45,11 @@ export function useHooks(orderId) {
     order,
     categories,
     handleSubmit: handleSubmit(onSubmit),
-    isLoading,
     formState: {
       errors,
       register,
+      isLoading: isLoading || isUpdating,
+      updateOrder,
     },
   }
 }
-
-export default useHooks
