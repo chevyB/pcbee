@@ -12,8 +12,8 @@ import { branchOptions, statusOptions } from '@/hooks/const'
 
 import { useHooks } from './hooks'
 
-const Order = () => {
-  const { formState, handleSubmit, categories } = useHooks()
+const Order = ({ orderId }) => {
+  const { formState, handleSubmit, categories } = useHooks(orderId)
 
   const breadcrumbs = [
     {
@@ -23,9 +23,10 @@ const Order = () => {
     },
     {
       href: '#',
-      title: 'Order Create',
+      title: 'Order Edit',
     },
   ]
+
   return (
     <Template>
       <PageHeader breadcrumbs={breadcrumbs} />
@@ -69,7 +70,7 @@ const Order = () => {
               />
               <FilePickerInput
                 label='Upload File'
-                name='files'
+                name='images_paths'
                 multiple
                 {...formState}
               />
