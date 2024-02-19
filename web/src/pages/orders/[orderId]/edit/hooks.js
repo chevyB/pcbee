@@ -47,11 +47,11 @@ export function useHooks() {
         ...formData,
         orderId,
       }
-      await updateOrder(updatedData).unwrap()
+      const data = await updateOrder(updatedData).unwrap()
       addToast({
         message: 'Updated order successfully',
       })
-      router.back()
+      router.push(`/orders/${data.id}`)
     } catch (error) {
       handleError(error)
     }

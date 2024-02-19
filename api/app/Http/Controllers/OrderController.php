@@ -80,7 +80,7 @@ class OrderController extends Controller
         }
         $order->update($validatedData);
 
-        return response()->json(['message' => 'Order updated successfully', 'order' => $order]);
+        return response()->json($order, 201);
     }
     /**
      * Remove the specified resource from storage.
