@@ -20,7 +20,7 @@ const schema = yup.object({
   status: yup.string().oneOf(statuses),
   link: yup.string(),
   notes: yup.string(),
-  image_paths: yup.array().of(yup.string()),
+  files: yup.array().of(yup.string().required()),
 })
 
 export function useHooks() {
@@ -35,6 +35,7 @@ export function useHooks() {
   } = useForm({ resolver: yupResolver(schema) })
 
   const onSubmit = async (data) => {
+    console.log(data)
     try {
       const { order } = await createOrderMutation(data).unwrap()
       router.push(`/orders`, order)

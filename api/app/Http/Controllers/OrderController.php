@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderImage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
@@ -43,9 +44,10 @@ class OrderController extends Controller
         if ($request->hasFile('files')) {
             $filePath = [];
             foreach ($request->file('files') as $file) {
+                $path = Storage::put('orders/file.jpg', $file);
                 $filePath[] = [
                     'order_id' => $order->id,
-                    'path' => $file->store('orders', 's3')
+                    'path' => $path
                 ];
             }
             OrderImage::createMany($filePath);

@@ -1,11 +1,14 @@
 import { FileInput } from 'flowbite-react'
 
-const FilePickerInput = ({ multiple = false }) => {
+const ImageFilePickerInput = ({ multiple = false }) => {
   return (
     <>
-      <FileInput multiple={multiple} />
+      <FileInput
+        multiple={multiple}
+        accept='image/jpeg, image/png, image/jpg'
+      />
     </>
   )
 }
 
-export default FilePickerInput
+export default ImageFilePickerInput
