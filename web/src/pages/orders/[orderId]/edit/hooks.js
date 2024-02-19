@@ -4,24 +4,25 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
+import { errors } from '@/constants/formErrors'
 import { orderApi } from '@/hooks/api/orderApi'
 import { statuses } from '@/hooks/lib/statuses'
 import { useOrder } from '@/hooks/redux/useOrders'
 import { useHandleError } from '@/hooks/useHandleError'
 
 const schema = yup.object({
-  store_id: yup.number().oneOf([1, 2, 3]).required(),
-  category_label: yup.string().required(),
-  job_order: yup.number(),
-  brand: yup.string().required(),
+  store_id: yup.number().oneOf([1, 2, 3], errors.required).required(),
+  category_label: yup.string().required(errors.required),
+  job_order: yup.number().typeError(errors.required),
   part_model: yup.string(),
   model: yup.string(),
-  downpayment: yup.number().default(0),
-  amount: yup.number().required(),
-  quantity: yup.number().required(),
-  status: yup.string().oneOf(statuses),
+  downpayment: yup.number().default(0).typeError(errors.required),
+  quantity: yup.number().required().typeError(errors.required),
+  amount: yup.number().required(errors.required),
+  status: yup.string().oneOf(statuses, errors.required),
   link: yup.string(),
   notes: yup.string(),
+  files: yup.mixed().nullable(),
 })
 
 export function useHooks() {
@@ -57,7 +58,7 @@ export function useHooks() {
   }
   useEffect(() => {
     if (order) {
-      reset({...order, category_label: order.category.label})
+      reset({ ...order, category_label: order.category.label })
     }
   }, [order, reset])
 
@@ -69,7 +70,7 @@ export function useHooks() {
       register,
       isLoading: isLoading || isUpdating,
       updateOrder,
-      control
+      control,
     },
   }
 }

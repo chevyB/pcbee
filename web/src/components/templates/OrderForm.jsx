@@ -8,88 +8,82 @@ import TextInput from '@/components/organisms/TextInput'
 import { branchOptions, statusOptions } from '@/hooks/const'
 import { useCategories } from '@/hooks/redux/useCategories'
 
-
-const OrderForm = ({handleSubmit, formState}) => {
-  const { categories } = useCategories  ()
+const OrderForm = ({ handleSubmit, formState }) => {
+  const { categories } = useCategories()
 
   return (
-    
     <form onSubmit={handleSubmit} className='flex flex-col '>
-    <div className='flex flex-col space-y-4'>
-      <div className='flex space-x-4'>
-        <DatePicker label='Date' name='order_at' {...formState} />
+      <div className='flex flex-col space-y-4'>
+        <div className='flex space-x-4'>
+          <DatePicker label='Date' name='order_at' {...formState} />
+          <SelectInput
+            label='Branch'
+            name='store_id'
+            className='w-60'
+            options={branchOptions}
+            {...formState}
+          />
+        </div>
+        <TextInput label='Job Order No.' name='job_order' {...formState} />
         <SelectInput
-          label='Branch'
-          name='store_id'
+          label='Status'
+          name='status'
           className='w-60'
-          options={branchOptions}
+          options={statusOptions}
           {...formState}
         />
-      </div>
-      <TextInput
-        label='Job Order No.'
-        name='job_order'
-        {...formState}
-      />
-      <SelectInput
-        label='Status'
-        name='status'
-        className='w-60'
-        options={statusOptions}
-        {...formState}
-      />
-      <SelectInput
-        label='Category'
-        name='category_label'
-        className='w-60'
-        options={[
-          { value: '', label: 'Category', isDisabled: true },
-          ...(categories?.map((category) => ({
-            value: category.label,
-            label: category.label,
-          })) || []),
-        ]}
-        {...formState}
-      />
-      <div className='flex  space-x-4'>
-        <TextInput label='Brand' name='brand' {...formState} />
-        <TextInput label='Unit Model' name='model' {...formState} />
-      </div>
-      <TextInput label='Parts Model' name='part_model' {...formState} />
-      <TextInput label='Quantity' name='quantity' {...formState} />
-      <TextInput label='Link Ref' name='link' {...formState} />
-      <div className='flex  space-x-4'>
-        <TextInput
-          label='Down Payment'
-          name='downpayment'
-          type='number'
+        <SelectInput
+          label='Category'
+          name='category_label'
+          className='w-60'
+          options={[
+            { value: '', label: 'Category', isDisabled: true },
+            ...(categories?.map((category) => ({
+              value: category.label,
+              label: category.label,
+            })) || []),
+          ]}
           {...formState}
         />
-        <TextInput
-          label='Amount'
-          name='amount'
-          type='number'
+        <div className='flex  space-x-4'>
+          <TextInput label='Brand' name='brand' {...formState} />
+          <TextInput label='Unit Model' name='model' {...formState} />
+        </div>
+        <TextInput label='Parts Model' name='part_model' {...formState} />
+        <TextInput label='Quantity' name='quantity' {...formState} />
+        <TextInput label='Link Ref' name='link' {...formState} />
+        <div className='flex  space-x-4'>
+          <TextInput
+            label='Down Payment'
+            name='downpayment'
+            type='number'
+            {...formState}
+          />
+          <TextInput
+            label='Amount'
+            name='amount'
+            type='number'
+            {...formState}
+          />
+        </div>
+        <FilePickerInput
+          label='Upload File'
+          name='files'
+          multiple
           {...formState}
         />
+        <TextAreaInput
+          label='Comments'
+          name='notes'
+          placeHolder='Comments'
+          className='w-full'
+          {...formState}
+        />
+        <Button color='warning' type='submit'>
+          Submit
+        </Button>
       </div>
-      <FilePickerInput
-        label='Upload File'
-        name='files'
-        multiple
-        {...formState}
-      />
-      <TextAreaInput
-        label='Comments'
-        name='notes'
-        placeHolder='Comments'
-        className='w-full'
-        {...formState}
-      />
-      <Button color='warning' type='submit'>
-        Submit
-      </Button>
-    </div>
-  </form>
+    </form>
   )
 }
 
