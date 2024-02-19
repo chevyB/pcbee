@@ -20,7 +20,7 @@ const schema = yup.object({
   status: yup.string().oneOf(statuses),
   link: yup.string(),
   notes: yup.string(),
-  files: yup.array().of(yup.string().required()),
+  files:  yup.mixed().nullable()
 })
 
 export function useHooks() {
@@ -35,10 +35,23 @@ export function useHooks() {
   } = useForm({ resolver: yupResolver(schema) })
 
   const onSubmit = async (data) => {
-    console.log(data)
+    
+    const payload = new FormData();
+
+    Object.keys(data).forEach((key) => {
+      const value = data[key];
+      if (key === 'files') {
+        Array.from(value).forEach((file, index) => {
+          payload.append(`files[${index}]`, file);
+        });
+      }else{
+        payload.append(key, value);
+      }
+    });
+
     try {
-      const { order } = await createOrderMutation(data).unwrap()
-      router.push(`/orders`, order)
+      const order = await createOrderMutation(payload).unwrap()
+      router.push(`/orders/${order.id}`)
     } catch (error) {
       handleError(error)
     }

@@ -38,22 +38,19 @@ class OrderController extends Controller
         $validatedData['user_id'] = Auth::id();
 
         unset($validatedData['category_label']);
+        unset($validatedData['files']);
 
         $order = Order::create($validatedData);
 
         if ($request->hasFile('files')) {
-            $filePath = [];
             foreach ($request->file('files') as $file) {
-                $path = Storage::put('orders/file.jpg', $file);
-                $filePath[] = [
-                    'order_id' => $order->id,
-                    'path' => $path
-                ];
+                $path = Storage::put('orders', $file);
+                $url = Storage::url($path);
+                $order->orderImages()->create(['path' => $url]);
             }
-            OrderImage::createMany($filePath);
         }
 
-        return response()->json(['orders' => $order], 201);
+        return response()->json($order, 201);
     }
 
     /**
