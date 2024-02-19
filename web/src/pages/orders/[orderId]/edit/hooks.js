@@ -2,8 +2,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
 
 import { orderApi } from '@/hooks/api/orderApi'
+import { statuses } from '@/hooks/lib/statuses'
 import { useOrder } from '@/hooks/redux/useOrders'
 import { useHandleError } from '@/hooks/useHandleError'
 
@@ -44,15 +46,18 @@ export function useHooks() {
         ...formData,
         orderId,
       }
-      const { order } = await updateOrder(updatedData).unwrap()
-      router.push(`/orders`, order)
+      await updateOrder(updatedData).unwrap()
+      addToast({
+        message: 'Updated order successfully',
+      })
+      router.back()
     } catch (error) {
       handleError(error)
     }
   }
   useEffect(() => {
     if (order) {
-      reset(order)
+      reset({...order, category_label: order.category.label})
     }
   }, [order, reset])
 

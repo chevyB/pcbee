@@ -60,6 +60,9 @@ export function useHooks() {
 
     try {
       const order = await createOrderMutation(payload).unwrap()
+      addToast({
+        message: 'Created order successfully',
+      })
       router.push(`/orders/${order.id}`)
     } catch (error) {
       handleError(error)
