@@ -1,7 +1,7 @@
 import { FileInput } from 'flowbite-react'
 
-const ImageFilePickerInput = (props) => {
-  const {multiple, errors, name, register, ...rest } = props
+const FilePickerInput = (props) => {
+  const { multiple, errors, name, register, ...rest } = props
 
   const formRegister = name && register && { ...register(name) }
 
@@ -21,4 +21,4 @@ const ImageFilePickerInput = (props) => {
   )
 }
 
-export default ImageFilePickerInput
+export default FilePickerInput
