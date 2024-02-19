@@ -6,6 +6,7 @@ import { userApi } from '@/hooks/api/userApi'
 import authSlice from '@/hooks/redux/authSlice'
 
 import { categoryApi } from './api/categoryApi'
+import { dashboardApi } from './api/dashboardApi'
 import { orderApi } from './api/orderApi'
 import { storeApi } from './api/storeApi'
 
@@ -17,6 +18,7 @@ export const store = configureStore({
     [orderApi.reducerPath]: orderApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [storeApi.reducerPath]: storeApi.reducer,
+    [dashboardApi.reducerPath]: dashboardApi.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
@@ -27,6 +29,7 @@ export const store = configureStore({
       orderApi.middleware,
       userApi.middleware,
       storeApi.middleware,
+      dashboardApi.middleware,
     ]),
 })
 
