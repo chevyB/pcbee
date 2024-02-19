@@ -9,6 +9,7 @@ import { orderApi } from '@/hooks/api/orderApi'
 import { statuses } from '@/hooks/lib/statuses'
 import { useOrder } from '@/hooks/redux/useOrders'
 import { useHandleError } from '@/hooks/useHandleError'
+import { useToast } from '@/hooks/useToast'
 
 const schema = yup.object({
   store_id: yup.number().oneOf([1, 2, 3], errors.required).required(),
@@ -27,6 +28,7 @@ const schema = yup.object({
 
 export function useHooks() {
   const router = useRouter()
+  const { addToast } = useToast()
   const { orderId } = router.query
   const { order, isLoading } = useOrder(orderId)
   const { handleError } = useHandleError()
@@ -47,11 +49,12 @@ export function useHooks() {
         ...formData,
         orderId,
       }
-      const data = await updateOrder(updatedData).unwrap()
+      const {id} = await updateOrder(updatedData).unwrap()
       addToast({
         message: 'Updated order successfully',
       })
-      router.push(`/orders/${data.id}`)
+      console.log({id})
+      router.push(`/orders/${id}`)
     } catch (error) {
       handleError(error)
     }
