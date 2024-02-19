@@ -11,14 +11,13 @@ const Gallery = ({ images }) => {
       {images.map((imageUrl, index) => (
         <div
           key={index}
-          className='rounded-lg overflow-hidden border border-gray-300'
+          className='rounded-lg overflow-hidden border border-gray-300 max-w-[150px]'
         >
           <Image
             src={imageUrl}
             alt={`Image ${index + 1}`}
-            width={300}
-            height={200}
-            className='object-cover w-full h-full'
+            width={120}
+            height={120}
           />
         </div>
       ))}

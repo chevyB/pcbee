@@ -8,13 +8,14 @@ import { errors } from '@/constants/formErrors'
 import { orderApi } from '@/hooks/api/orderApi'
 import { statuses } from '@/hooks/lib/statuses'
 import { useHandleError } from '@/hooks/useHandleError'
+import { useToast } from '@/hooks/useToast'
 
 const schema = yup.object({
   order_at: yup.date().required(),
   store_id: yup.number().oneOf([1, 2, 3], errors.required).required(),
   category_label: yup.string().required(errors.required),
   job_order: yup.number().typeError(errors.required),
-  part_model: yup.string(),
+  part_model: yup.string().required(errors.required),
   brand: yup.string().required(),
   model: yup.string(),
   downpayment: yup.number().default(0).typeError(errors.required),
@@ -28,6 +29,7 @@ const schema = yup.object({
 
 export function useHooks() {
   const router = useRouter()
+  const { addToast } = useToast()
   const { handleError } = useHandleError()
   const [createOrderMutation] = orderApi.useCreateOrderMutation()
   const {

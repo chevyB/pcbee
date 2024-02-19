@@ -14,7 +14,7 @@ const schema = yup.object({
   store_id: yup.number().oneOf([1, 2, 3], errors.required).required(),
   category_label: yup.string().required(errors.required),
   job_order: yup.number().typeError(errors.required),
-  part_model: yup.string(),
+  part_model: yup.string().required(errors.required),
   model: yup.string(),
   downpayment: yup.number().default(0).typeError(errors.required),
   quantity: yup.number().required().typeError(errors.required),
