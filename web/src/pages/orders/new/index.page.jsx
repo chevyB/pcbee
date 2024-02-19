@@ -74,17 +74,20 @@ const Order = () => {
                 {...formState}
               />
             </div>
-            <div className='grid grid-cols-1 gap-2'>
-              <SelectInput
-                label='Branch'
-                name='store_id'
-                options={branchOptions}
-                {...formState}
-              />
+            <div className='grid grid-cols-1 gap-4'>
+              <div className='mb-3 p-0.5'>
+                <SelectInput
+                  label='Branch'
+                  name='store_id'
+                  options={branchOptions}
+                  {...formState}
+                />
+              </div>
+
               <TextInput
                 label='Unit Model'
                 name='model'
-                className='mb-40'
+                className='mb-44'
                 {...formState}
               />
             </div>
