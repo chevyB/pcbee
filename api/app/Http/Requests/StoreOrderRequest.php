@@ -29,10 +29,12 @@ class StoreOrderRequest extends FormRequest
             'model' => 'nullable|string',
             'part_model' => 'required|string',
             'downpayment' => 'required|numeric',
+            'amount' => 'nullable|numeric',
             'quantity' => 'required|integer',
             'status' => 'nullable|in:delivered,open,in-transit,cancelled,onhold',
             'link' => 'nullable|string',
             'notes' => 'nullable|string',
+            'order_at' => 'nullable|date',
             'files' => 'nullable|array',
             'files.*' => [
                 'nullable',
