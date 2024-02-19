@@ -36,7 +36,6 @@ class StoreOrderRequest extends FormRequest
             'files' => 'nullable|array',
             'files.*' => [
                 'nullable',
-                'string',
                 'mimetypes:image/jpeg,image/png,image/jpg',
             ],
         ];

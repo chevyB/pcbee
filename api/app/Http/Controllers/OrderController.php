@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderImage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
@@ -37,21 +38,19 @@ class OrderController extends Controller
         $validatedData['user_id'] = Auth::id();
 
         unset($validatedData['category_label']);
+        unset($validatedData['files']);
 
         $order = Order::create($validatedData);
 
         if ($request->hasFile('files')) {
-            $filePath = [];
             foreach ($request->file('files') as $file) {
-                $filePath[] = [
-                    'order_id' => $order->id,
-                    'path' => $file->store('orders', 's3')
-                ];
+                $path = Storage::put('orders', $file);
+                $url = Storage::url($path);
+                $order->orderImages()->create(['path' => $url]);
             }
-            OrderImage::createMany($filePath);
         }
 
-        return response()->json(['orders' => $order], 201);
+        return response()->json($order, 201);
     }
 
     /**

@@ -26,8 +26,9 @@ const links = [
     label: 'Messages',
     icon: <HiOutlineChatAlt2 />,
     link: '/messages',
+    hidden: true,
   },
-]
+].filter((link) => !link.hidden)
 
 const Sidebar = () => {
   return (
