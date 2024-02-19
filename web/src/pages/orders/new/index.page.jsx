@@ -32,9 +32,18 @@ const Order = () => {
 
       <section className='bg-white dark:bg-gray-900'>
         <div className='container mx-auto px-8 py-8'>
-          <form onSubmit={handleSubmit} className='grid lg:grid-cols-2 gap-4'>
-            <div className='grid grid-cols-1 gap-4'>
-              <DatePicker label='Date' name='created_at' {...formState} />
+          <form onSubmit={handleSubmit} className='flex flex-col '>
+            <div className='flex flex-col space-y-4'>
+              <div className='flex space-x-4'>
+                <DatePicker label='Date' name='order_at' {...formState} />
+                <SelectInput
+                  label='Branch'
+                  name='store_id'
+                  className='w-60'
+                  options={branchOptions}
+                  {...formState}
+                />
+              </div>
               <TextInput
                 label='Job Order No.'
                 name='job_order'
@@ -43,12 +52,14 @@ const Order = () => {
               <SelectInput
                 label='Status'
                 name='status'
+                className='w-60'
                 options={statusOptions}
                 {...formState}
               />
               <SelectInput
                 label='Category'
                 name='category_label'
+                className='w-60'
                 options={[
                   { value: '', label: 'Category', isDisabled: true },
                   ...(categories?.map((category) => ({
@@ -58,45 +69,40 @@ const Order = () => {
                 ]}
                 {...formState}
               />
-              <TextInput label='Brand' name='brand' {...formState} />
+              <div className='flex  space-x-4'>
+                <TextInput label='Brand' name='brand' {...formState} />
+                <TextInput label='Unit Model' name='model' {...formState} />
+              </div>
               <TextInput label='Parts Model' name='part_model' {...formState} />
               <TextInput label='Quantity' name='quantity' {...formState} />
               <TextInput label='Link Ref' name='link' {...formState} />
-              <TextInput
-                label='Down Payment'
-                name='downpayment'
-                {...formState}
-              />
+              <div className='flex  space-x-4'>
+                <TextInput
+                  label='Down Payment'
+                  name='downpayment'
+                  type='number'
+                  {...formState}
+                />
+                <TextInput
+                  label='Amount'
+                  name='amount'
+                  type='number'
+                  {...formState}
+                />
+              </div>
               <FilePickerInput
                 label='Upload File'
                 name='files'
                 multiple
                 {...formState}
               />
-            </div>
-            <div className='grid grid-cols-1 gap-2'>
-              <SelectInput
-                label='Branch'
-                name='store_id'
-                options={branchOptions}
-                {...formState}
-              />
-              <TextInput
-                label='Unit Model'
-                name='model'
-                className='mb-40'
-                {...formState}
-              />
-            </div>
-            <div className='col-span-full'>
               <TextAreaInput
                 label='Comments'
                 name='notes'
                 placeHolder='Comments'
+                className='w-full'
                 {...formState}
               />
-            </div>
-            <div className='col-span-full'>
               <Button color='warning' type='submit'>
                 Submit
               </Button>

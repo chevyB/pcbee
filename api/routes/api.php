@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
     Route::group(['middleware' => ['restrictRole:admin'], 'prefix' => 'admin'], function () {
+        Route::get('/dashboard', [DashboardController::class, 'show']);
         Route::resource('users', UserController::class)->only(['index', 'store', 'destroy']);
     });
 });

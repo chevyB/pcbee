@@ -41,7 +41,7 @@ const Order = () => {
                   <>
                     <RowItem
                       label='Date'
-                      value={formatDate(order.created_at)}
+                      value={formatDate(order.order_at)}
                       order
                       icon={<FaCalendarAlt />}
                     />
