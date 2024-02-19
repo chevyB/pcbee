@@ -6,7 +6,6 @@ import * as yup from 'yup'
 
 import { orderApi } from '@/hooks/api/orderApi'
 import { statuses } from '@/hooks/lib/statuses'
-import { useCategories } from '@/hooks/redux/useCategories'
 import { useHandleError } from '@/hooks/useHandleError'
 
 const schema = yup.object({
@@ -19,6 +18,7 @@ const schema = yup.object({
   model: yup.string(),
   downpayment: yup.number().default(0),
   quantity: yup.number().required(),
+  amount: yup.number().required(),
   status: yup.string().oneOf(statuses),
   link: yup.string(),
   notes: yup.string(),
@@ -29,7 +29,6 @@ export function useHooks() {
   const router = useRouter()
   const { handleError } = useHandleError()
   const [createOrderMutation] = orderApi.useCreateOrderMutation()
-  const { categories } = useCategories()
   const {
     register,
     formState: { errors },
@@ -38,6 +37,7 @@ export function useHooks() {
   } = useForm({
     defaultValues: {
       order_at: dayjs(new Date()).format('YYYY-MM-DD'),
+      amount: 0,
     },
     resolver: yupResolver(schema),
   })
@@ -60,13 +60,15 @@ export function useHooks() {
 
     try {
       const order = await createOrderMutation(payload).unwrap()
+      addToast({
+        message: 'Created order successfully',
+      })
       router.push(`/orders/${order.id}`)
     } catch (error) {
       handleError(error)
     }
   }
   return {
-    categories,
     handleSubmit: handleSubmit(onSubmit),
     formState: {
       errors,

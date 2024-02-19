@@ -6,7 +6,6 @@ import * as yup from 'yup'
 
 import { orderApi } from '@/hooks/api/orderApi'
 import { statuses } from '@/hooks/lib/statuses'
-import { useCategories } from '@/hooks/redux/useCategories'
 import { useOrder } from '@/hooks/redux/useOrders'
 import { useHandleError } from '@/hooks/useHandleError'
 
@@ -18,6 +17,7 @@ const schema = yup.object({
   part_model: yup.string(),
   model: yup.string(),
   downpayment: yup.number().default(0),
+  amount: yup.number().required(),
   quantity: yup.number().required(),
   status: yup.string().oneOf(statuses),
   link: yup.string(),
@@ -28,13 +28,13 @@ export function useHooks() {
   const router = useRouter()
   const { orderId } = router.query
   const { order, isLoading } = useOrder(orderId)
-  const { categories } = useCategories()
   const { handleError } = useHandleError()
   const {
     register,
     formState: { errors },
     handleSubmit,
-    setValue,
+    control,
+    reset,
   } = useForm({ resolver: yupResolver(schema) })
 
   const [updateOrder, { isLoading: isUpdating }] =
@@ -46,36 +46,30 @@ export function useHooks() {
         ...formData,
         orderId,
       }
-      const { order } = await updateOrder(updatedData).unwrap()
-      router.push(`/orders`, order)
+      await updateOrder(updatedData).unwrap()
+      addToast({
+        message: 'Updated order successfully',
+      })
+      router.back()
     } catch (error) {
       handleError(error)
     }
   }
   useEffect(() => {
     if (order) {
-      setValue('store_id', order.store_id)
-      setValue('category_label', order.category.label)
-      setValue('job_order', order.job_order)
-      setValue('brand', order.brand)
-      setValue('part_model', order.part_model)
-      setValue('model', order.model)
-      setValue('downpayment', order.downpayment)
-      setValue('quantity', order.quantity)
-      setValue('status', order.status)
-      setValue('notes', order.notes)
+      reset({...order, category_label: order.category.label})
     }
-  }, [order, setValue])
+  }, [order, reset])
 
   return {
     order,
-    categories,
     handleSubmit: handleSubmit(onSubmit),
     formState: {
       errors,
       register,
       isLoading: isLoading || isUpdating,
       updateOrder,
+      control
     },
   }
 }
