@@ -76,6 +76,7 @@ class OrderController extends Controller
             $category = Category::firstOrCreate(['label' => $validatedData['category_label']]);
             $validatedData['category_id'] = $category->id;
             unset($validatedData['category_label']);
+            unset($validatedData['files']);
         }
         $order->update($validatedData);
 
