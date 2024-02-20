@@ -6,7 +6,8 @@ import { getToken } from '../lib/tokenStorage'
 // initialize an empty api service that we'll inject endpoints into later as needed
 export const baseApi = createApi({
   reducerPath: 'api',
-  tagTypes: ['Auth'],
+  tagTypes: ['Auth', 'categories', 'dashboard', 'orders', 'stores', 'users'],
+  overrideExisting: true,
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API || 'http://localhost:8000/api',
     prepareHeaders: (headers) => {
@@ -28,6 +29,7 @@ export const baseApi = createApi({
       }
       return false
     },
+    overrideExisting: true,
   }),
   endpoints: () => ({}),
 })

@@ -53,7 +53,6 @@ export function useHooks() {
       addToast({
         message: 'Updated order successfully',
       })
-      console.log({ id })
       router.push(`/orders/${id}`)
     } catch (error) {
       handleError(error)
