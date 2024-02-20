@@ -7,6 +7,7 @@ import * as yup from 'yup'
 import CardItem from '@/components/organisms/Card'
 import DatePicker from '@/components/organisms/DatePicker'
 import PageHeader from '@/components/organisms/PageHeader'
+import AdminGuard from '@/components/templates/AdminGuard'
 import Template from '@/components/templates/Template'
 import { errors } from '@/constants/formErrors'
 import { dashboardApi } from '@/hooks/api/dashboardApi'
@@ -51,30 +52,32 @@ const Dashboard = () => {
 
   return (
     <Template>
-      <PageHeader breadcrumbs={breadcrumbs} />
+      <AdminGuard>
+        <PageHeader breadcrumbs={breadcrumbs} />
 
-      <div className='flex flex-row items-center justify-center mb-4'>
-        <DatePicker control={control} name='start_date' />
+        <div className='flex flex-row items-center justify-center mb-4'>
+          <DatePicker control={control} name='start_date' />
 
-        <FaArrowRight
-          className='mx-3 text-gray-500'
-          style={{ marginTop: '1px' }}
-        />
+          <FaArrowRight
+            className='mx-3 text-gray-500'
+            style={{ marginTop: '1px' }}
+          />
 
-        <DatePicker control={control} name='end_date' />
-      </div>
-
-      <div className='mx-auto max-w-screen-lg mt-12'>
-        <div className='grid grid-cols-3 gap-2'>
-          {cardData.map((card, index) => (
-            <CardItem
-              key={index}
-              title={card.title}
-              description={card.description}
-            />
-          ))}
+          <DatePicker control={control} name='end_date' />
         </div>
-      </div>
+
+        <div className='mx-auto max-w-screen-lg mt-12'>
+          <div className='grid grid-cols-3 gap-2'>
+            {cardData.map((card, index) => (
+              <CardItem
+                key={index}
+                title={card.title}
+                description={card.description}
+              />
+            ))}
+          </div>
+        </div>
+      </AdminGuard>
     </Template>
   )
 }

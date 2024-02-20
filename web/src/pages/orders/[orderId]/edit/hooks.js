@@ -49,7 +49,7 @@ export function useHooks() {
         ...formData,
         orderId,
       }
-      const {id} = await updateOrder(updatedData).unwrap()
+      const { id } = await updateOrder(updatedData).unwrap()
       addToast({
         message: 'Updated order successfully',
       })
