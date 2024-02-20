@@ -4,6 +4,7 @@ import { CiViewList } from 'react-icons/ci'
 import { FaEdit } from 'react-icons/fa'
 
 import Loading from '@/components/atoms/Loading'
+import Filter from '@/components/organisms/Filter'
 import PageHeader from '@/components/organisms/PageHeader'
 import Pagination from '@/components/organisms/Pagination'
 import Table from '@/components/organisms/Table'
@@ -14,12 +15,16 @@ import useHooks from './hooks'
 
 const Order = () => {
   const {
-    orders,
     isLoading,
     breadcrumbs,
     totalPages,
     currentPage,
     onPageChange,
+    searchQuery,
+    setSearchQuery,
+    statusFilter,
+    setStatusFilter,
+    statusFilteredOrders,
   } = useHooks()
 
   const getAction = (row) => {
@@ -80,9 +85,15 @@ const Order = () => {
             </Link>
           }
         />
+        <Filter
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          statusFilter={statusFilter}
+          setStatusFilter={setStatusFilter}
+        />
         {isLoading ?
           <Loading />
-        : <Table rows={rows} data={orders.data} />}
+        : <Table rows={rows} data={statusFilteredOrders} />}
       </section>
 
       <Pagination
