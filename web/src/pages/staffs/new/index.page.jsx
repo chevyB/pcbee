@@ -6,7 +6,10 @@ import PageHeader from '@/components/organisms/PageHeader'
 import TextInput from '@/components/organisms/TextInput'
 import Template from '@/components/templates/Template'
 
+import { useHooks } from './hooks'
+
 const AddStaff = () => {
+  const { formState, handleSubmit } = useHooks()
   const breadcrumbs = [
     {
       href: '/staffs',
@@ -23,11 +26,12 @@ const AddStaff = () => {
     <Template>
       <PageHeader breadcrumbs={breadcrumbs} />
 
-      <form className='flex center w-80 flex-col gap-2'>
-        <TextInput label='Name' name='createStaff' />
-        <TextInput label='Position' name='createStaff' />
-        <TextInput label='Contact Number' name='createStaff' />
-        <TextInput label='Account Type' name='createStaff' />
+      <form className='flex center w-80 flex-col gap-2' onSubmit={handleSubmit}>
+        <TextInput label='Name' name='name' {...formState} />
+        <TextInput label='Username' name='username' {...formState} />
+        <TextInput label='Position' name='position' {...formState} />
+        <TextInput label='Contact Number' name='phone' {...formState} />
+        <TextInput label='Account Type' name='role' {...formState} />
 
         <Button color='warning' type='submit' style={{ width: 140 }}>
           Submit
