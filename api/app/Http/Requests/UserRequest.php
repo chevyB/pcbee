@@ -24,9 +24,9 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required|string|min:3',
             'username' => 'required|string|min:3|unique:users',
-            'phone' => 'required|string|size:11',
-            'position' => 'required|string',
-            'role' => 'required|string', 
+            'phone' => 'nullable|string|size:11|numeric',
+            'position' => 'nullable|string',
+            'role' => 'required|string|in:staff,admin',
         ];
     }
 }
