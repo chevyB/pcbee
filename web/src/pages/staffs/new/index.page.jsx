@@ -8,6 +8,7 @@ import AdminGuard from '@/components/templates/AdminGuard'
 import Template from '@/components/templates/Template'
 
 import { useHooks } from './hooks'
+import SelectInput from '@/components/organisms/SelectInput'
 
 const AddStaff = () => {
   const { formState, handleSubmit } = useHooks()
@@ -36,7 +37,18 @@ const AddStaff = () => {
           <TextInput label='Username' name='username' {...formState} />
           <TextInput label='Position' name='position' {...formState} />
           <TextInput label='Contact Number' name='phone' {...formState} />
-          <TextInput label='Account Type' name='role' {...formState} />
+          <SelectInput
+            label='Account Type'
+            name='role'
+            options={[
+              {
+                value: 'staff',
+                label: 'staff',
+              },
+              { value: 'admin', label: 'admin' },
+            ]}
+            {...formState}
+          />
 
           <Button color='warning' type='submit' style={{ width: 140 }}>
             Submit

@@ -6,13 +6,14 @@ import * as yup from 'yup'
 import { userApi } from '@/hooks/api/userApi'
 import { useHandleError } from '@/hooks/useHandleError'
 import { useToast } from '@/hooks/useToast'
+import { errors } from '@/constants/formErrors'
 
 const schema = yup.object({
-  name: yup.string().required(),
-  username: yup.string().min(4).required(),
-  position: yup.string().nullable(),
+  name: yup.string().required(errors.required),
+  username: yup.string().min(4).required(errors.required),
+  position: yup.string().nullable(errors.required),
   phone: yup.string().nullable(),
-  role: yup.string(),
+  role: yup.string().oneOf(['staff', 'admin']).required(errors.required),
 })
 
 export const useHooks = () => {
@@ -23,7 +24,10 @@ export const useHooks = () => {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm({ resolver: yupResolver(schema) })
+  } = useForm({
+    defaultValues: { role: 'staff' },
+    resolver: yupResolver(schema),
+  })
 
   const [createUserMutation] = userApi.useCreateUserMutation()
 
