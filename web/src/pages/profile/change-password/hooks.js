@@ -9,11 +9,17 @@ import { useHandleError } from '@/hooks/useHandleError'
 import { useToast } from '@/hooks/useToast'
 
 const schema = yup.object({
-  old_password: yup.string().min(6).required(),
-  password: yup.string().min(6).required(),
+  old_password: yup
+    .string()
+    .min(6, 'Old Password must be at least 6 characters')
+    .required(),
+  password: yup
+    .string()
+    .min(6, 'Password must be at least 6 characters')
+    .required(),
   password_confirmation: yup
     .string()
-    .min(6)
+    .min(6, 'Confirm Password must be at least 6 characters')
     .required()
     .test('passwords-match', 'Passwords must match', function (value) {
       return this.parent.password === value
