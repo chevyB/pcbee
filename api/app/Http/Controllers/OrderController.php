@@ -18,7 +18,16 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $perPage = $request->perPage ?? 20;
+        $keyword = $request->keyword;
+        $status = $request->status;
         $orders = Order::with('store', 'category')
+            ->when($keyword != 'null', function ($q) use ($keyword) {
+                return $q->where('job_order', 'LIKE', "%{$keyword}%")
+                    ->orWhere('model', 'LIKE', "%{$keyword}%");
+            })
+            ->when($status, function ($q) use ($status) {
+                return $q->where('status', $status);
+            })
             ->orderBy('created_at', 'DESC')
             ->paginate($perPage);
         return response()->json(['orders' => $orders]);

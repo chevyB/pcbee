@@ -1,24 +1,39 @@
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useMemo } from 'react'
 import { FaTasks } from 'react-icons/fa'
+import * as yup from 'yup'
 
 import { useOrders } from '@/hooks/redux/useOrders'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { statuses } from '@/hooks/lib/statuses'
+
+const schema = yup.object({
+  keyword: yup.string().nullable(),
+  status: yup.string().oneOf(statuses).nullable(),
+})
 
 const useHooks = () => {
   const router = useRouter()
-  const [currentPage, setCurrentPage] = useState(1)
+  const page = useMemo(() => router.query.page ?? 1, [router.query.page])
 
-  useEffect(() => {
-    const page = parseInt(router.query.page, 10) || 1
-    setCurrentPage(page)
-  }, [router.query.page])
+  const {
+    register,
+    formState: { errors },
+    watch,
+  } = useForm({
+    defaultValues: {
+      keyword: null,
+      status: 0,
+    },
+    resolver: yupResolver(schema),
+  })
 
-  const { orders, isLoading } = useOrders(currentPage)
+  const { orders, isLoading } = useOrders({ page, ...watch() })
 
   const totalPages = orders.last_page || 1
 
   const onPageChange = (page) => {
-    setCurrentPage(page)
     router.push({ pathname: '/orders', query: { page } })
   }
 
@@ -35,8 +50,12 @@ const useHooks = () => {
     isLoading,
     breadcrumbs,
     totalPages,
-    currentPage,
+    currentPage: page,
     onPageChange,
+    formState: {
+      errors,
+      register,
+    },
   }
 }
 

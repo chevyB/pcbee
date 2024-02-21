@@ -2,8 +2,8 @@ import { useMemo } from 'react'
 
 import { orderApi } from '../api/orderApi'
 
-export const useOrders = (page) => {
-  const { data, error, isError, isLoading } = orderApi.useGetOrdersQuery(page)
+export const useOrders = (params) => {
+  const { data, error, isError, isLoading } = orderApi.useGetOrdersQuery(params)
 
   const orders = useMemo(() => data?.orders || [], [data])
 
