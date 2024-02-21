@@ -1,49 +1,49 @@
-import { Button, Label } from "flowbite-react";
+import { Button, Label } from 'flowbite-react'
 
-import PageHeader from "@/components/organisms/PageHeader";
-import TextInput from "@/components/organisms/TextInput";
-import Template from "@/components/templates/Template";
+import PageHeader from '@/components/organisms/PageHeader'
+import TextInput from '@/components/organisms/TextInput'
+import Template from '@/components/templates/Template'
 
-import { useHooks } from "./hooks";
+import { useHooks } from './hooks'
 
 const ChangePasswordPage = () => {
-  const { breadcrumbs, formState, handleSubmit } = useHooks();
+  const { breadcrumbs, formState, handleSubmit } = useHooks()
 
   return (
     <Template>
       <PageHeader breadcrumbs={breadcrumbs} />
       <form
-        className="flex flex-col gap-4 max-w-xl p-4"
+        className='flex flex-col gap-4 max-w-xl p-4'
         onSubmit={handleSubmit}
       >
         <div>
-          <div className="mb-2 block">
-            <Label value="Old Password" />
+          <div className='mb-2 block'>
+            <Label value='Old Password' />
           </div>
-          <TextInput name="old_password" type="password" {...formState} />
+          <TextInput name='old_password' type='password' {...formState} />
         </div>
         <div>
-          <div className="mb-2 block">
-            <Label value="New Password" />
+          <div className='mb-2 block'>
+            <Label value='New Password' />
           </div>
-          <TextInput name="password" type="password" {...formState} />
+          <TextInput name='password' type='password' {...formState} />
         </div>
         <div>
-          <div className="mb-2 block">
-            <Label value="Confirm Password" />
+          <div className='mb-2 block'>
+            <Label value='Confirm Password' />
           </div>
           <TextInput
-            name="password_confirmation"
-            type="password"
+            name='password_confirmation'
+            type='password'
             {...formState}
           />
         </div>
-        <Button color="warning" type="submit">
+        <Button color='warning' type='submit'>
           Confirm Password
         </Button>
       </form>
     </Template>
-  );
-};
+  )
+}
 
-export default ChangePasswordPage;
+export default ChangePasswordPage

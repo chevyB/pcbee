@@ -40,7 +40,10 @@ export function useHooks() {
   } = useForm({
     defaultValues: {
       order_at: dayjs(new Date()).format('YYYY-MM-DD'),
+      quantity: 1,
+      downpayment: 0,
       amount: 0,
+      status: 'open',
     },
     resolver: yupResolver(schema),
   })

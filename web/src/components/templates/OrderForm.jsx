@@ -17,7 +17,12 @@ const OrderForm = ({ handleSubmit, formState }) => {
         <div className='flex space-x-4'>
           <DatePicker label='Date' name='order_at' {...formState} />
           <SelectInput
-            label='Branch'
+            name='status'
+            className='w-60'
+            options={statusOptions}
+            {...formState}
+          />
+          <SelectInput
             name='store_id'
             className='w-60'
             options={branchOptions}
@@ -25,13 +30,6 @@ const OrderForm = ({ handleSubmit, formState }) => {
           />
         </div>
         <TextInput label='Job Order No.' name='job_order' {...formState} />
-        <SelectInput
-          label='Status'
-          name='status'
-          className='w-60'
-          options={statusOptions}
-          {...formState}
-        />
         <SelectInput
           label='Category'
           name='category_label'
@@ -50,8 +48,16 @@ const OrderForm = ({ handleSubmit, formState }) => {
           <TextInput label='Unit Model' name='model' {...formState} />
         </div>
         <TextInput label='Parts Model' name='part_model' {...formState} />
-        <TextInput label='Quantity' name='quantity' {...formState} />
-        <TextInput label='Link Ref' name='link' {...formState} />
+        <div className='flex space-x-4'>
+          <TextInput
+            label='Quantity'
+            name='quantity'
+            type='number'
+            containerClassName='w-40'
+            {...formState}
+          />
+          <TextInput label='Link Ref' name='link' {...formState} />
+        </div>
         <div className='flex  space-x-4'>
           <TextInput
             label='Down Payment'
