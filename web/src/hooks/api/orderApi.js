@@ -28,6 +28,12 @@ export const orderApi = baseApi.injectEndpoints({
       providesTags: (orderId) => [{ type: 'orders', id: orderId }],
       query: (orderId) => ({ url: `/orders/${orderId}` }),
     }),
+    deleteOrder: build.mutation({
+      query: (orderId) => ({
+        url: `orders/${orderId}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
   overrideExisting: false,
 })
@@ -37,4 +43,5 @@ export const {
   useGetOrdersQuery,
   useGetOrderByIdQuery,
   useUpdateOrderMutation,
+  useDeleteOrderMutation,
 } = orderApi

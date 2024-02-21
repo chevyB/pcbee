@@ -1,11 +1,26 @@
+import { orderApi } from '@/hooks/api/orderApi'
 import { useOrder } from '@/hooks/redux/useOrders'
+import { useRouter } from 'next/router'
 
 const useHooks = (orderId) => {
-  const { order, isloading } = useOrder(orderId)
+  const router = useRouter()
+  const { order, isLoading } = useOrder(orderId)
+  const [deleteOrder, isDeleteLoading] = orderApi.useDeleteOrderMutation()
+
+  const handleDelete = async (orderId) => {
+    try {
+      await deleteOrder(orderId)
+      router.push(`/orders`)
+    } catch (error) {
+      handleError(error)
+    }
+  }
 
   return {
     order,
-    isloading,
+    isLoading,
+    isDeleteLoading,
+    handleDelete,
   }
 }
 
