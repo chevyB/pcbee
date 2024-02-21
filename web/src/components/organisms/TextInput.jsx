@@ -1,7 +1,7 @@
-import { FloatingLabel } from 'flowbite-react'
+import { TextInput as FlowbiteTextInput, Label } from 'flowbite-react'
 
 const TextInput = (props) => {
-  const { errors, name, register, ...rest } = props
+  const { errors, name, register, label, ...rest } = props
 
   const formRegister = name && register && { ...register(name) }
 
@@ -9,8 +9,12 @@ const TextInput = (props) => {
 
   return (
     <div>
-      <FloatingLabel
-        variant='outlined'
+      {label && (
+        <div className='mb-2'>
+          <Label value={label} />
+        </div>
+      )}
+      <FlowbiteTextInput
         {...formRegister}
         {...rest}
         color={error ? 'error' : 'default'}

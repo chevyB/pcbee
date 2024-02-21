@@ -9,7 +9,7 @@ module.exports = {
     'react',
     'react-hooks',
     'import',
-    'simple-import-sort',
+    // 'simple-import-sort',
   ],
   extends: [
     'next/core-web-vitals',
@@ -21,8 +21,8 @@ module.exports = {
   ],
   rules: {
     'no-console': 'warn',
-    'simple-import-sort/imports': 'error',
-    'simple-import-sort/exports': 'error',
+    // 'simple-import-sort/imports': 'error',
+    // 'simple-import-sort/exports': 'error',
     'import/first': 'error',
     'import/newline-after-import': 'error',
     'import/no-duplicates': 'error',

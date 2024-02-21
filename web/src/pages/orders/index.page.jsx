@@ -8,9 +8,13 @@ import PageHeader from '@/components/organisms/PageHeader'
 import Pagination from '@/components/organisms/Pagination'
 import Table from '@/components/organisms/Table'
 import Template from '@/components/templates/Template'
-import { capitalizeFirstLetter, formatDate } from '@/hooks/lib/util'
+import { formatDate } from '@/hooks/lib/util'
+import StatusBadge from '@/components/atoms/StatusBadge'
 
 import useHooks from './hooks'
+import TextInput from '@/components/organisms/TextInput'
+import SelectInput from '@/components/organisms/SelectInput'
+import { statusOptions } from '@/hooks/const'
 
 const Order = () => {
   const {
@@ -20,6 +24,7 @@ const Order = () => {
     totalPages,
     currentPage,
     onPageChange,
+    formState,
   } = useHooks()
 
   const getAction = (row) => {
@@ -41,9 +46,14 @@ const Order = () => {
 
   const rows = [
     {
+      key: 'jobOrder',
+      header: 'Job Order',
+      render: (row) => row.job_order,
+    },
+    {
       key: 'brand',
-      header: 'Product Name',
-      render: (row) => row.brand,
+      header: 'Model',
+      render: (row) => row.model,
     },
     {
       key: 'date',
@@ -58,7 +68,7 @@ const Order = () => {
     {
       key: 'status',
       header: 'Status',
-      render: (row) => capitalizeFirstLetter(row.status),
+      render: (row) => <StatusBadge status={row.status} />,
     },
     {
       key: 'actions',
@@ -80,6 +90,15 @@ const Order = () => {
             </Link>
           }
         />
+        <div className='flex pb-4 space-x-4'>
+          <TextInput
+            name='keyword'
+            placeHolder='Search Job Order or Model'
+            className='w-80'
+            {...formState}
+          />
+          <SelectInput name='status' options={statusOptions} {...formState} />
+        </div>
         {isLoading ?
           <Loading />
         : <Table rows={rows} data={orders.data} />}
