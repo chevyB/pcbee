@@ -7,7 +7,7 @@ const useHooks = (orderId) => {
   const { order, isLoading } = useOrder(orderId)
   const [deleteOrder, isDeleteLoading] = orderApi.useDeleteOrderMutation()
 
-  const handleDelete = async (orderId) => {
+  const handleDelete = async () => {
     try {
       await deleteOrder(orderId)
       router.push(`/orders`)
