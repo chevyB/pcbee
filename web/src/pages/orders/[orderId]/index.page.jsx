@@ -12,12 +12,13 @@ import Template from '@/components/templates/Template'
 import { capitalizeFirstLetter } from '@/hooks/lib/util'
 
 import useHooks from './hooks'
+import DeleteModal from '@/components/organisms/DeleteModal'
 
 const Order = () => {
   const router = useRouter()
   const { orderId } = router.query
 
-  const { order, isloading } = useHooks(orderId)
+  const { order, isLoading, handleDelete } = useHooks(orderId)
 
   const breadcrumbs = [
     {
@@ -36,14 +37,17 @@ const Order = () => {
       <PageHeader
         breadcrumbs={breadcrumbs}
         right={
-          <Link href={`/orders/${orderId}/edit`}>
-            <Button size='xs' color='warning' className='m-w-20'>
-              Edit
-            </Button>
-          </Link>
+          <div className='flex pb-4 space-x-4'>
+            <DeleteModal handleDelete={() => handleDelete(orderId)} />
+            <Link href={`/orders/${orderId}/edit`}>
+              <Button size='xs' color='warning' className='m-w-20'>
+                Edit
+              </Button>
+            </Link>
+          </div>
         }
       />
-      {isloading || !order ?
+      {isLoading || !order ?
         <Loading />
       : <section className='p-8 flex flex-col space-x-4 space-y-6'>
           <div className='flex space-x-8'>
@@ -67,6 +71,7 @@ const Order = () => {
             <RowItem label='Unit Model' value={order.model} />
             <RowItem label='Parts Model' value={order.part_model} />
           </div>
+          <RowItem label='Quantity' value={order.quantity} />
           <RowItem label='Link Ref' value={order.link} />
           <div className='flex space-x-8'>
             <RowItem label='Down Payment' value={order.downpayment} />
