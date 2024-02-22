@@ -1,14 +1,14 @@
 import { TextInput as FlowbiteTextInput, Label } from 'flowbite-react'
 
 const TextInput = (props) => {
-  const { errors, name, register, label, ...rest } = props
+  const { errors, name, register, label, containerClassName, ...rest } = props
 
   const formRegister = name && register && { ...register(name) }
 
   const error = errors?.[name]?.message || null
 
   return (
-    <div>
+    <div className={`w-full ${containerClassName}`}>
       {label && (
         <div className='mb-2'>
           <Label value={label} />
