@@ -6,7 +6,7 @@ const SelectInput = ({ errors, name, register, label, options, ...rest }) => {
 
   return (
     <>
-      {label && (<Label value={label} />)}
+      {label && <Label value={label} />}
       <Select id={name} variant='outlined' {...formRegister} {...rest}>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
